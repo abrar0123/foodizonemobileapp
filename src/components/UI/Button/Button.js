@@ -9,7 +9,7 @@ const Button = props => {
       activeOpacity={0.7}
       style={[styles.buttonStyle, props.style]}
       onPress={props.onPress}>
-      <AppText> {props.children}</AppText>
+      <AppText style={[styles.text, props.style]}> {props.children}</AppText>
     </TouchableOpacity>
   );
 };
@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(2),
     backgroundColor: mycolors.blue,
     color: mycolors.white,
+  },
+  text: {
+    color: mycolors.white,
+    fontSize: scale(16),
+    fontWeight: 'bold',
   },
 });
 
