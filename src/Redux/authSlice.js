@@ -1,4 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {persistReducer} from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -14,6 +16,10 @@ export const authSlice = createSlice({
     },
   },
 });
+const persistConfigue = {
+  key: 'root',
+  storage: AsyncStorage,
+};
 
-export const authreducer = authSlice.reducer;
+export const authreducer = persistReducer(persistConfigue, authSlice.reducer);
 export const authActions = authSlice.actions;
