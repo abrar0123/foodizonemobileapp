@@ -10,11 +10,15 @@ import {
 import Home from './src/screens/Home/home';
 import Login from './src/screens/login/login';
 import Splash from './src/screens/splash/splash';
+import Register from './src/screens/register/register';
+import Forgotpassword from './src/screens/forgotpass/forgotpassword';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.safeStyle}>
-      <Login />
+      {/* <Login /> */}
+      <Register />
+      {/* <Forgotpassword /> */}
       {/* <Splash /> */}
     </SafeAreaView>
   );
