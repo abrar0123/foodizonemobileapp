@@ -34,7 +34,9 @@ const Splash = () => {
 
 const styles = StyleSheet.create({
   splashContainer: {
+    flex: 1,
     padding: moderateScale(10),
+    color: mycolors.white,
   },
   imgStyle: {
     width: '100%',

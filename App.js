@@ -14,16 +14,20 @@ import Splash from './src/screens/splash/splash';
 import Register from './src/screens/register/register';
 import Forgotpassword from './src/screens/forgotpass/forgotpassword';
 import Route from './src/navigations/Routes/route';
+import AppText from './src/components/UI/AppText/AppText';
+import Authnavigation from './src/navigations/AuthNaviation/authnavigation';
+import mycolors from './src/styles/mycolors';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.safeStyle}>
+    <>
       {/* <Login /> */}
-      <Register />
-      {/* <Route /> */}
+      {/* <Register /> */}
+      <Route />
+      {/* <Authnavigation /> */}
       {/* <Forgotpassword /> */}
       {/* <Splash /> */}
-    </SafeAreaView>
+    </>
   );
 };
 
@@ -32,5 +36,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
 });
+
 AppRegistry.registerComponent('foodizone', () => App);
+
 export default App;
