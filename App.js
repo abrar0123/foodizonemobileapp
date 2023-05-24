@@ -1,33 +1,21 @@
 import React from 'react';
 import {
-  View,
-  Text,
   StyleSheet,
   SafeAreaView,
   Platform,
   StatusBar,
   AppRegistry,
 } from 'react-native';
-import Home from './src/screens/Home/home';
-import Login from './src/screens/login/login';
-import Splash from './src/screens/splash/splash';
-import Register from './src/screens/register/register';
-import Forgotpassword from './src/screens/forgotpass/forgotpassword';
+
 import Route from './src/navigations/Routes/route';
-import AppText from './src/components/UI/AppText/AppText';
-import Authnavigation from './src/navigations/AuthNaviation/authnavigation';
-import mycolors from './src/styles/mycolors';
+import {store} from './src/Redux/store/store';
+import {Provider} from 'react-redux';
 
 const App = () => {
   return (
-    <>
-      {/* <Login /> */}
-      {/* <Register /> */}
+    <Provider store={store}>
       <Route />
-      {/* <Authnavigation /> */}
-      {/* <Forgotpassword /> */}
-      {/* <Splash /> */}
-    </>
+    </Provider>
   );
 };
 

@@ -9,6 +9,7 @@ import stackscreens from '../../constants/stackscreens';
 import AppText from '../../components/UI/AppText/AppText';
 import mycolors from '../../styles/mycolors';
 import Forgotpassword from '../../screens/forgotpass/forgotpassword';
+import Home from '../../screens/Home/home';
 
 const Authnavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -32,7 +33,5 @@ const Authnavigation = () => {
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default Authnavigation;

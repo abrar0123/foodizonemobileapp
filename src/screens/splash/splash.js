@@ -10,17 +10,23 @@ import AppText from '../../components/UI/AppText/AppText';
 import Button from '../../components/UI/Button/Button';
 import mycolors from '../../styles/mycolors';
 import stackscreens from '../../constants/stackscreens';
+import {useSelector} from 'react-redux';
 
 const Splash = ({navigation}) => {
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate(stackscreens.login);
-    }, 5000);
-  });
+  const loginEmail = useSelector(state => state.auth.loginEmail);
+  console.log('loginEmail__', loginEmail);
 
   const goHandler = () => {
-    navigation.navigate(stackscreens.login);
+    loginEmail
+      ? navigation.navigate(stackscreens.home)
+      : navigation.navigate(stackscreens.login);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      goHandler();
+    }, 2000);
+  });
 
   return (
     <View style={styles.splashContainer}>

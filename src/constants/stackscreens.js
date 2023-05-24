@@ -2,5 +2,6 @@ export default {
   splash: 'splash',
   login: 'login',
   register: 'register',
-  forgotpass:'forgetpassword'
+  forgotpass:'forgetpassword',
+  home:'Home'
 };
