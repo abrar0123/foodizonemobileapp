@@ -17,8 +17,9 @@ import {
   respHeight,
   screenheight,
 } from '../../components/responsiveness/RespHeight';
+import stackscreens from '../../constants/stackscreens';
 
-const Register = () => {
+const Register = ({navigation}) => {
   const [username, setusername] = useState('');
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
@@ -51,6 +52,9 @@ const Register = () => {
     }
   };
 
+  const goLogin = () => {
+    navigation.navigate(stackscreens.login);
+  };
   //   console.log('work well', errors);
 
   const onSubmitLogin = event => {
@@ -134,14 +138,12 @@ const Register = () => {
           {errors.Password?.length > 0 && (
             <AppText style={styles.errorText}>{errors.Password}</AppText>
           )}
-          <TouchableOpacity activeOpacity={0.5}>
-            <AppText style={styles.forgotText}>Forgot Password ?</AppText>
-          </TouchableOpacity>
+
           <View style={styles.loginbtn}>
             <Button onPress={onSubmitLogin}>Register</Button>
           </View>
 
-          <TouchableOpacity activeOpacity={0.5}>
+          <TouchableOpacity activeOpacity={0.5} onPress={goLogin}>
             <AppText style={styles.signupText}>
               Already have an Account?
               <AppText style={{color: mycolors.blue, fontWeight: 'bold'}}>
@@ -157,7 +159,7 @@ const Register = () => {
 
 const styles = StyleSheet.create({
   loginStyle: {
-    // flex: 1,
+    flex: 1,
     padding: moderateScale(10),
     backgroundColor: mycolors.white,
   },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet, Text, Image} from 'react-native';
 import pic from '../../assets/image/Foodizone.png';
 import {
@@ -9,7 +9,19 @@ import {
 import AppText from '../../components/UI/AppText/AppText';
 import Button from '../../components/UI/Button/Button';
 import mycolors from '../../styles/mycolors';
-const Splash = () => {
+import stackscreens from '../../constants/stackscreens';
+
+const Splash = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate(stackscreens.login);
+    }, 5000);
+  });
+
+  const goHandler = () => {
+    navigation.navigate(stackscreens.login);
+  };
+
   return (
     <View style={styles.splashContainer}>
       <View style={styles.imgStyle}>
@@ -22,7 +34,7 @@ const Splash = () => {
         Home and Enjoy Food.
       </AppText>
       <View style={styles.gobtn}>
-        <Button>
+        <Button onPress={goHandler}>
           <AppText style={{color: mycolors.white, textAlign: 'center'}}>
             Let's Go
           </AppText>
@@ -36,7 +48,7 @@ const styles = StyleSheet.create({
   splashContainer: {
     flex: 1,
     padding: moderateScale(10),
-    color: mycolors.white,
+    backgroundColor: mycolors.white,
   },
   imgStyle: {
     width: '100%',
