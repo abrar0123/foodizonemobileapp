@@ -28,7 +28,7 @@ const Home = () => {
     <ScrollView>
       <View style={styles.homeStyle}>
         <Text>home</Text>
-
+        {/* box 2  */}
         <SmCard style={styles.flexstyle}>
           <View style={styles.flexcolum}>
             <AppText style={styles.welcomeText}>Good Morning, Abrar </AppText>
@@ -43,6 +43,7 @@ const Home = () => {
         <View style={{marginVertical: moderateScale(20)}}>
           <Search />
         </View>
+        {/* box 2 */}
         <SmCard style={styles.primaryBox2}>
           <View style={styles.flexcolum}>
             <AppText style={styles.box2Text}>Food Delivery </AppText>
@@ -55,7 +56,8 @@ const Home = () => {
             <Image style={styles.box2imgstyle} source={imagesPath.plate} />
           </View>
         </SmCard>
-        <View style={{marginVertical: 15}}>
+        {/* box 3 added */}
+        <Card style={{marginVertical: 15}}>
           <View style={styles.primaryBox3}>
             <SmCard style={styles.Box3container1}>
               <AppText style={styles.box3Text}>Foodie Mart </AppText>
@@ -97,6 +99,42 @@ const Home = () => {
                 <Image style={styles.box3imgstyle2} source={imagesPath.plate} />
               </SmCard>
             </View>
+          </View>
+        </Card>
+        <View>
+          <AppText
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginBottom: moderateScale(10),
+            }}>
+            Your Restuarants
+          </AppText>
+          <SmCard style={styles.primaryBox2}>
+            <View style={styles.flexcolum}>
+              <AppText style={styles.box2Text}>Food Foods </AppText>
+              <AppText
+                style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
+                Order Food You Love
+              </AppText>
+            </View>
+            <View>
+              <Image style={styles.box2imgstyle} source={imagesPath.food1} />
+            </View>
+          </SmCard>
+          <View style={{marginVertical: moderateScale(10)}}>
+            <SmCard style={styles.primaryBox2}>
+              <View style={styles.flexcolum}>
+                <AppText style={styles.box2Text}>Food Foods </AppText>
+                <AppText
+                  style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
+                  Order Food You Love
+                </AppText>
+              </View>
+              <View>
+                <Image style={styles.box2imgstyle} source={imagesPath.food2} />
+              </View>
+            </SmCard>
           </View>
         </View>
       </View>

@@ -10,9 +10,11 @@ import {
 import {useState, useEffect} from 'react';
 import AppText from '../../../components/UI/AppText';
 import ListFood from './listfood';
-import Card from '../../../components/UI/Card';
-import GridFood from './gridFood';
+import Card from '../../../components/UI/Card/Card';
+// import GridFood from './gridFood';
 import mycolors from '../../../styles/mycolors';
+import {scale} from 'react-native-size-matters';
+import {respWidth} from '../../../components/responsiveness/RespHeight';
 
 const screens = [
   {
@@ -95,39 +97,30 @@ const MyFood = () => {
     );
   };
 
-  <ListFood MyFood={MyFood} Loader={Loader} />;
-
   return (
-    <>
-      <Card style={styles.mainContainer}>
-        <FlatList
+    <React.Fragment>
+      {/* <FlatList
           data={screens}
           numColumns={2}
           key={item => item.id}
           renderItem={renderItem}
           columnWrapperStyle={{justifyContent: 'space-evenly'}}
-        />
-      </Card>
-      {ind === 1 ? (
-        <ListFood MyFood={MyFood} Loader={Loader} />
-      ) : (
-        <GridFood MyFood={MyFood} Loader={Loader} />
-      )}
-    </>
+        /> */}
+      <AppText style={styles.welcomeText}>FastFood Deals</AppText>
+
+      <ListFood MyFood={MyFood} Loader={Loader} />
+    </React.Fragment>
   );
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    margin: 8,
-    paddingTop: Platform.OS === 'android' && StatusBar.currentHeight,
-  },
-
-  btn: {
-    padding: 10,
-    backgroundColor: mycolors.orange,
-    borderRadius: 5,
-    marginHorizontal: 4,
+  welcomeText: {
+    fontSize: scale(25),
+    fontWeight: 'bold',
+    marginBottom: 10,
+    width: respWidth(50),
+    borderBottomColor: mycolors.red,
+    borderBottomWidth: 3,
   },
 });
 

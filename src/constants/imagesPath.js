@@ -11,5 +11,9 @@ export default {
   filter: require('../assets/image/filter.png'),
   plate: require('../assets/image/plate1.png'),
   kake: require('../assets/image/kake.png'),
+  food1: require('../assets/image/food1.png'),
+  food2: require('../assets/image/food2.png'),
+  plate2: require('../assets/image/plate2.png'),
 
+  notification: require('../assets/image/notification.png'),
 };

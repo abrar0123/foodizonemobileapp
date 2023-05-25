@@ -8,6 +8,7 @@ import Profile from '../../screens/Profile/profile';
 import mycolors from '../../styles/mycolors';
 import imagesPath from '../../constants/imagesPath';
 import Localmall from '../../screens/localMall/localmall';
+import MyFood from '../../screens/localMall/MyFood/MyFood';
 
 const Tabroutes = () => {
   const Tab = createBottomTabNavigator();

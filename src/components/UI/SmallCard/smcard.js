@@ -8,7 +8,6 @@ const Smcard = props => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 5,
     borderRadius: 2,
     backgroundColor: mycolors.white,
 

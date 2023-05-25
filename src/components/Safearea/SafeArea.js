@@ -10,7 +10,7 @@ const SafeArea = props => {
 const styles = StyleSheet.create({
   safestyle: {
     flex: 1,
-    // backgroundColor:mycolors.red,
+    backgroundColor: mycolors.white,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
 });
