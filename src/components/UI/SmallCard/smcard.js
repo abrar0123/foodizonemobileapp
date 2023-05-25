@@ -1,20 +1,21 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import colors from "../../../constants/colors";
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import mycolors from '../../../styles/mycolors';
 
-const Smcard = (props) => {
+const Smcard = props => {
   return <View style={[styles.container, props.style]}>{props.children}</View>;
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
-    backgroundColor: colors.white,
+    paddingHorizontal: 5,
+    borderRadius: 2,
+    backgroundColor: mycolors.white,
 
     //  add a shadow property
 
-    backgroundColor: colors.white,
-    shadowColor: colors.black,
+    background: mycolors.white,
+    shadowColor: mycolors.black,
     // borderRadius: 10,
     shadowOffset: {
       width: 0,
