@@ -11,22 +11,21 @@ import Button from '../../components/UI/Button/Button';
 import mycolors from '../../styles/mycolors';
 import stackscreens from '../../constants/stackscreens';
 import {useSelector} from 'react-redux';
+import { respHeight } from '../../components/responsiveness/RespHeight';
 
 const Splash = ({navigation}) => {
-  const loginEmail = useSelector(state => state.auth.loginEmail);
-  console.log('loginEmail__', loginEmail);
+  // const loginEmail = useSelector(state => state.auth.loginEmail);
+  // console.log('loginEmail__', loginEmail);
 
   const goHandler = () => {
-    loginEmail
-      ? navigation.navigate(stackscreens.home)
-      : navigation.navigate(stackscreens.login);
+    navigation.navigate(stackscreens.login);
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      goHandler();
-    }, 2000);
-  });
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     goHandler();
+  //   }, 2000);
+  // });
 
   return (
     <View style={styles.splashContainer}>
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   },
   imgStyle: {
     width: '100%',
-    height: moderateScale(400),
+    height: respHeight(55),
   },
   welcomText: {
     fontSize: scale(28),

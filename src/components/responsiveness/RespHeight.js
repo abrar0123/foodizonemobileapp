@@ -6,6 +6,7 @@ const {width} = Dimensions.get('window');
 export const screenwidth = width;
 export const screenheight = height;
 
+console.log('screenheight', screenheight);
 //  just give value in percentages
 
 export const respHeight = h => {
