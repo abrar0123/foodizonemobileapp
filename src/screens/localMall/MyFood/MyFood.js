@@ -29,7 +29,7 @@ const screens = [
   },
 ];
 
-const MyFood = () => {
+const MyFood = ({navigation}) => {
   const [MyFood, setMyFood] = useState([]);
   const [ind, setind] = useState(1);
   const [Loader, setLoader] = useState(false);
@@ -108,7 +108,7 @@ const MyFood = () => {
         /> */}
       <AppText style={styles.welcomeText}>FastFood Deals</AppText>
 
-      <ListFood MyFood={MyFood} Loader={Loader} />
+      <ListFood MyFood={MyFood} Loader={Loader} navigation={navigation} />
     </React.Fragment>
   );
 };

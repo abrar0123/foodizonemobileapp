@@ -10,6 +10,7 @@ import AppText from '../../components/UI/AppText/AppText';
 import mycolors from '../../styles/mycolors';
 import Forgotpassword from '../../screens/forgotpass/forgotpassword';
 import Home from '../../screens/Home/home';
+import Localmall from '../../screens/localMall/localmall';
 
 const Authnavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -30,6 +31,7 @@ const Authnavigation = () => {
       <Stack.Screen name={stackscreens.login} component={Login} />
       <Stack.Screen name={stackscreens.register} component={Register} />
       <Stack.Screen name={stackscreens.forgotpass} component={Forgotpassword} />
+      <Stack.Screen name={stackscreens.localmaall} component={Localmall} />
     </Stack.Navigator>
   );
 };

@@ -17,7 +17,7 @@ import {
 } from 'react-native-size-matters';
 import Smcard from '../../components/UI/SmallCard/smcard';
 
-export default function Localmall() {
+export default function Localmall({navigation}) {
   return (
     <SafeArea>
       <View style={styles.mystyle}>
@@ -50,8 +50,8 @@ export default function Localmall() {
             </View>
           </Smcard>
         </View>
-        <View style={{marginTop: moderateScale(12)}}>
-          <MyFood />
+        <View style={{marginVertical: moderateScale(5)}}>
+          <MyFood navigation={navigation} />
         </View>
       </View>
     </SafeArea>

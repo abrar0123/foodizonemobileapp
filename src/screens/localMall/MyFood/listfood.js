@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import AppText from '../../../components/UI/AppText';
 import mycolors from '../../../styles/mycolors';
@@ -9,8 +9,13 @@ import {FlatList} from 'react-native';
 import {respWidth} from '../../../components/responsiveness/RespHeight';
 import Smcard from '../../../components/UI/SmallCard/smcard';
 import {moderateScale} from 'react-native-size-matters';
+import stackscreens from '../../../constants/stackscreens';
 
-const listfood = ({MyFood, Loader}) => {
+const Listfood = ({MyFood, Loader, navigation}) => {
+  const HandleDetails = id => {
+    navigation.navigate(stackscreens.foodDetail, {id: id});
+  };
+
   // const userCart = useSelector((state) => state.foodcart.userFoodCart);
   // const cartIndex = useSelector((state) => state.cartIndex);
 
@@ -69,70 +74,74 @@ const listfood = ({MyFood, Loader}) => {
 
     // const mycarts = userCart && userCart.find((e) => e.id === item.id);
     return (
-      <Smcard style={styles.fastFoodCard}>
-        <Image source={{uri: imageUrl}} style={styles.img} />
-        <AppText lines={2} style={styles.title}>
-          {item.title}
-        </AppText>
-        <AppText
-          lines={3}
-          style={{
-            fontSize: 13,
-            color: mycolors.grey,
-            paddingHorizontal: 10,
-          }}>
-          {description}
-        </AppText>
-        <AppText lines={2} style={{...styles.title, marginBottom: 5}}>
-          ${item.readyInMinutes}
-        </AppText>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}>
-          <View style={styles.cartcontainer}>
-            <TouchableOpacity
-            // onPress={deleteToCartHandler.bind(this, item.id, index)}
-            // onPress={removeToCart.bind(this, item.id)}
-            >
-              {/* <AntDesign
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={HandleDetails.bind(this, item.id)}>
+        <Smcard style={styles.fastFoodCard}>
+          <Image source={{uri: imageUrl}} style={styles.img} />
+          <AppText lines={2} style={styles.title}>
+            {item.title}
+          </AppText>
+          <AppText
+            lines={3}
+            style={{
+              fontSize: 13,
+              color: mycolors.grey,
+              paddingHorizontal: 10,
+            }}>
+            {description}
+          </AppText>
+          <AppText lines={2} style={{...styles.title, marginBottom: 5}}>
+            ${item.readyInMinutes}
+          </AppText>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <View style={styles.cartcontainer}>
+              <TouchableOpacity
+              // onPress={deleteToCartHandler.bind(this, item.id, index)}
+              // onPress={removeToCart.bind(this, item.id)}
+              >
+                {/* <AntDesign
             name="minuscircle"
             size={30}
             color={colors.jamanlight}
           /> */}
-            </TouchableOpacity>
+              </TouchableOpacity>
 
-            {/* {mycarts && (
+              {/* {mycarts && (
           <AppText style={{ color: colors.white }}>{mycarts.quant}</AppText>
         )} */}
 
-            <TouchableOpacity
-            // onPress={addToCartHandler.bind(this, item.id, index)}
-            // onPress={addToCart.bind(
-            //   this,
-            //   item.id,
-            //   item.title,
-            //   imageUrl,
-            //   item.readyInMinutes
-            // )}
-            >
-              {/* <AntDesign
+              <TouchableOpacity
+              // onPress={addToCartHandler.bind(this, item.id, index)}
+              // onPress={addToCart.bind(
+              //   this,
+              //   item.id,
+              //   item.title,
+              //   imageUrl,
+              //   item.readyInMinutes
+              // )}
+              >
+                {/* <AntDesign
             name="pluscircle"
             size={30}
             color={colors.jamanlight}
           /> */}
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </Smcard>
+        </Smcard>
+      </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
       <FlatList
-        contentContainerStyle={{paddingBottom: 750}}
+        contentContainerStyle={{paddingBottom: 700}}
         data={MyFood}
         keyExtractor={item => item.id}
         renderItem={renderItem}
@@ -170,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default listfood;
+export default Listfood;

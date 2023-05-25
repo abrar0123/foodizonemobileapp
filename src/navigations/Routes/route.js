@@ -10,7 +10,7 @@ const Route = () => {
 
   return (
     <NavigationContainer>
-      {loginEmail ? <Tabroutes /> : <Authnavigation />}
+      {loginEmail ? <Homestack /> : <Authnavigation />}
     </NavigationContainer>
   );
 };
