@@ -12,19 +12,48 @@ import {
   respWidth,
 } from '../../../components/responsiveness/RespHeight';
 import imagesPath from '../../../constants/imagesPath';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Rating from 'react-native-easy-rating';
+import {cartActions} from '../../../Redux/cartSlice';
+import {useNavigation} from '@react-navigation/native';
 
 const FoodDetails = ({route}) => {
   const myFood = useSelector(state => state.foodapi.foodapidata);
+  const foodCart = useSelector(state => state.cart.foodCart);
+  console.log('foodCart__', foodCart);
 
+  const navigation = useNavigation();
+  const Dispatch = useDispatch();
+
+  const addTOCartHandler = (id, title, image, price) => {
+    Dispatch(
+      cartActions.addToCart({
+        id: id,
+        title,
+        url: image,
+        quant: 1,
+        price: price,
+        subtotal: price * 1,
+      }),
+    );
+  };
+
+  const removeToCartHandler = id => {
+    Dispatch(cartActions.removeToCart({id: id}));
+  };
+
+  const backHandler = () => {
+    navigation.goBack();
+  };
+  // console.log('oneFood__', oneFood);
   const {id} = route.params;
-
   const oneFood = myFood.find(food => food.id === id);
-  console.log('oneFood__', oneFood);
+  const FoodQuant = foodCart.find(food => food.id === id);
+
   const handleStar =
     oneFood.servings * 1 > 6 ? oneFood.servings / 2 : oneFood.servings;
   const imageUrl = `${imagesPath.apiImage}/${oneFood.image}`;
+
   return (
     <View style={styles.mainDetails}>
       <View style={styles.mainContainer}>
@@ -34,14 +63,16 @@ const FoodDetails = ({route}) => {
           {oneFood.title}
         </AppText>
         <AppText style={styles.descriptionText}>
-          this is bestest pizza forever , please go order and enjoy best pizza
+          Best pizza forever , please go order and enjoy best pizza
         </AppText>
         <View style={styles.ratingContainer}>
           <AppText style={{fontSize: 18, fontWeight: 'bold'}}>
             Price{'  '} ${oneFood.readyInMinutes}
           </AppText>
           <View style={{...styles.ratingContainer}}>
-            <TouchableOpacity activeOpacity={0.7}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={removeToCartHandler.bind(this, oneFood.id)}>
               <View style={styles.iconContainer}>
                 <AppText style={{fontSize: 25, color: mycolors.white}}>
                   -
@@ -55,10 +86,18 @@ const FoodDetails = ({route}) => {
                 paddingVertical: moderateScale(9),
               }}>
               <AppText style={{fontSize: 18, color: mycolors.white}}>
-                10
+                {FoodQuant?.quant ? FoodQuant.quant : 0}
               </AppText>
             </View>
-            <TouchableOpacity activeOpacity={0.7}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={addTOCartHandler.bind(
+                this,
+                oneFood.id,
+                oneFood.title,
+                imageUrl,
+                oneFood.readyInMinutes,
+              )}>
               <View style={styles.iconContainer2}>
                 <AppText style={{fontSize: 25, color: mycolors.white}}>
                   +
@@ -86,11 +125,11 @@ const FoodDetails = ({route}) => {
         style={{
           alignItems: 'center',
         }}>
-        <TouchableOpacity activeOpacity={0.7}>
+        <TouchableOpacity activeOpacity={0.7} onPress={backHandler}>
           <View style={styles.cartbtn}>
             <AppText
               style={{fontSize: 18, fontWeight: 'bold', color: mycolors.white}}>
-              Add to Cart
+              Add to Cart {FoodQuant?.subtotal && `$${FoodQuant?.subtotal}`}
             </AppText>
           </View>
         </TouchableOpacity>
@@ -138,7 +177,7 @@ const styles = StyleSheet.create({
   cartbtn: {
     backgroundColor: mycolors.primaryorange,
     // width: respWidth(50),
-    paddingHorizontal: moderateScale(115),
+    paddingHorizontal: moderateScale(105),
     paddingVertical: moderateScale(12),
     borderRadius: moderateScale(25),
   },

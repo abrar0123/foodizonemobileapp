@@ -4,9 +4,11 @@ import {authreducer} from '../authSlice';
 import persistStore from 'redux-persist/es/persistStore';
 import {FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from 'redux-persist';
 import {foodApiReducer} from '../foodapiSlice';
+import {cartReducer} from '../cartSlice';
 
 const rootReducer = combineReducers({
   auth: authreducer,
+  cart: cartReducer,
   foodapi: foodApiReducer,
 });
 
