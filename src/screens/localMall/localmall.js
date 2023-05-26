@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import AppText from '../../components/UI/AppText';
 import MyFood from './MyFood/MyFood';
 import SearchBar from '../../components/Search/SearchBar';
@@ -16,8 +16,30 @@ import {
   scale,
 } from 'react-native-size-matters';
 import Smcard from '../../components/UI/SmallCard/smcard';
+import {getFoodData} from '../../Redux/foodapiSlice';
+import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Localmall({navigation}) {
+  const foodapidata = useSelector(state => state.foodapi.foodapidata);
+  const isLoading = useSelector(state => state.foodapi.loading);
+
+  const loading = false;
+  // console.log('foodapidata__', foodapidata, isLoading);
+  const Dispatch = useDispatch();
+  useEffect(() => {
+    // console.log('fooddata__');
+    Dispatch(getFoodData());
+  }, [Dispatch]);
+  //   <Spinner
+  //   visible={isload}
+  //   size={50}
+  //   textContent={'Loading...'}
+  //   type={'wave'}
+  //   color={'#123abc'}
+  //   textStyle={{color: '#FFF'}}
+  // />
   return (
     <SafeArea>
       <View style={styles.mystyle}>
@@ -35,6 +57,7 @@ export default function Localmall({navigation}) {
         <View style={{marginVertical: moderateScale(12)}}>
           <SearchBar />
         </View>
+
         <View>
           <Smcard style={styles.primaryBox2}>
             <View style={styles.flexcolum}>
@@ -51,7 +74,10 @@ export default function Localmall({navigation}) {
           </Smcard>
         </View>
         <View style={{marginVertical: moderateScale(5)}}>
-          <MyFood navigation={navigation} />
+          <MyFood
+            foodapidata={foodapidata}
+            navigation={navigation}
+          />
         </View>
       </View>
     </SafeArea>
@@ -73,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  // box
+  // box 2
   primaryBox2: {
     display: 'flex',
     flexDirection: 'row',

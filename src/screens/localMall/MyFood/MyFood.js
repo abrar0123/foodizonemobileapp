@@ -11,10 +11,11 @@ import {useState, useEffect} from 'react';
 import AppText from '../../../components/UI/AppText';
 import ListFood from './listfood';
 import Card from '../../../components/UI/Card/Card';
-// import GridFood from './gridFood';
 import mycolors from '../../../styles/mycolors';
 import {scale} from 'react-native-size-matters';
 import {respWidth} from '../../../components/responsiveness/RespHeight';
+import Spinner from 'react-native-loading-spinner-overlay';
+import {useSelector} from 'react-redux';
 
 const screens = [
   {
@@ -29,25 +30,13 @@ const screens = [
   },
 ];
 
-const MyFood = ({navigation}) => {
-  const [MyFood, setMyFood] = useState([]);
+const MyFood = ({foodapidata, navigation}) => {
+  // const [MyFood, setMyFood] = useState([]);
   const [ind, setind] = useState(1);
   const [Loader, setLoader] = useState(false);
   const [number, setNumber] = useState(9);
-
-  const populatFoodApi = async () => {
-    try {
-      setLoader(true);
-      const data = await fetch(
-        'https://api.spoonacular.com/recipes/search?apiKey=01f6f4375b1a4cf5b57fac91d2e1b8fd&query=pizza&number=10',
-      );
-      const response = await data.json();
-      setMyFood(response.results);
-    } catch (error) {
-      console.log('MyFood_API___Error___:', error);
-    }
-    setLoader(false);
-  };
+  const isLoading = useSelector(state => state.foodapi.loading);
+  // const isLoading = true;
 
   const myFoodApi = async () => {
     try {
@@ -69,10 +58,6 @@ const MyFood = ({navigation}) => {
     setind(id);
     // console.log("food", MyFood);
   };
-
-  useEffect(() => {
-    populatFoodApi();
-  }, []);
 
   const renderItem = ({item}) => {
     return (
@@ -107,8 +92,22 @@ const MyFood = ({navigation}) => {
           columnWrapperStyle={{justifyContent: 'space-evenly'}}
         /> */}
       <AppText style={styles.welcomeText}>FastFood Deals</AppText>
-
-      <ListFood MyFood={MyFood} Loader={Loader} navigation={navigation} />
+      {isLoading ? (
+        <Spinner
+          visible={isLoading}
+          size={45}
+          animation="fade"
+          color={mycolors.blue}
+          textStyle={mycolors.white}
+          textContent={'Loading...'}
+        />
+      ) : (
+        <ListFood
+          MyFood={foodapidata}
+          Loader={Loader}
+          navigation={navigation}
+        />
+      )}
     </React.Fragment>
   );
 };

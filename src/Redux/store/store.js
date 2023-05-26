@@ -3,9 +3,11 @@ import {combineReducers} from '@reduxjs/toolkit';
 import {authreducer} from '../authSlice';
 import persistStore from 'redux-persist/es/persistStore';
 import {FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from 'redux-persist';
+import {foodApiReducer} from '../foodapiSlice';
 
 const rootReducer = combineReducers({
   auth: authreducer,
+  foodapi: foodApiReducer,
 });
 
 export const store = configureStore({

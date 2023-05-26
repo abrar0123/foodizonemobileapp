@@ -6,12 +6,16 @@ import mycolors from '../../../styles/mycolors';
 // import { useDispatch } from "react-redux";
 import {foodCartActions} from '../../../ReduxSlice/cartSlice';
 import {FlatList} from 'react-native';
-import {respWidth} from '../../../components/responsiveness/RespHeight';
+import {
+  respHeight,
+  respWidth,
+} from '../../../components/responsiveness/RespHeight';
 import Smcard from '../../../components/UI/SmallCard/smcard';
 import {moderateScale} from 'react-native-size-matters';
 import stackscreens from '../../../constants/stackscreens';
+import imagesPath from '../../../constants/imagesPath';
 
-const Listfood = ({MyFood, Loader, navigation}) => {
+const Listfood = ({MyFood, navigation}) => {
   const HandleDetails = id => {
     navigation.navigate(stackscreens.foodDetail, {id: id});
   };
@@ -68,8 +72,8 @@ const Listfood = ({MyFood, Loader, navigation}) => {
   //   }
   // };
 
-  const renderItem = ({item, index}) => {
-    const imageUrl = `https://spoonacular.com/recipeImages/${item.image}`;
+  const renderItem = ({item}) => {
+    const imageUrl = `${imagesPath.apiImage}/${item.image}`;
     const description = `The Top and best ${item.title} forever, you must enjoy once you place order `;
 
     // const mycarts = userCart && userCart.find((e) => e.id === item.id);
@@ -94,45 +98,6 @@ const Listfood = ({MyFood, Loader, navigation}) => {
           <AppText lines={2} style={{...styles.title, marginBottom: 5}}>
             ${item.readyInMinutes}
           </AppText>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}>
-            <View style={styles.cartcontainer}>
-              <TouchableOpacity
-              // onPress={deleteToCartHandler.bind(this, item.id, index)}
-              // onPress={removeToCart.bind(this, item.id)}
-              >
-                {/* <AntDesign
-            name="minuscircle"
-            size={30}
-            color={colors.jamanlight}
-          /> */}
-              </TouchableOpacity>
-
-              {/* {mycarts && (
-          <AppText style={{ color: colors.white }}>{mycarts.quant}</AppText>
-        )} */}
-
-              <TouchableOpacity
-              // onPress={addToCartHandler.bind(this, item.id, index)}
-              // onPress={addToCart.bind(
-              //   this,
-              //   item.id,
-              //   item.title,
-              //   imageUrl,
-              //   item.readyInMinutes
-              // )}
-              >
-                {/* <AntDesign
-            name="pluscircle"
-            size={30}
-            color={colors.jamanlight}
-          /> */}
-              </TouchableOpacity>
-            </View>
-          </View>
         </Smcard>
       </TouchableOpacity>
     );
@@ -156,6 +121,7 @@ const Listfood = ({MyFood, Loader, navigation}) => {
 const styles = StyleSheet.create({
   fastFoodCard: {
     width: respWidth(46),
+    height: respHeight(35),
     // height: 300,
     marginVertical: moderateScale(5),
     borderRadius: 3,

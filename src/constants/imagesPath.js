@@ -1,4 +1,5 @@
 export default {
+  apiImage:'https://spoonacular.com/recipeImages/',
   home: require('../assets/imagesIcons/house.png'),
   cart: require('../assets/imagesIcons/cart.png'),
   mall: require('../assets/imagesIcons/mall.png'),
