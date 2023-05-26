@@ -1,9 +1,10 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {API_KEY, Api_EndPoints} from './Handleapi/handleapi';
 
 export const getFoodData = createAsyncThunk('fooddata', async () => {
   try {
     const response = await fetch(
-      'https://api.spoonacular.com/recipes/search?apiKey=01f6f4375b1a4cf5b57fac91d2e1b8fd&query=pizza&number=10',
+      `${Api_EndPoints}/search?apiKey=${API_KEY}&query=pizza&number=10`,
     );
     const data = await response.json();
     // console.log('fooddata__1\n', data.results);

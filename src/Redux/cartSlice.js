@@ -1,4 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import persistReducer from 'redux-persist/es/persistReducer';
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -42,16 +44,18 @@ export const cartSlice = createSlice({
       let productIndex = state.foodCart.findIndex(
         item => item.id === product.id,
       );
-      if (productIndex === -1) {
-        state.foodCart.push(product);
-      } else {
-        state.foodCart[productIndex].quant++;
-        state.foodCart[productIndex].subtotal =
-          state.foodCart[productIndex].price *
-          state.foodCart[productIndex].quant;
+      if (productIndex !== -1) {
+        state.foodCart.splice(productIndex, 1);
       }
     },
   },
 });
-export const cartReducer = cartSlice.reducer;
+
+const persistconfigue = {
+  key: 'root',
+  storage: AsyncStorage,
+};
+export const cartReducer = persistReducer(persistconfigue, cartSlice.reducer);
+
+// export const cartReducer = cartSlice.reducer;
 export const cartActions = cartSlice.actions;

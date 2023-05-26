@@ -3,7 +3,7 @@ import {Image, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import stackscreens from '../../constants/stackscreens';
 import Home from '../../screens/Home/home';
-import Cart from '../../screens/cart/Cart';
+import MainCart from '../../screens/cart/MainCart';
 import Profile from '../../screens/Profile/profile';
 import mycolors from '../../styles/mycolors';
 import imagesPath from '../../constants/imagesPath';
@@ -58,8 +58,8 @@ const Tabroutes = () => {
         }}
       />
       <Tab.Screen
-        name={stackscreens.cart}
-        component={Cart}
+        name={stackscreens.maincart}
+        component={MainCart}
         options={{
           tabBarIcon: ({focused}) => {
             return (

@@ -6,7 +6,7 @@ export default {
   home: 'Home',
   home1: 'Home1',
   tabRoutes:'TabRoutes',
-  cart: 'Cart',
+  maincart: 'MainCart',
   profile: 'Profile',
   mall: 'mall',
   localmaall:'LocalMall',

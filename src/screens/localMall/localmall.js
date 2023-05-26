@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView, LogBox} from 'react-native';
 import React, {useEffect} from 'react';
 import AppText from '../../components/UI/AppText';
 import MyFood from './MyFood/MyFood';
@@ -25,21 +25,17 @@ export default function Localmall({navigation}) {
   const foodapidata = useSelector(state => state.foodapi.foodapidata);
   const isLoading = useSelector(state => state.foodapi.loading);
 
-  const loading = false;
   // console.log('foodapidata__', foodapidata, isLoading);
   const Dispatch = useDispatch();
   useEffect(() => {
     // console.log('fooddata__');
     Dispatch(getFoodData());
   }, [Dispatch]);
-  //   <Spinner
-  //   visible={isload}
-  //   size={50}
-  //   textContent={'Loading...'}
-  //   type={'wave'}
-  //   color={'#123abc'}
-  //   textStyle={{color: '#FFF'}}
-  // />
+
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, []);
+
   return (
     <SafeArea>
       <View style={styles.mystyle}>
@@ -57,28 +53,26 @@ export default function Localmall({navigation}) {
         <View style={{marginVertical: moderateScale(12)}}>
           <SearchBar />
         </View>
-
-        <View>
-          <Smcard style={styles.primaryBox2}>
-            <View style={styles.flexcolum}>
-              <AppText style={styles.box2Text}>Best Burgers Deals </AppText>
-              <AppText
-                style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-                Order Food You Love
-              </AppText>
-              <AppText style={styles.box2Text}>Deals 30% OFF </AppText>
-            </View>
-            <View>
-              <Image style={styles.box2imgstyle} source={imagesPath.plate2} />
-            </View>
-          </Smcard>
-        </View>
-        <View style={{marginVertical: moderateScale(5)}}>
-          <MyFood
-            foodapidata={foodapidata}
-            navigation={navigation}
-          />
-        </View>
+        <ScrollView showsVerticalScrollIndicator>
+          <View>
+            <Smcard style={styles.primaryBox2}>
+              <View style={styles.flexcolum}>
+                <AppText style={styles.box2Text}>Best Burgers Deals </AppText>
+                <AppText
+                  style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
+                  Order Food You Love
+                </AppText>
+                <AppText style={styles.box2Text}>Deals 30% OFF </AppText>
+              </View>
+              <View>
+                <Image style={styles.box2imgstyle} source={imagesPath.plate2} />
+              </View>
+            </Smcard>
+          </View>
+          <View style={{marginVertical: moderateScale(5)}}>
+            <MyFood foodapidata={foodapidata} navigation={navigation} />
+          </View>
+        </ScrollView>
       </View>
     </SafeArea>
   );

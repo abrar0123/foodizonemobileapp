@@ -20,63 +20,10 @@ const Listfood = ({MyFood, navigation}) => {
     navigation.navigate(stackscreens.foodDetail, {id: id});
   };
 
-  // const userCart = useSelector((state) => state.foodcart.userFoodCart);
-  // const cartIndex = useSelector((state) => state.cartIndex);
-
-  // console.log("userCart____", userCart);
-
-  // const dispatch = useDispatch();
-
-  // const addToCart = (id, title, image, price) => {
-  //   dispatch(
-  //     foodCartActions.addToCart({
-  //       id: id,
-  //       title: title,
-  //       image: image,
-  //       quant: 1,
-  //       price: price,
-  //     })
-  //   );
-  //   // dispatch({ type: "addToCart", payload: { id: id, quant: 1 } });
-  // };
-
-  // const removeToCart = (id) => {
-  //   // console.log("id_", id);
-  //   dispatch(foodCartActions.deleteToCart({ id }));
-  //   // dispatch({ type: "removeToCart", payload: { id: id, quant: 1 } });
-  // };
-
-  // const addToCartHandler = (productid) => {
-  //   const updatedCartIndex = [...userFoodCart];
-  //   const itemIndex = updatedCartIndex.findIndex((e) => e.id === productid);
-  //   console.log("itemIndex___", itemIndex);
-  //   if (itemIndex >= 0) {
-  //     updatedCartIndex[itemIndex].cart++;
-  //   } else {
-  //     updatedCartIndex.push({ id: productid, cart: 1 });
-  //   }
-  //   // setUserFoodCart(updatedCartIndex);
-  // };
-
-  // const deleteToCartHandler = (pid) => {
-  //   const updatedCartIndex = [...userFoodCart];
-  //   const findIndex = updatedCartIndex.findIndex((e) => e.id === pid);
-  //   console.log("findIndex", findIndex);
-  //   if (findIndex >= 0) {
-  //     if (updatedCartIndex[findIndex].cart > 0) {
-  //       updatedCartIndex[findIndex].cart--;
-  //     } else if (updatedCartIndex[findIndex].cart === 0) {
-  //       updatedCartIndex.splice(findIndex, 1);
-  //     }
-  //     setUserFoodCart(updatedCartIndex);
-  //   }
-  // };
-
   const renderItem = ({item}) => {
     const imageUrl = `${imagesPath.apiImage}/${item.image}`;
     const description = `The Top and best ${item.title} forever, you must enjoy once you place order `;
 
-    // const mycarts = userCart && userCart.find((e) => e.id === item.id);
     return (
       <TouchableOpacity
         activeOpacity={0.7}
@@ -106,7 +53,7 @@ const Listfood = ({MyFood, navigation}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        contentContainerStyle={{paddingBottom: 700}}
+        contentContainerStyle={{paddingBottom: 140}}
         data={MyFood}
         keyExtractor={item => item.id}
         renderItem={renderItem}

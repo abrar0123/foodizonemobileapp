@@ -17,4 +17,8 @@ export default {
   plate2: require('../assets/image/plate2.png'),
 
   notification: require('../assets/image/notification.png'),
+  arrowBack: require('../assets/image/arrowback.png'),
+  delete: require('../assets/image/delete1.png'),
+
+
 };
