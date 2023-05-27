@@ -10,11 +10,16 @@ import {moderateScale} from 'react-native-size-matters';
 import imagesPath from '../../constants/imagesPath';
 import SafeArea from '../../components/Safearea/SafeArea';
 import {respHeight} from '../../components/responsiveness/RespHeight';
+import stackscreens from '../../constants/stackscreens';
+import CartButton from '../../components/Buttons/AppButtons/CartButton';
 
-const MainCart = () => {
+const MainCart = ({navigation}) => {
   //   const cartIndex = useSelector(state => state.foodcart.cartIndex);
   const userFoodCart = useSelector(state => state.cart.foodCart);
 
+  const goCheckoutHandler = () => {
+    navigation.navigate(stackscreens.Checkout);
+  };
   let total = 0;
 
   for (let items in userFoodCart) {
@@ -31,27 +36,11 @@ const MainCart = () => {
       <View style={styles.MainCartcontainer}>
         <View style={styles.main2cart}>
           <AppText style={styles.mainTextstyle}>Your Food Cart</AppText>
-
           <CartItems userFoodCart={userFoodCart} />
         </View>
-
-        <View
-          style={{
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity activeOpacity={0.9}>
-            <View style={styles.cartbtn}>
-              <AppText
-                style={{
-                  fontSize: 22,
-                  fontWeight: 'bold',
-                  color: mycolors.white,
-                }}>
-                Check out {`( Total : $${total} )`}
-              </AppText>
-            </View>
-          </TouchableOpacity>
-        </View>
+        <CartButton onPress={goCheckoutHandler}>
+          Check out {`( Total : $${total} )`}
+        </CartButton>
       </View>
     </SafeArea>
   );

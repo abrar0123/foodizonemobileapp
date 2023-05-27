@@ -27,11 +27,11 @@ const Home = () => {
   return (
     <ScrollView>
       <View style={styles.homeStyle}>
-        <Text>home</Text>
+        <Text></Text>
         {/* box 2  */}
         <SmCard style={styles.flexstyle}>
-          <View style={styles.flexcolum}>
-            <AppText style={styles.welcomeText}>Good Morning, Abrar </AppText>
+          <View style={styles.flexcolum0}>
+            <AppText style={styles.welcomeText}>Welcome Back, Abrar </AppText>
             <AppText style={styles.desText}>
               Almost 50 + Restaurants opens in Area, Enjoy Your Best Food
             </AppText>
@@ -144,7 +144,9 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   homeStyle: {
-    paddingHorizontal: moderateScale(10),
+    // paddingHorizontal: moderateScale(10),
+    paddingHorizontal: respWidth(3),
+
     backgroundColor: mycolors.white,
     flex: 1,
   },
@@ -153,8 +155,34 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: moderateScale(3),
-    backgroundColor: mycolors.white,
+    padding: moderateScale(5),
     justifyContent: 'space-between',
+  },
+  flexcolum0: {
+    display: 'flex',
+    width: respWidth(55),
+    gap: 2,
+    flexDirection: 'column',
+  },
+  flexcolum: {
+    display: 'flex',
+    // width: respWidth(55),
+    gap: 2,
+    flexDirection: 'column',
+  },
+  imagestyle: {
+    width: respWidth(35),
+    height: respHeight(15),
+    resizeMode: 'contain',
+  },
+  welcomeText: {
+    fontSize: scale(22),
+    width: '100%',
+    fontWeight: 'bold',
+  },
+  desText: {
+    width: '100%',
+    fontSize: scale(13),
   },
   primaryBox2: {
     display: 'flex',
@@ -234,26 +262,6 @@ const styles = StyleSheet.create({
     fontSize: scale(20),
     fontWeight: 'bold',
     color: mycolors.white,
-  },
-  flexcolum: {
-    display: 'flex',
-    gap: 2,
-    flexDirection: 'column',
-  },
-  imagestyle: {
-    width: respWidth(35),
-    height: respHeight(15),
-    resizeMode: 'contain',
-    // backgroundColor: mycolors.red,
-  },
-  welcomeText: {
-    fontSize: scale(22),
-    width: respWidth(60),
-    fontWeight: 'bold',
-  },
-  desText: {
-    width: respWidth(60),
-    fontSize: scale(13),
   },
 });
 

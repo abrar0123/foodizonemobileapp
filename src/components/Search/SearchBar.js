@@ -2,16 +2,25 @@ import React from 'react';
 import {View, StyleSheet, Image, TextInput} from 'react-native';
 import imagesPath from '../../constants/imagesPath';
 import mycolors from '../../styles/mycolors';
-import {scale} from 'react-native-size-matters';
+import {moderateScale, scale} from 'react-native-size-matters';
+import Smcard from '../UI/SmallCard/smcard';
+import {respWidth} from '../responsiveness/RespHeight';
 
 const SearchBar = () => {
   return (
     <View style={styles.searchContainer}>
-      <View style={styles.inputContainer}>
+      <Smcard style={styles.inputContainer}>
         <Image source={imagesPath.search} style={styles.imagstyle} />
         <TextInput style={styles.textInput} placeholder="Search for Foods" />
-      </View>
-      <Image source={imagesPath.filter} style={styles.imagstyle} />
+      </Smcard>
+      <Smcard
+        style={{
+          paddingVertical: moderateScale(12),
+          paddingHorizontal: moderateScale(7),
+          borderRadius: 5,
+        }}>
+        <Image source={imagesPath.filter} style={styles.imagstyle} />
+      </Smcard>
     </View>
   );
 };
@@ -21,35 +30,26 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-
+    // gap: 5,
     justifyContent: 'space-between',
   },
   imagstyle: {
-    width: 30,
+    width: respWidth(8),
     height: 25,
   },
   inputContainer: {
-    shadowColor: mycolors.black,
-
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    elevation: 5,
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
     paddingLeft: 10,
+    width: respWidth(80),
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 5,
-    backgroundColor: mycolors.white,
+    // backgroundColor: mycolors.red,
 
     // backgroundColor: mycolors.grey,
   },
   textInput: {
-    width: '80%',
+    width: '85%',
     fontSize: scale(18),
     // backgroundColor: mycolors.jamanlight,
   },

@@ -5,11 +5,11 @@ export default {
   forgotpass: 'forgetpassword',
   home: 'Home',
   home1: 'Home1',
-  tabRoutes:'TabRoutes',
+  tabRoutes: 'TabRoutes',
   maincart: 'MainCart',
   profile: 'Profile',
   mall: 'mall',
-  localmaall:'LocalMall',
-  foodDetail:'Food Details'
-
+  localmaall: 'LocalMall',
+  foodDetail: 'Food Details',
+  Checkout: 'checkout',
 };
