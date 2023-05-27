@@ -54,6 +54,7 @@ const Login = ({navigation}) => {
   const signupHandler = () => {
     navigation.navigate(stackscreens.register);
   };
+  
   const onSubmitLogin = event => {
     event.preventDefault();
 

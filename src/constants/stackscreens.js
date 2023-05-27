@@ -12,4 +12,7 @@ export default {
   localmaall: 'LocalMall',
   foodDetail: 'Food Details',
   Checkout: 'checkout',
+  myorder: 'My Orders',
+  account: 'Account',
+
 };

@@ -18,6 +18,8 @@ import {
   screenheight,
 } from '../../components/responsiveness/RespHeight';
 import stackscreens from '../../constants/stackscreens';
+import {useDispatch} from 'react-redux';
+import {authActions} from '../../Redux/authSlice';
 
 const Register = ({navigation}) => {
   const [username, setusername] = useState('');
@@ -30,6 +32,8 @@ const Register = ({navigation}) => {
   const emailError = 'Empty Email not allowed';
   const emailvalidation = 'please enter valid Email';
   const passError = 'Empty Password not allowed';
+
+  const Dispatch = useDispatch();
 
   const usernameHandler = event => {
     setusername(event);
@@ -81,6 +85,9 @@ const Register = ({navigation}) => {
     } else if (!password) {
       return seterrors({Password: passError});
     }
+    Dispatch(
+      authActions.login({email: email, password: password, username: username}),
+    );
   };
 
   return (

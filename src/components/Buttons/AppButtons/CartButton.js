@@ -5,10 +5,12 @@ import mycolors from '../../../styles/mycolors';
 import {moderateScale, scale} from 'react-native-size-matters';
 
 const CartButton = props => {
+  const opacity = props.opacity ? props.opacity : 0.7;
+
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={props.onPress}>
+    <TouchableOpacity activeOpacity={opacity} onPress={props.onPress}>
       <View style={{...styles.cartbtn, ...props.style}}>
-        <AppText style={{...styles.text, ...props.style}}>
+        <AppText style={{...styles.text, ...props.styleT}}>
           {props.children}
         </AppText>
       </View>
@@ -17,6 +19,9 @@ const CartButton = props => {
 };
 
 const styles = StyleSheet.create({
+  opacity: {
+    activeOpacity: 0.7,
+  },
   cartbtn: {
     backgroundColor: mycolors.jaman,
     // paddingHorizontal: moderateScale(35),
