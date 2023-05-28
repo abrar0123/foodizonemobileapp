@@ -20,4 +20,7 @@ export default {
   arrowBack: require('../assets/image/arrowback.png'),
   delete: require('../assets/image/delete1.png'),
   background: require('../assets/image/background.jpg'),
+  Google_API_KEY: 'AIzaSyCYq-SOVccQ3j5wchYBCd2vneiAPTVZnTs',
+  Qr_Scanner: require('../assets/image/qr.png')
+
 };

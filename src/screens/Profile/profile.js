@@ -23,6 +23,9 @@ const Profile = ({navigation}) => {
   const goProfileHandler = () => {
     navigation.navigate(stackscreens.account);
   };
+  const goOrder = () => {
+    navigation.navigate(stackscreens.myorder);
+  };
   return (
     <View style={styles.profile}>
       <View style={{display: 'flex', gap: moderateScale(5)}}>
@@ -62,7 +65,9 @@ const Profile = ({navigation}) => {
         <Smcard style={styles.ordersummaryContainer}>
           <View style={{...styles.itemsDetailContainer}}>
             <AppText style={styles.orderText}>MyOrders</AppText>
-            <AppText style={styles.viewAllText}>View All {'>'}</AppText>
+            <TouchableOpacity activeOpacity={0.7} onPress={goOrder}>
+              <AppText style={styles.viewAllText}>View All {'>'}</AppText>
+            </TouchableOpacity>
           </View>
 
           <View
