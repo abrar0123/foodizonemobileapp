@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   StyleSheet,
   FlatList,
-  Text,
   ScrollView,
   Image,
   LogBox,
@@ -23,20 +22,53 @@ import {
 } from 'react-native-size-matters';
 import Card from '../../components/UI/Card/Card';
 import CartButton from '../../components/Buttons/AppButtons/CartButton';
+import {collection, addDoc} from 'firebase/firestore';
+import {DB} from '../../firebase_Configue';
 
 const Checkout = () => {
   const foodCart = useSelector(state => state.cart.foodCart);
-  //   console.log('foodCart', foodCart);
+  // console.log('foodCart', foodCart);
+  const deliverTo = {
+    name: 'Abrar Hussain',
+    address: 'chak road shah e noor bazar shop 29, lahore,punjab',
+    estimatedTime: '25 mins',
+  };
   let total = 0;
   for (let items in foodCart) {
     total += foodCart[items].quant * foodCart[items].price;
   }
 
+  const discount = total * 0.01;
+  const megaTotal = total + 5 - discount;
+
+  const OrderSummary = {
+    itemsTotal: total,
+    deliveryFee: '$5',
+    Voucher: discount,
+    megaTotal: megaTotal,
+  };
+
+  const orderPlaceAtFirestore = () => {
+    const mycollection = collection(DB, 'userOrders');
+    try {
+      const response = addDoc(mycollection, {
+        UpdatedOrder: {
+          DeliverTo: deliverTo,
+          UserFoodItems: foodCart,
+          OrderSummary: OrderSummary,
+        },
+      });
+      response
+        .then(e => console.log('resolved', e))
+        .catch(e => console.log('reject', e));
+    } catch (error) {
+      console.log('err', error);
+    }
+  };
+
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
-  const discount = total * 0.01;
-  const megaTotal = total + 5 - discount;
 
   const itemsRender = ({item}) => {
     return (
@@ -70,16 +102,14 @@ const Checkout = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Smcard style={styles.ordersummaryContainer}>
             <AppText style={styles.deliveryText}>
-              Delivery to: Abrar Hussain
+              Delivery to: {deliverTo.name}
             </AppText>
             <AppText style={{fontWeight: 'bold'}}>
               Delivery Address :{'  '}
-              <AppText>
-                chak road shah e noor bazar shop 29, lahore,punjab
-              </AppText>
+              <AppText>{deliverTo.address}</AppText>
             </AppText>
             <AppText style={{fontWeight: 'bold'}}>
-              Estimated Delivery : <AppText>25 mins</AppText>
+              Estimated Delivery : <AppText>{deliverTo.estimatedTime}</AppText>
             </AppText>
           </Smcard>
           {/* food items details */}
@@ -103,7 +133,7 @@ const Checkout = () => {
 
             <View style={{...styles.itemsDetailContainer}}>
               <AppText style={styles.orderText}>Delivery Fee</AppText>
-              <AppText>$5</AppText>
+              <AppText>{OrderSummary.deliveryFee}</AppText>
             </View>
             <View style={{...styles.itemsDetailContainer}}>
               <AppText style={styles.orderText}>Discount Voucher</AppText>
@@ -118,7 +148,7 @@ const Checkout = () => {
 
         {/* view 2 */}
       </View>
-      <CartButton>Place Order</CartButton>
+      <CartButton onPress={orderPlaceAtFirestore}>Place Order</CartButton>
     </View>
   );
 };

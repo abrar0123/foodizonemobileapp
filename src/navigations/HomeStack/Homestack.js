@@ -22,8 +22,8 @@ const Homestack = ({navigation}) => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {backgroundColor: mycolors.red},
-        // headerTintColor: mycolors.white,
+        headerStyle: {backgroundColor: mycolors.jaman},
+        headerTintColor: mycolors.white,
         contentStyle: {backgroundColor: mycolors.gray},
       }}>
       <Stack.Screen
