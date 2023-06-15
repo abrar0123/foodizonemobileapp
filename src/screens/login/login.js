@@ -20,10 +20,11 @@ import {
 import stackscreens from '../../constants/stackscreens';
 import {useDispatch} from 'react-redux';
 import {authActions} from '../../Redux/authSlice';
+import {apiEndpoints, authApiKey} from '../../firebase_Configue';
 
 const Login = ({navigation}) => {
-  const [email, setemail] = useState('');
-  const [password, setpassword] = useState('');
+  const [email, setemail] = useState('ab@gmail.com');
+  const [password, setpassword] = useState('222');
   const [showpassword, setshowpassword] = useState(true);
   const [errors, seterrors] = useState({Email: '', Password: ''});
 
@@ -54,7 +55,7 @@ const Login = ({navigation}) => {
   const signupHandler = () => {
     navigation.navigate(stackscreens.register);
   };
-  
+
   const onSubmitLogin = event => {
     event.preventDefault();
 
@@ -74,8 +75,45 @@ const Login = ({navigation}) => {
     } else if (!password) {
       return seterrors({Password: passError});
     }
-    Dispatch(authActions.login({email: email, password: password}));
+    if (errors.Email || errors.Password) {
+      return;
+    }
+    logInAuthentication();
   };
+
+  // Login user
+
+  const logInAuthentication = async () => {
+    try {
+      const response = await fetch(
+        `${apiEndpoints}/accounts:signInWithPassword?key=${authApiKey}`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+          headers: {'Content-Type': 'application/json'},
+          returnSecureToken: true,
+        },
+      );
+
+      const data = await response.json();
+
+      console.log('dataa__', data);
+      if (data.error) {
+        const error = `Authentication error : ${data.error.message.toLowerCase()}`;
+        seterrors({Password: error});
+        return;
+      }
+      Dispatch(authActions.login({email: email, password: password}));
+    } catch (error) {
+      console.log('dataa__1', error);
+    }
+  };
+
+  console.log('error___23', errors);
+
   return (
     <View style={styles.loginStyle}>
       <KeyboardAvoidingView behavior="position">
