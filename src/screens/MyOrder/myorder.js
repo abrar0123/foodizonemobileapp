@@ -1,133 +1,93 @@
-import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Linking,
-  Alert,
-  Image,
-} from 'react-native';
-import AppText from '../../components/UI/AppText';
-import mycolors from '../../styles/mycolors';
-import {
-  respHeight,
-  respWidth,
-} from '../../components/responsiveness/RespHeight';
-import Smcard from '../../components/UI/SmallCard/smcard';
-import {moderateScale} from 'react-native-size-matters';
-import MapView from 'react-native-maps';
-import MapViewDirections from 'react-native-maps-directions';
-import imagesPath from '../../constants/imagesPath';
+import React, {useRef} from 'react';
+import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {RNCamera} from 'react-native-camera';
-import QRCodeScanner from 'react-native-qrcode-scanner';
+import {Alert} from 'react-native';
+// import RNFS from 'react-native-fs';
+import * as RNFS from 'react-native-fs';
+
+import {useState} from 'react';
+import imagesPath from '../../constants/imagesPath';
 
 const Myorder = () => {
-  const location = {
-    pickupCors: {
-      latitude: 30.7046,
-      longitude: 76.7179,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    },
-    droplocationCors: {
-      latitude: 30.7333,
-      longitude: 76.7794,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    },
-  };
-  const [state, setstate] = useState(location);
-  const [qrshow, setqrshow] = useState(false);
-  const {pickupCors, droplocationCors} = state;
+  const cameraRef = useRef(null);
 
-  const onSuccess = e => {
-    Alert.alert('Qr Code Data', e.data, [
-      {text: 'close'},
-      {text: 'Ok', onPress: qrdataHandler},
-    ]);
-    qrdataHandler();
-    Linking.openURL(e.data).catch(err => {
-      console.log('error__', err);
-    });
+  const [capturedImage, setCapturedImage] = useState(null);
+
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      const options = {quality: 0.5, base64: true};
+      const data = await cameraRef.current.takePictureAsync(options);
+      saveImage(data.uri);
+    }
   };
 
-  const qrdataHandler = () => {
-    setqrshow(!qrshow);
+  const saveImage = async uri => {
+    try {
+      const newPath = `${RNFS.DocumentDirectoryPath}/capturedImage.jpg`;
+      await RNFS.copyFile(uri, newPath);
+      setCapturedImage(newPath);
+      console.log('Image saved:', newPath);
+    } catch (error) {
+      console.log('Failed to save image:', error);
+    }
   };
+  const r = 10;
   return (
-    <View style={styles.myorder}>
-      <Smcard
-        style={{
-          paddingVertical: 20,
-          paddingHorizontal: 10,
-
-          backgroundColor: mycolors.orange,
-          marginBottom: 70,
-        }}>
-        <AppText style={{...styles.buttonText, color: mycolors.white}}>
-          Scan qr code to get information about products
-        </AppText>
-      </Smcard>
-      <View style={{height: respHeight(60)}}>
-        {qrshow ? (
-          <View>
-            <QRCodeScanner
-              // reactivate={2000}
-              onRead={onSuccess}
-              flashMode={RNCamera.Constants.FlashMode.off}
-              topContent={<AppText></AppText>}
-              bottomContent={
-                <TouchableOpacity
-                  style={styles.buttonTouchable}></TouchableOpacity>
-              }
+    <View style={styles.container}>
+      {capturedImage ? (
+        <Image
+          source={{uri: capturedImage}}
+          style={{
+            width: '80%',
+            height: '80%',
+            resizeMode: 'center',
+            alignSelf: 'center',
+          }}
+        />
+      ) : (
+        <>
+          <RNCamera
+            ref={cameraRef}
+            style={styles.camera}
+            type={RNCamera.Constants.Type.back}
+            captureAudio={false}
+          />
+          <View style={styles.captureButtonContainer}>
+            <TouchableOpacity
+              style={styles.captureButton}
+              onPress={takePicture}
             />
           </View>
-        ) : (
-          <Image
-            source={imagesPath.Qr_Scanner}
-            style={{
-              width: '80%',
-              height: '80%',
-              resizeMode: 'center',
-              alignSelf: 'center',
-            }}
-          />
-        )}
-      </View>
-
-      <View>
-        <TouchableOpacity
-          style={styles.buttonTouchable}
-          onPress={qrdataHandler}>
-          <AppText style={styles.buttonText}>Scan My QR Code</AppText>
-        </TouchableOpacity>
-      </View>
+        </>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  myorder: {
-    backgroundColor: mycolors.white,
-    // paddingHorizontal: respWidth(3),
+  container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  centerText: {
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
+  camera: {
+    flex: 1,
+    width: '100%',
+    // height: 00,
   },
-  textBold: {
-    fontWeight: '600',
-    color: mycolors.black,
+  captureButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    alignItems: 'center',
+    width: '100%',
   },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-    textAlign: 'center',
-  },
-  buttonTouchable: {
-    padding: 16,
+  captureButton: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    borderWidth: 5,
+    borderColor: '#fff',
+    backgroundColor: '#ccc',
   },
 });
 
