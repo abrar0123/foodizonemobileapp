@@ -20,6 +20,8 @@ import {
 import stackscreens from '../../constants/stackscreens';
 import {useDispatch} from 'react-redux';
 import {authActions} from '../../Redux/authSlice';
+import {collection, addDoc, getDocs} from 'firebase/firestore';
+import {DB, apiEndpoints, authApiKey} from '../../firebase_Configue';
 
 const Register = ({navigation}) => {
   const [username, setusername] = useState('');
@@ -85,9 +87,56 @@ const Register = ({navigation}) => {
     } else if (!password) {
       return seterrors({Password: passError});
     }
+
+    //  submitted...
+
     Dispatch(
       authActions.login({email: email, password: password, username: username}),
     );
+    signupAuthentication();
+    fireStoreRegisters();
+  };
+
+  // register user
+
+  const signupAuthentication = async () => {
+    try {
+      const response = await fetch(
+        `${apiEndpoints}/accounts:signUp?key=${authApiKey}`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            username: username,
+          }),
+          headers: {'Content-Type': 'application/json'},
+        },
+      );
+      const data = await response.json();
+      console.log('data__', data);
+    } catch (error) {
+      console.log(error, 'err');
+    }
+  };
+  
+
+  // store in firestore database
+
+  const fireStoreRegisters = async () => {
+    const mycollection = await collection(DB, 'RegisterUsers');
+    try {
+      const users = await addDoc(mycollection, {
+        email: email,
+        password: password,
+        username: username,
+      });
+      users
+        .then(e => console.log('resolve', e))
+        .catch(e => console.log('reject', e));
+    } catch (error) {
+      console.log(error, 'err');
+    }
   };
 
   return (
