@@ -14,5 +14,7 @@ export default {
   Checkout: 'checkout',
   myorder: 'My Orders',
   account: 'Account',
+  camera: 'Camera',
+
 
 };

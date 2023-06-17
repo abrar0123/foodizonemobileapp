@@ -22,5 +22,4 @@ export default {
   background: require('../assets/image/background.jpg'),
   Google_API_KEY: 'AIzaSyCYq-SOVccQ3j5wchYBCd2vneiAPTVZnTs',
   Qr_Scanner: require('../assets/image/qr.png')
-
 };

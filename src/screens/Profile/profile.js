@@ -24,7 +24,7 @@ const Profile = ({navigation}) => {
     navigation.navigate(stackscreens.account);
   };
   const goOrder = () => {
-    navigation.navigate(stackscreens.myorder);
+    navigation.navigate(stackscreens.camera);
   };
   return (
     <View style={styles.profile}>
