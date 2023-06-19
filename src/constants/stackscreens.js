@@ -15,6 +15,8 @@ export default {
   myorder: 'My Orders',
   account: 'Account',
   camera: 'Camera',
+  qrcode: 'QrCode',
+
 
 
 };

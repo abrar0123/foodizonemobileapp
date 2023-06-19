@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  Text,
   Image,
   TouchableOpacity,
   ImageBackground,
@@ -18,13 +17,24 @@ import AppText from '../../components/UI/AppText';
 import Card from '../../components/UI/Card/Card';
 import imagesPath from '../../constants/imagesPath';
 import stackscreens from '../../constants/stackscreens';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Profile = ({navigation}) => {
   const goProfileHandler = () => {
     navigation.navigate(stackscreens.account);
   };
+
   const goOrder = () => {
+    navigation.navigate(stackscreens.myorder);
+  };
+
+  const goCamera = () => {
     navigation.navigate(stackscreens.camera);
+  };
+
+  const goQrCode = () => {
+    navigation.navigate(stackscreens.qrcode);
   };
   return (
     <View style={styles.profile}>
@@ -91,13 +101,40 @@ const Profile = ({navigation}) => {
             <AppText style={styles.orderText1}>To Cancellation</AppText>
           </View>
         </Smcard>
+
+        {/* My Features  */}
+
         <Smcard style={styles.ordersummaryContainer}>
           <View style={{...styles.itemsDetailContainer}}>
-            <AppText style={styles.orderText}>My Coins</AppText>
-            <AppText style={styles.viewAllText}>Earn Coins {'>'}</AppText>
+            <AppText style={styles.orderText}>My Features</AppText>
+            <AppText style={styles.viewAllText}>See Details {'>'}</AppText>
+          </View>
+
+          <View style={{...styles.itemsDetailContainer}}>
+            <TouchableOpacity activeOpacity={0.5}>
+              <Icon name="cc-mastercard" size={28} color={mycolors.jaman} />
+            </TouchableOpacity>
+
+            <TouchableOpacity activeOpacity={0.5} onPress={goQrCode}>
+              <Icon name="qrcode" size={35} color={mycolors.jaman} />
+            </TouchableOpacity>
+
+            <TouchableOpacity activeOpacity={0.5} onPress={goCamera}>
+              <Icon name="camera-retro" size={30} color={mycolors.jaman} />
+            </TouchableOpacity>
+
+            <TouchableOpacity activeOpacity={0.5}>
+              <Ionicons
+                name="chatbox-ellipses"
+                size={35}
+                color={mycolors.jaman}
+              />
+            </TouchableOpacity>
           </View>
         </Smcard>
       </View>
+
+      {/* my accout card */}
       <Smcard style={styles.ordersummaryContainer}>
         <View style={{...styles.itemsDetailContainer}}>
           <AppText style={styles.orderText}>My Account</AppText>
@@ -131,7 +168,7 @@ const styles = StyleSheet.create({
     shadowColor: mycolors.l2black,
   },
   orderText: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: 'bold',
   },
   itemsDetailContainer: {
