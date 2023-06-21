@@ -36,6 +36,11 @@ const Profile = ({navigation}) => {
   const goQrCode = () => {
     navigation.navigate(stackscreens.qrcode);
   };
+
+  const goDevceInfo = () => {
+    navigation.navigate(stackscreens.deviceinfo);
+  };
+
   return (
     <View style={styles.profile}>
       <View style={{display: 'flex', gap: moderateScale(5)}}>
@@ -111,23 +116,31 @@ const Profile = ({navigation}) => {
           </View>
 
           <View style={{...styles.itemsDetailContainer}}>
-            <TouchableOpacity activeOpacity={0.5}>
-              <Icon name="cc-mastercard" size={28} color={mycolors.jaman} />
+            <TouchableOpacity activeOpacity={0.5} onPress={goDevceInfo}>
+              <Icon
+                name="cc-mastercard"
+                size={28}
+                color={mycolors.primaryorange}
+              />
             </TouchableOpacity>
 
             <TouchableOpacity activeOpacity={0.5} onPress={goQrCode}>
-              <Icon name="qrcode" size={35} color={mycolors.jaman} />
+              <Icon name="qrcode" size={35} color={mycolors.primaryorange} />
             </TouchableOpacity>
 
             <TouchableOpacity activeOpacity={0.5} onPress={goCamera}>
-              <Icon name="camera-retro" size={30} color={mycolors.jaman} />
+              <Icon
+                name="camera-retro"
+                size={30}
+                color={mycolors.primaryorange}
+              />
             </TouchableOpacity>
 
             <TouchableOpacity activeOpacity={0.5}>
               <Ionicons
                 name="chatbox-ellipses"
                 size={35}
-                color={mycolors.jaman}
+                color={mycolors.primaryorange}
               />
             </TouchableOpacity>
           </View>

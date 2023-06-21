@@ -17,7 +17,8 @@ import imagesPath from '../../constants/imagesPath';
 import mycolors from '../../styles/mycolors';
 import VisionCamera from '../../screens/VisionCamera/VisionCamera';
 import QrCode from '../../screens/QrCode/QrCode';
-
+// import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from '../../screens/DeviceInfo.js/DeviceInfo';
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,12 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.qrcode}
         component={QrCode}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name={stackscreens.deviceinfo}
+        component={DeviceInfo}
         options={{headerShown: false}}
       />
 

@@ -16,7 +16,5 @@ export default {
   account: 'Account',
   camera: 'Camera',
   qrcode: 'QrCode',
-
-
-
+  deviceinfo: 'Device Info',
 };
