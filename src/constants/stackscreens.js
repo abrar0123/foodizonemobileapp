@@ -17,4 +17,5 @@ export default {
   camera: 'Camera',
   qrcode: 'QrCode',
   deviceinfo: 'Device Info',
+  myTabsView: 'MyTabsView',
 };

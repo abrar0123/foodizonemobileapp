@@ -19,6 +19,7 @@ import VisionCamera from '../../screens/VisionCamera/VisionCamera';
 import QrCode from '../../screens/QrCode/QrCode';
 // import DeviceInfo from 'react-native-device-info';
 import DeviceInfo from '../../screens/DeviceInfo.js/DeviceInfo';
+import MyTabsView from '../../screens/TabView/myTabsView';
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
 
@@ -66,6 +67,11 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.camera}
         component={VisionCamera}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={stackscreens.myTabsView}
+        component={MyTabsView}
         options={{headerShown: false}}
       />
       <Stack.Screen name={stackscreens.foodDetail} component={FoodDetails} />

@@ -58,7 +58,7 @@ const VisionCamera = () => {
       const cameraPermission = await Camera.getCameraPermissionStatus();
       const microphonePermission = await Camera.getMicrophonePermissionStatus();
       const devices = await Camera.getAvailableCameraDevices();
-      // console.log('devices__234:\n\n\n', devices);
+      console.log('devices__234:\n\n\n', cameraPermission);
     } catch (error) {
       console.log('erorr__:', error);
     }

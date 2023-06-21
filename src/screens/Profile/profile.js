@@ -41,6 +41,10 @@ const Profile = ({navigation}) => {
     navigation.navigate(stackscreens.deviceinfo);
   };
 
+  const goTabActivity = () => {
+    navigation.navigate(stackscreens.myTabsView);
+  };
+
   return (
     <View style={styles.profile}>
       <View style={{display: 'flex', gap: moderateScale(5)}}>
@@ -108,11 +112,13 @@ const Profile = ({navigation}) => {
         </Smcard>
 
         {/* My Features  */}
-
+        
         <Smcard style={styles.ordersummaryContainer}>
           <View style={{...styles.itemsDetailContainer}}>
             <AppText style={styles.orderText}>My Features</AppText>
-            <AppText style={styles.viewAllText}>See Details {'>'}</AppText>
+            <TouchableOpacity onPress={goTabActivity} activeOpacity={0.7}>
+              <AppText style={styles.viewAllText}>See Details {'>'}</AppText>
+            </TouchableOpacity>
           </View>
 
           <View style={{...styles.itemsDetailContainer}}>
