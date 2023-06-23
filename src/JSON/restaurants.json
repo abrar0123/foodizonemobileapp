@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "BBQ Rstaurant",
+        "location": "Pk,Gujrat, Jalalpur"
+    },
+    {
+        "id": 2,
+        "name": "Fast Food Rstaurant",
+        "location": "Pk,Gujrat, Jalalpur"
+    },
+    {
+        "id": 3,
+        "name": "Spanish Pizza Rstaurant",
+        "location": "Pk,Gujrat, Jalalpur"
+    },
+    {
+        "id": 4,
+        "name": "Kamran Rstaurant",
+        "location": "Pk,Gujrat, Jalalpur"
+    }
+]

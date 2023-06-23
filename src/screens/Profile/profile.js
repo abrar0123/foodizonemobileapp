@@ -111,8 +111,7 @@ const Profile = ({navigation}) => {
           </View>
         </Smcard>
 
-        {/* My Features  */}
-        
+        {/* My Features  */}        
         <Smcard style={styles.ordersummaryContainer}>
           <View style={{...styles.itemsDetailContainer}}>
             <AppText style={styles.orderText}>My Features</AppText>

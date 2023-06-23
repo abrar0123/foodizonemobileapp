@@ -18,4 +18,5 @@ export default {
   qrcode: 'QrCode',
   deviceinfo: 'Device Info',
   myTabsView: 'MyTabsView',
+  restaurant: 'Restaurants',
 };

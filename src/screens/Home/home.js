@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image, ScrollView} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  ScrollView,
+  Touchable,
+  TouchableOpacity,
+} from 'react-native';
 import AppText from '../../components/UI/AppText/AppText';
 import {useSelector} from 'react-redux';
 import {
@@ -20,15 +28,20 @@ import Container from '../../components/UI/Container/Container';
 import SmCard from '../../components/UI/SmallCard/smcard';
 import {SearchBar} from 'react-native-screens';
 import Search from '../../components/Search/SearchBar';
+import stackscreens from '../../constants/stackscreens';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const loginEmail = useSelector(state => state.auth.loginEmail);
+
+  const goResaurant = () => {
+    navigation.navigate(stackscreens.restaurant);
+  };
 
   return (
     <ScrollView>
       <View style={styles.homeStyle}>
         <Text></Text>
-        {/* box 2  */}
+        {/* box 2 */}
         <SmCard style={styles.flexstyle}>
           <View style={styles.flexcolum0}>
             <AppText style={styles.welcomeText}>Welcome Back, Abrar </AppText>
@@ -43,19 +56,23 @@ const Home = () => {
         <View style={{marginVertical: moderateScale(20)}}>
           <Search />
         </View>
-        {/* box 2 */}
-        <SmCard style={styles.primaryBox2}>
-          <View style={styles.flexcolum}>
-            <AppText style={styles.box2Text}>Food Delivery </AppText>
-            <AppText
-              style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-              Order Food You Love
-            </AppText>
-          </View>
-          <View>
-            <Image style={styles.box2imgstyle} source={imagesPath.plate} />
-          </View>
-        </SmCard>
+        
+        {/* box 2  food delivery */}
+        <TouchableOpacity onPress={goResaurant} activeOpacity={0.95}>
+          <SmCard style={styles.primaryBox2}>
+            <View style={styles.flexcolum}>
+              <AppText style={styles.box2Text}>Food Delivery </AppText>
+              <AppText
+                style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
+                Order Food You Love
+              </AppText>
+            </View>
+            <View>
+              <Image style={styles.box2imgstyle} source={imagesPath.plate} />
+            </View>
+          </SmCard>
+        </TouchableOpacity>
+
         {/* box 3 added */}
         <Card style={{marginVertical: 15}}>
           <View style={styles.primaryBox3}>

@@ -20,6 +20,7 @@ import QrCode from '../../screens/QrCode/QrCode';
 // import DeviceInfo from 'react-native-device-info';
 import DeviceInfo from '../../screens/DeviceInfo.js/DeviceInfo';
 import MyTabsView from '../../screens/TabView/myTabsView';
+import Restaurants from '../../screens/Restaurants/Restaurants';
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
 
@@ -72,6 +73,11 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.myTabsView}
         component={MyTabsView}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={stackscreens.restaurant}
+        component={Restaurants}
         options={{headerShown: false}}
       />
       <Stack.Screen name={stackscreens.foodDetail} component={FoodDetails} />
