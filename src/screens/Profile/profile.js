@@ -20,6 +20,14 @@ import stackscreens from '../../constants/stackscreens';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import notifee, {
+  AndroidStyle,
+  RepeatFrequency,
+  TriggerType,
+  TimestampTrigger,
+} from '@notifee/react-native';
+// import {TimestampTrigger} from '@notifee/react-native';
+
 const Profile = ({navigation}) => {
   const goProfileHandler = () => {
     navigation.navigate(stackscreens.account);
@@ -45,6 +53,45 @@ const Profile = ({navigation}) => {
     navigation.navigate(stackscreens.myTabsView);
   };
 
+  const displayNotification = async () => {
+    const date = new Date(Date.now());
+    date.setHours(3);
+    date.setMinutes(10);
+    console.log('date:', date);
+
+    const trigger: TimestampTrigger = {
+      type: TriggerType.TIMESTAMP,
+      timestamp: date.getTime(),
+      repeatFrequency: RepeatFrequency.WEEKLY,
+    };
+    // Create a channel (required for Android)
+    const channelId = await notifee.createChannel({
+      id: 'default',
+      name: 'Default Channel',
+    });
+
+    // Display a notification
+    await notifee.displayNotification(
+      {
+        title: 'Appointment with Mrs. Zara',
+        body: 'You have one appointment with Mrs. Zara at 11pm ',
+        android: {
+          channelId: channelId,
+          // smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
+          // pressAction is needed if you want the notification to open the app when pressed
+
+          pressAction: {
+            id: 'default',
+          },
+          style: {
+            type: AndroidStyle.BIGPICTURE,
+            picture: imagesPath.notificationPic,
+          },
+        },
+      },
+      trigger,
+    );
+  };
   return (
     <View style={styles.profile}>
       <View style={{display: 'flex', gap: moderateScale(5)}}>
@@ -111,7 +158,7 @@ const Profile = ({navigation}) => {
           </View>
         </Smcard>
 
-        {/* My Features  */}        
+        {/* My Features  */}
         <Smcard style={styles.ordersummaryContainer}>
           <View style={{...styles.itemsDetailContainer}}>
             <AppText style={styles.orderText}>My Features</AppText>
@@ -141,7 +188,7 @@ const Profile = ({navigation}) => {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={0.5}>
+            <TouchableOpacity activeOpacity={0.5} onPress={displayNotification}>
               <Ionicons
                 name="chatbox-ellipses"
                 size={35}

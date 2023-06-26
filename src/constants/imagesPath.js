@@ -21,5 +21,8 @@ export default {
   delete: require('../assets/image/delete1.png'),
   background: require('../assets/image/background.jpg'),
   Google_API_KEY: 'AIzaSyCYq-SOVccQ3j5wchYBCd2vneiAPTVZnTs',
-  Qr_Scanner: require('../assets/image/qr.png')
+  Qr_Scanner: require('../assets/image/qr.png'),
+
+  notificationPic:
+    'https://i.pinimg.com/564x/c3/bc/9b/c3bc9b54443e9926365fcf717782c46d.jpg',
 };
