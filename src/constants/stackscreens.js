@@ -19,4 +19,6 @@ export default {
   deviceinfo: 'Device Info',
   myTabsView: 'MyTabsView',
   restaurant: 'Restaurants',
+  notification: 'Notification',
+
 };

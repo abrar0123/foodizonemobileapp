@@ -21,6 +21,7 @@ import QrCode from '../../screens/QrCode/QrCode';
 import DeviceInfo from '../../screens/DeviceInfo.js/DeviceInfo';
 import MyTabsView from '../../screens/TabView/myTabsView';
 import Restaurants from '../../screens/Restaurants/Restaurants';
+import Notification from '../../screens/ChatNotification/Notification';
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
 
@@ -78,6 +79,11 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.restaurant}
         component={Restaurants}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={stackscreens.notification}
+        component={Notification}
         options={{headerShown: false}}
       />
       <Stack.Screen name={stackscreens.foodDetail} component={FoodDetails} />
