@@ -11,10 +11,15 @@ import mycolors from '../../styles/mycolors';
 import {Bubble, GiftedChat} from 'react-native-gifted-chat';
 import {useState} from 'react';
 import {useEffect} from 'react';
+import {Firestore, addDoc, collection} from 'firebase/firestore';
+import {DB} from '../../firebase_Configue';
+import {useRoute} from '@react-navigation/native';
 
 const ChatBot = () => {
   const [myMessage, setmyMessage] = useState([]);
+  const route = useRoute();
 
+  // console.log('route\n:', route.params.data);
   useEffect(() => {
     setmyMessage([
       {
@@ -29,12 +34,28 @@ const ChatBot = () => {
       },
     ]);
   }, []);
-  const sendHandler = message => {
+
+  const sendHandler = async messageArray => {
     setmyMessage(previousMessage =>
-      GiftedChat.append(previousMessage, message),
+      GiftedChat.append(previousMessage, messageArray),
     );
+    console.log('messages__:', messageArray, '\n\n', myMessage[0]);
+
+    const myCollection = await collection(DB, 'TDMChats');
+
+    try {
+      const insertMSG = await addDoc(myCollection, messageArray[0]);
+      insertMSG
+        .then(e => console.log('resolve', e))
+        .catch(e => console.log('reject', e));
+    } catch (error) {
+      console.log('error_:', error);
+    }
   };
 
+  //   **************** DB Messages ****************
+
+  const messageDB = async () => {};
   const renderBubble = props => {
     return (
       <Bubble

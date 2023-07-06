@@ -15,6 +15,7 @@ import Button from '../../components/UI/Button/Button';
 import AppText from '../../components/UI/AppText/AppText';
 import {
   respHeight,
+  respWidth,
   screenheight,
 } from '../../components/responsiveness/RespHeight';
 import stackscreens from '../../constants/stackscreens';
@@ -22,13 +23,19 @@ import {useDispatch} from 'react-redux';
 import {authActions} from '../../Redux/authSlice';
 import {collection, addDoc, getDocs} from 'firebase/firestore';
 import {DB, apiEndpoints, authApiKey} from '../../firebase_Configue';
+import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import uuid from 'react-native-uuid';
+import firestore from '@react-native-firebase/firestore';
+import moment from 'moment/moment';
 
 const Register = ({navigation}) => {
-  const [username, setusername] = useState('');
-  const [email, setemail] = useState('');
-  const [password, setpassword] = useState('');
+  const [username, setusername] = useState('hamdanullah');
+  const [email, setemail] = useState('hamdanullah@gmail.com');
+  const [password, setpassword] = useState('hamdab123');
   const [showpassword, setshowpassword] = useState(true);
   const [errors, seterrors] = useState({Username: '', Email: '', Password: ''});
+  const uid = uuid.v4();
 
   const usernameError = 'please enter valid username';
   const emailError = 'Empty Email not allowed';
@@ -91,7 +98,7 @@ const Register = ({navigation}) => {
     //  submitted...
 
     Dispatch(
-      authActions.login({email: email, password: password, username: username}),
+      authActions.login({email: email, password: password, username: uid}),
     );
     signupAuthentication();
     fireStoreRegisters();
@@ -114,28 +121,31 @@ const Register = ({navigation}) => {
         },
       );
       const data = await response.json();
-      console.log('data__', data);
+      console.log('data__\n', data);
     } catch (error) {
       console.log(error, 'err');
     }
   };
-  
 
   // store in firestore database
 
-  const fireStoreRegisters = async () => {
-    const mycollection = await collection(DB, 'RegisterUsers');
+  const fireStoreRegisters = () => {
+    const time = moment().format('lll');
     try {
-      const users = await addDoc(mycollection, {
-        email: email,
-        password: password,
-        username: username,
-      });
-      users
+      firestore()
+        .collection('RegisterUsers')
+        .doc(uid)
+        .set({
+          Time: time,
+          email: email,
+          password: password,
+          username: username,
+          userId: uid,
+        })
         .then(e => console.log('resolve', e))
         .catch(e => console.log('reject', e));
     } catch (error) {
-      console.log(error, 'err');
+      console.log('error22:', error);
     }
   };
 
@@ -147,13 +157,12 @@ const Register = ({navigation}) => {
         </View>
         <View style={styles.primaryInputsContainer}>
           <View style={styles.inputcontainer}>
-            {/* <FontAwesome
+            <FontAwesome5
               name="user"
               size={25}
-              color={colors.blue}
-              style={{ marginRight: 10 }}
-            /> */}
-            <Text>pending...</Text>
+              color={mycolors.blue}
+              style={{marginRight: respWidth(1.5)}}
+            />
             <TextInput
               style={styles.input}
               value={username}
@@ -166,7 +175,12 @@ const Register = ({navigation}) => {
             <AppText style={styles.errorText}>{errors.Username}</AppText>
           )}
           <View style={styles.inputcontainer}>
-            <Text>pending...</Text>
+            <Entypo
+              name="mail"
+              size={27}
+              color={mycolors.blue}
+              style={{marginRight: respWidth(1.5)}}
+            />
             <TextInput
               style={styles.input}
               value={email}
@@ -181,7 +195,16 @@ const Register = ({navigation}) => {
 
           {/* passowrd */}
           <View style={styles.inputcontainer}>
-            <Text>pending...</Text>
+            <TouchableOpacity onPress={() => setshowpassword(!showpassword)}>
+              <Entypo
+                // name="eye"
+                name={showpassword === false ? 'eye' : 'eye-with-line'}
+                size={25}
+                color={mycolors.blue}
+                style={{marginRight: respWidth(1.5)}}
+              />
+            </TouchableOpacity>
+
             <TextInput
               style={styles.input}
               value={password}

@@ -15,16 +15,19 @@ import Button from '../../components/UI/Button/Button';
 import AppText from '../../components/UI/AppText/AppText';
 import {
   respHeight,
+  respWidth,
   screenheight,
 } from '../../components/responsiveness/RespHeight';
 import stackscreens from '../../constants/stackscreens';
 import {useDispatch} from 'react-redux';
 import {authActions} from '../../Redux/authSlice';
 import {apiEndpoints, authApiKey} from '../../firebase_Configue';
+import Entypo from 'react-native-vector-icons/Entypo';
+import firestore from '@react-native-firebase/firestore';
 
 const Login = ({navigation}) => {
-  const [email, setemail] = useState('ab@gmail.com');
-  const [password, setpassword] = useState('222');
+  const [email, setemail] = useState('foodizone@gmail.com');
+  const [password, setpassword] = useState('foodizone1');
   const [showpassword, setshowpassword] = useState(true);
   const [errors, seterrors] = useState({Email: '', Password: ''});
 
@@ -79,6 +82,7 @@ const Login = ({navigation}) => {
       return;
     }
     logInAuthentication();
+    firestreLoginCheck();
   };
 
   // Login user
@@ -112,7 +116,20 @@ const Login = ({navigation}) => {
     }
   };
 
-  console.log('error___23', errors);
+  const firestreLoginCheck = () => {
+    try {
+      firestore()
+        .collection('RegisterUsers')
+        .where('email', '==', email)
+        .get()
+        .then(e => console.log('login', e))
+        .catch(e => console.log('error3', e));
+    } catch (error) {
+      console.log('error333', error);
+    }
+  };
+
+  // console.log('error___23', errors);
 
   return (
     <View style={styles.loginStyle}>
@@ -122,13 +139,12 @@ const Login = ({navigation}) => {
         </View>
         <View style={styles.primaryInputsContainer}>
           <View style={styles.inputcontainer}>
-            {/* <FontAwesome
-              name="user"
+            <Entypo
+              name="mail"
               size={25}
-              color={colors.blue}
-              style={{ marginRight: 10 }}
-            /> */}
-            <Text>Pending...</Text>
+              color={mycolors.blue}
+              style={{marginRight: respWidth(1.5)}}
+            />
             <TextInput
               style={styles.input}
               value={email}
@@ -142,11 +158,19 @@ const Login = ({navigation}) => {
 
           {/* passowrd */}
           <View style={styles.inputcontainer}>
-            <Text>Pending...</Text>
+            <TouchableOpacity onPress={() => setshowpassword(!showpassword)}>
+              <Entypo
+                name={showpassword === false ? 'eye' : 'eye-with-line'}
+                size={25}
+                color={mycolors.blue}
+                style={{marginRight: respWidth(1.5)}}
+              />
+            </TouchableOpacity>
+
             <TextInput
               style={styles.input}
               value={password}
-              secureTextEntry={true}
+              secureTextEntry={showpassword}
               onChangeText={passwordHandler}
               placeholder="Enter password"
             />
