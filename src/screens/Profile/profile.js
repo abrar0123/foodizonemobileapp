@@ -19,6 +19,7 @@ import Card from '../../components/UI/Card/Card';
 import imagesPath from '../../constants/imagesPath';
 import stackscreens from '../../constants/stackscreens';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Profile = ({navigation}) => {
@@ -48,7 +49,9 @@ const Profile = ({navigation}) => {
   const goNotification = () => {
     navigation.navigate(stackscreens.notification);
   };
-
+  const goChatBot = () => {
+    navigation.navigate(stackscreens.chatBot);
+  };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.profile}>
@@ -132,27 +135,34 @@ const Profile = ({navigation}) => {
                 <Icon
                   name="cc-mastercard"
                   size={28}
-                  color={mycolors.primaryorange}
+                  color={mycolors.cyan}
                 />
               </TouchableOpacity>
 
               <TouchableOpacity activeOpacity={0.5} onPress={goQrCode}>
-                <Icon name="qrcode" size={35} color={mycolors.primaryorange} />
+                <Icon name="qrcode" size={35} color={mycolors.cyan} />
               </TouchableOpacity>
 
               <TouchableOpacity activeOpacity={0.5} onPress={goCamera}>
                 <Icon
                   name="camera-retro"
                   size={30}
-                  color={mycolors.primaryorange}
+                  color={mycolors.cyan}
                 />
               </TouchableOpacity>
 
               <TouchableOpacity activeOpacity={0.5} onPress={goNotification}>
                 <Ionicons
+                  name="md-notifications-circle-outline"
+                  size={38}
+                  color={mycolors.cyan}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.5} onPress={goChatBot}>
+                <Ionicons
                   name="chatbox-ellipses"
                   size={35}
-                  color={mycolors.primaryorange}
+                  color={mycolors.cyan}
                 />
               </TouchableOpacity>
             </View>

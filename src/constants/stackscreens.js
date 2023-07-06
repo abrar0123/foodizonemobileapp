@@ -20,5 +20,5 @@ export default {
   myTabsView: 'MyTabsView',
   restaurant: 'Restaurants',
   notification: 'Notification',
-
+  chatBot: 'chatBot',
 };

@@ -22,6 +22,7 @@ import DeviceInfo from '../../screens/DeviceInfo.js/DeviceInfo';
 import MyTabsView from '../../screens/TabView/myTabsView';
 import Restaurants from '../../screens/Restaurants/Restaurants';
 import Notification from '../../screens/ChatNotification/Notification';
+import ChatBot from '../../screens/chatBot/chatBot';
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
 
@@ -84,6 +85,11 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.notification}
         component={Notification}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={stackscreens.chatBot}
+        component={ChatBot}
         options={{headerShown: false}}
       />
       <Stack.Screen name={stackscreens.foodDetail} component={FoodDetails} />

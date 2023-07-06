@@ -1,7 +1,7 @@
 export default {
   black: '#000',
-  lightgrey:'#eeeeee',
-  whitelight:'#f9f9f9',
+  lightgrey: '#eeeeee',
+  whitelight: '#f9f9f9',
   orange: 'orange',
   white: '#fff',
   blue: 'darkblue',
@@ -19,4 +19,5 @@ export default {
   jamanlight: '#cda8ef',
   silk: '#05c4bc',
   brown: '#351401',
+  cyan: '#00ced1',
 };
