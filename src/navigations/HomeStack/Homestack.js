@@ -23,6 +23,7 @@ import MyTabsView from '../../screens/TabView/myTabsView';
 import Restaurants from '../../screens/Restaurants/Restaurants';
 import Notification from '../../screens/ChatNotification/Notification';
 import ChatBot from '../../screens/chatBot/chatBot';
+import UserChat from '../../screens/chatBot/userChat';
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
 
@@ -96,7 +97,16 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.chatBot}
         component={ChatBot}
-        options={{headerShown: false}}
+        options={{
+          headerStyle: {backgroundColor: mycolors.silk},
+        }}
+      />
+      <Stack.Screen
+        name={stackscreens.userChat}
+        component={UserChat}
+        options={{
+          headerStyle: {backgroundColor: mycolors.silk},
+        }}
       />
       <Stack.Screen name={stackscreens.foodDetail} component={FoodDetails} />
     </Stack.Navigator>

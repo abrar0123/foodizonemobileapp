@@ -49,7 +49,7 @@ const Profile = ({navigation}) => {
     navigation.navigate(stackscreens.notification);
   };
   const goChatBot = () => {
-    navigation.navigate(stackscreens.chatBot);
+    navigation.navigate(stackscreens.userChat);
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
