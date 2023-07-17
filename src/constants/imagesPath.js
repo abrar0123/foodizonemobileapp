@@ -25,4 +25,6 @@ export default {
 
   notificationPic:
     'https://i.pinimg.com/564x/c3/bc/9b/c3bc9b54443e9926365fcf717782c46d.jpg',
+
+  profilePic: require('../assets/image/circle.png'),
 };

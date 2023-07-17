@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 import pic from '../../assets/image/AsianFood.png';
 import {moderateScale} from 'react-native-size-matters';
@@ -104,13 +105,12 @@ const Login = ({navigation}) => {
 
       const data = await response.json();
 
-      console.log('dataa__', data);
+      // console.log('dataa__', data);
       if (data.error) {
         const error = `Authentication error : ${data.error.message.toLowerCase()}`;
         seterrors({Password: error});
         return;
       }
-      Dispatch(authActions.login({email: email, password: password}));
     } catch (error) {
       console.log('dataa__1', error);
     }
@@ -121,9 +121,20 @@ const Login = ({navigation}) => {
       firestore()
         .collection('RegisterUsers')
         .where('email', '==', email)
+        .where('password', '==', password)
         .get()
-        .then(e => console.log('login', e))
-        .catch(e => console.log('error3', e));
+        .then(res => {
+          Dispatch(authActions.login({loggedIn: res.docs[0].data()}));
+          // console.log('login__here23:\n');
+          Alert.alert('Founded', 'Your Email is Founded here');
+        })
+        .catch(e => {
+          console.log('error31__:\n', e);
+          Alert.alert(
+            'User Not Found',
+            'Maybe, your  email OR password is Incorrect',
+          );
+        });
     } catch (error) {
       console.log('error333', error);
     }

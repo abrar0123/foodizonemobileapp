@@ -54,7 +54,13 @@ const Homestack = ({navigation}) => {
           ),
         })}
       />
-      <Stack.Screen name={stackscreens.account} component={Account} />
+      <Stack.Screen
+        name={stackscreens.account}
+        component={Account}
+        options={{
+          headerStyle: {backgroundColor: mycolors.orange},
+        }}
+      />
       <Stack.Screen
         name={stackscreens.qrcode}
         component={QrCode}

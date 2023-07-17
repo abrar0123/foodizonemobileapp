@@ -2,7 +2,6 @@ import React from 'react';
 import {View, StyleSheet, Platform, StatusBar} from 'react-native';
 import AppText from '../../components/UI/AppText';
 import Smcard from '../../components/UI/SmallCard/smcard';
-import Button from '../../components/UI/Button/Button';
 import {
   respHeight,
   respWidth,
@@ -11,7 +10,7 @@ import mycolors from '../../styles/mycolors';
 import {Bubble, GiftedChat} from 'react-native-gifted-chat';
 import {useState} from 'react';
 import {useEffect} from 'react';
-import {Firestore, addDoc, collection} from 'firebase/firestore';
+import {addDoc, collection} from 'firebase/firestore';
 import {DB} from '../../firebase_Configue';
 import {useRoute} from '@react-navigation/native';
 

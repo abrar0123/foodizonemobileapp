@@ -142,8 +142,8 @@ const Register = ({navigation}) => {
           username: username,
           userId: uid,
         })
-        .then(e => console.log('resolve', e))
-        .catch(e => console.log('reject', e));
+        .then(e => console.log('resolve status__:\n', e))
+        .catch(e => console.log('reject status__:\n', e));
     } catch (error) {
       console.log('error22:', error);
     }

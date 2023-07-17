@@ -19,7 +19,6 @@ import Card from '../../components/UI/Card/Card';
 import imagesPath from '../../constants/imagesPath';
 import stackscreens from '../../constants/stackscreens';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Profile = ({navigation}) => {

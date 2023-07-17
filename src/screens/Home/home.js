@@ -2,10 +2,8 @@ import React from 'react';
 import {
   View,
   StyleSheet,
-  Text,
   Image,
   ScrollView,
-  Touchable,
   TouchableOpacity,
 } from 'react-native';
 import AppText from '../../components/UI/AppText/AppText';
@@ -15,18 +13,14 @@ import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters';
-import SafeArea from '../../components/Safearea/SafeArea';
 import mycolors from '../../styles/mycolors';
 import imagesPath from '../../constants/imagesPath';
 import {
   respHeight,
   respWidth,
-  screenwidth,
 } from '../../components/responsiveness/RespHeight';
 import Card from '../../components/UI/Card/Card';
-import Container from '../../components/UI/Container/Container';
 import SmCard from '../../components/UI/SmallCard/smcard';
-import {SearchBar} from 'react-native-screens';
 import Search from '../../components/Search/SearchBar';
 import stackscreens from '../../constants/stackscreens';
 
@@ -40,7 +34,6 @@ const Home = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.homeStyle}>
-        <Text></Text>
         {/* box 2 */}
         <SmCard style={styles.flexstyle}>
           <View style={styles.flexcolum0}>

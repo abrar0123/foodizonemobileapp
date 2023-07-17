@@ -6,21 +6,14 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     loginEmail: '',
-    password: '',
-    username: '',
+    loggedInCredential: {},
   },
   reducers: {
     login: (state, action) => {
-      const {email} = action.payload;
-      const {password} = action.payload;
-      const {username} = action.payload;
-
-      //   const {pass} = action.payload;
-      state.loginEmail = email;
-      state.password = password;
-      state.username = username;
-
-      //   state.login.pass = pass;
+      const {loggedIn} = action.payload;
+      console.log('loggedIn__mycode123\n:', loggedIn);
+      state.loginEmail = loggedIn.email;
+      state.loggedInCredential = loggedIn;
     },
     logout: state => {
       state.loginEmail = null;
