@@ -21,18 +21,18 @@ import {
 import stackscreens from '../../constants/stackscreens';
 import {useDispatch} from 'react-redux';
 import {authActions} from '../../Redux/authSlice';
-import {collection, addDoc, getDocs} from 'firebase/firestore';
-import {DB, apiEndpoints, authApiKey} from '../../firebase_Configue';
+import {apiEndpoints, authApiKey} from '../../firebase_Configue';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import uuid from 'react-native-uuid';
 import firestore from '@react-native-firebase/firestore';
 import moment from 'moment/moment';
+import {Time} from 'react-native-gifted-chat';
 
 const Register = ({navigation}) => {
-  const [username, setusername] = useState('hamdanullah');
-  const [email, setemail] = useState('hamdanullah@gmail.com');
-  const [password, setpassword] = useState('hamdab123');
+  const [username, setusername] = useState('');
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
   const [showpassword, setshowpassword] = useState(true);
   const [errors, seterrors] = useState({Username: '', Email: '', Password: ''});
   const uid = uuid.v4();
@@ -97,9 +97,6 @@ const Register = ({navigation}) => {
 
     //  submitted...
 
-    Dispatch(
-      authActions.login({email: email, password: password, username: uid}),
-    );
     signupAuthentication();
     fireStoreRegisters();
   };
@@ -121,7 +118,7 @@ const Register = ({navigation}) => {
         },
       );
       const data = await response.json();
-      console.log('data__\n', data);
+      // console.log('data__\n', data);
     } catch (error) {
       console.log(error, 'err');
     }
@@ -142,10 +139,19 @@ const Register = ({navigation}) => {
           username: username,
           userId: uid,
         })
-        .then(e => console.log('resolve status__:\n', e))
-        .catch(e => console.log('reject status__:\n', e));
+        .then(e => {
+          const loggedIn = {
+            Time: time,
+            email: email,
+            password: password,
+            userId: uid,
+          };
+          Dispatch(authActions.login({loggedIn: loggedIn}));
+          console.log('ResolveStatus___:\n', loggedIn);
+        })
+        .catch(e => console.log('Reject Status___:\n', e));
     } catch (error) {
-      console.log('error22:', error);
+      console.log('Error22:', error);
     }
   };
 

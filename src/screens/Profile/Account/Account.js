@@ -39,7 +39,7 @@ const Account = () => {
           }}
         />
         <AppText style={styles.profileText}>
-          {loggedInCred?.username.toUpperCase()} Software Engr.
+          {loggedInCred?.username?.toUpperCase()} Software Engr.
         </AppText>
       </View>
 
@@ -70,7 +70,7 @@ const Account = () => {
             }}>
             <AntDesign name="tag" size={28} color={mycolors.dgrey} />
             <View>
-              <AppText style={styles.profileheaderText}>UserID </AppText>
+              <AppText style={styles.profileheaderText}>UserID</AppText>
 
               <AppText style={{...styles.orderText1}}>
                 {loggedInCred.userId}
@@ -84,8 +84,7 @@ const Account = () => {
             }}>
             <FontAwesome name="eye" size={28} color={mycolors.dgrey} />
             <View>
-              <AppText style={styles.profileheaderText}>Password </AppText>
-
+              <AppText style={styles.profileheaderText}>Password</AppText>
               <AppText style={styles.orderText1}>
                 {loggedInCred.password}
               </AppText>
@@ -98,7 +97,7 @@ const Account = () => {
             }}>
             <FontAwesome name="eye" size={28} color={mycolors.dgrey} />
             <View>
-              <AppText style={styles.profileheaderText}>Password </AppText>
+              <AppText style={styles.profileheaderText}>Password</AppText>
 
               <AppText style={styles.orderText1}>
                 {loggedInCred.password}

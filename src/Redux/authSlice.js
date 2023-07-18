@@ -12,7 +12,7 @@ export const authSlice = createSlice({
     login: (state, action) => {
       const {loggedIn} = action.payload;
       console.log('loggedIn__mycode123\n:', loggedIn);
-      state.loginEmail = loggedIn.email;
+      state.loginEmail = loggedIn?.email;
       state.loggedInCredential = loggedIn;
     },
     logout: state => {

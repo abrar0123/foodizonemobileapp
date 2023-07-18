@@ -21,5 +21,6 @@ export default {
   restaurant: 'Restaurants',
   notification: 'Notification',
   chatBot: 'chatBot',
-  userChat:'UserChat'
+  userChat: 'UserChat',
+  userOneChat: 'UserOneChat',
 };

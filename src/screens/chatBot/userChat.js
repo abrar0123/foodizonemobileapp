@@ -12,20 +12,23 @@ import {useSelector} from 'react-redux';
 import firestore from '@react-native-firebase/firestore';
 import Smcard from '../../components/UI/SmallCard/smcard';
 import {scale} from 'react-native-size-matters';
+import stackscreens from '../../constants/stackscreens';
 
 const data = [
   {id: 0, name: 'user', icon: 'users'},
   {id: 1, name: 'settings', icon: 'settings'},
 ];
 
-const UserChat = () => {
+const UserChat = ({navigation}) => {
   const [userdata, setuserdata] = useState(data);
   const [isSelected, setisSelected] = useState(0);
   const [fireStoreUsres, setfireStoreUsres] = useState([]);
 
   const myEmail = useSelector(state => state.auth.loggedInCredential);
-  console.log('fireStoreUsres__', fireStoreUsres);
+  //   console.log('fireStoreUsres__', fireStoreUsres);
   const email = myEmail.email;
+  const myID = myEmail.userId;
+  // console.log('myID__', myID);
 
   const mygetFireStoreUsers = () => {
     try {
@@ -53,13 +56,22 @@ const UserChat = () => {
     mygetFireStoreUsers();
   }, []);
 
+  const goOneUserChat = user => {
+    navigation.navigate(stackscreens.userOneChat, {
+      clientID: user.userId,
+      myID: myID,
+    });
+  };
+
+  // render item chats 2
+
   const renderItem = ({item}) => {
-    console.log('Item11:___:\n\n', item);
+    // console.log('Item11:___:\n\n', item.userId);
     return (
-      <TouchableOpacity activeOpacity={0.9}>
+      <TouchableOpacity activeOpacity={0.9} onPress={() => goOneUserChat(item)}>
         <Smcard style={{...styles.smcard, ...styles.flexApply}}>
           <View style={{...styles.bikeContainer}}>
-            <EvilIcons name="user" size={35} color={mycolors.white} />
+            <EvilIcons name="user" size={55} color={mycolors.dgrey} />
           </View>
           <View>
             <AppText style={styles.primaryText}> {item.email}</AppText>
@@ -70,17 +82,24 @@ const UserChat = () => {
       </TouchableOpacity>
     );
   };
+
   return (
     <View style={styles.chat}>
-      <AppText>Welcome to user chatting</AppText>
-      <FlatList data={fireStoreUsres} renderItem={renderItem} />
+      <AppText style={styles.headerText}>Welcome to User Chatting</AppText>
+      {isSelected === 0 && (
+        <FlatList
+          contentContainerStyle={{paddingBottom: respHeight(14)}}
+          data={fireStoreUsres}
+          renderItem={renderItem}
+        />
+      )}
 
       <View style={styles.bottomContainer}>
         {userdata.map((item, index) => {
           return (
             <TouchableOpacity
+              key={item.id}
               activeOpacity={0.7}
-              id={index}
               onPress={() => setisSelected(item.id)}>
               <Feather
                 name={item.icon}
@@ -117,18 +136,24 @@ const styles = StyleSheet.create({
 
   //   renderData style
   smcard: {
-    marginHorizontal: respWidth(1.5),
-    marginVertical: respHeight(1),
+    // marginHorizontal: respWidth(1.5),
+    paddingVertical: respHeight(3),
     padding: 10,
-    borderRadius: 10,
-    backgroundColor: mycolors.silk,
+    borderRadius: 3,
+    backgroundColor: mycolors.whitelight,
   },
-
+  headerText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginVertical: 14,
+    paddingHorizontal: 5,
+    color: mycolors.silk,
+  },
   primaryText: {
     fontSize: scale(16),
     // paddingHorizontal: respWidth(3),
     // marginVertical: respHeight(1),
-    color: mycolors.white,
+    color: mycolors.black,
   },
 
   flexApply: {

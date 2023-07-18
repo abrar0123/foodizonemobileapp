@@ -24,6 +24,7 @@ import Restaurants from '../../screens/Restaurants/Restaurants';
 import Notification from '../../screens/ChatNotification/Notification';
 import ChatBot from '../../screens/chatBot/chatBot';
 import UserChat from '../../screens/chatBot/userChat';
+import UserOneChat from '../../screens/chatBot/UserOneChat';
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
 
@@ -109,6 +110,11 @@ const Homestack = ({navigation}) => {
         }}
       />
       <Stack.Screen name={stackscreens.foodDetail} component={FoodDetails} />
+      <Stack.Screen
+        name={stackscreens.userOneChat}
+        component={UserOneChat}
+        options={{headerStyle: {backgroundColor: mycolors.silk}}}
+      />
     </Stack.Navigator>
   );
 };
