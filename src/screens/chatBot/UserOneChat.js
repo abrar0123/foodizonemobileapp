@@ -1,13 +1,15 @@
 import React from 'react';
-import {View, StyleSheet, Platform, StatusBar} from 'react-native';
+import {View, StyleSheet, Platform, StatusBar, Image} from 'react-native';
 import AppText from '../../components/UI/AppText';
-import {Bubble, GiftedChat} from 'react-native-gifted-chat';
-import {respWidth} from '../../components/responsiveness/RespHeight';
+import {Bubble, GiftedChat, InputToolbar, Send} from 'react-native-gifted-chat';
+import {respHeight, respWidth} from '../../components/responsiveness/RespHeight';
 import mycolors from '../../styles/mycolors';
 import {useEffect} from 'react';
 import {useState} from 'react';
 import {addDoc, collection} from 'firebase/firestore';
 import firestore from '@react-native-firebase/firestore';
+import imagespath from '../../constants/imagesPath';
+import Feather from 'react-native-vector-icons/Feather';
 
 import {DB} from '../../firebase_Configue';
 import {useCallback} from 'react';
@@ -20,7 +22,7 @@ const UserOneChat = ({route}) => {
   const {clientID, myID} = route.params;
   const date = Date.parse(new Date());
 
-  console.log('myID___:', myID, 'clientID___:', clientID);
+  // console.log('myID___:', myID, 'clientID___:', clientID);
 
   const sendHandler = async messageArray => {
     // const msg = messageArray[0];
@@ -48,7 +50,6 @@ const UserOneChat = ({route}) => {
       .doc(myID + clientID)
       .collection('messages')
       .orderBy('createdAt', 'desc');
-
     subscriber.onSnapshot(querysnapshot => {
       const allMessage = querysnapshot.docs.map(item => {
         // console.log('receivedAt__12:\n\n', item.data());
@@ -59,8 +60,6 @@ const UserOneChat = ({route}) => {
       setmyMessage(allMessage);
     });
   }, []);
-
-  //  45ae8a2e-cbee-4f40-bd7c-c23762fe5c91 773b9252-15dd-4b0e-a7c9-0cef0ee94db0
 
   // console.log('messages___\t', myMessage);
   const onSend = useCallback((messages = []) => {
@@ -115,13 +114,33 @@ const UserOneChat = ({route}) => {
   //   console.log('messages__:', myMessage);
   return (
     <View style={styles.chat}>
-      <AppText>Welcome to One User Chat</AppText>
+      <AppText>Welcome to One User Chat 1</AppText>
       {/* <AppText>{userID}</AppText> */}
       <GiftedChat
         messages={myMessage}
         onSend={message => onSend(message)}
         user={{
           _id: myID,
+        }}
+        renderInputToolbar={props => {
+          return (
+            <InputToolbar
+              {...props}
+              containerStyle={styles.renderInput}></InputToolbar>
+          );
+        }}
+        alwaysShowSend
+        renderSend={props => {
+          return (
+            <View style={styles.renderSendStyle}>
+              <Feather name="paperclip" size={25} color={mycolors.silk} />
+              <Feather name="image" size={27} color={mycolors.silk} />
+
+              <Send {...props} containerStyle={{justifyContent: 'center'}}>
+                <Feather name="send" size={30} color={mycolors.silk} />
+              </Send>
+            </View>
+          );
         }}
         renderBubble={renderBubble}
       />
@@ -146,6 +165,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: mycolors.white,
     marginVertical: 5,
+  },
+  renderSendStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    // justifyContent: 'center',
+  },
+  renderInput: {
+    backgroundColor: mycolors.lightgrey,
+    marginVertical: respHeight(2),
+    marginHorizontal: respWidth(2),
+    borderRadius: respHeight(4),
+    paddingRight: respHeight(2),
   },
 });
 export default UserOneChat;
