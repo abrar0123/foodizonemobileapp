@@ -20,4 +20,5 @@ export default {
   silk: '#05c4bc',
   brown: '#351401',
   cyan: '#00ced1',
+  transparent:'rgba(0,0,0,0.6)'
 };

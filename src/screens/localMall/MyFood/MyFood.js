@@ -16,6 +16,7 @@ import {scale} from 'react-native-size-matters';
 import {respWidth} from '../../../components/responsiveness/RespHeight';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {useSelector} from 'react-redux';
+import CustomLoader from '../../../components/CustomLoader/CustomLoader';
 
 const screens = [
   {
@@ -93,14 +94,15 @@ const MyFood = ({foodapidata, navigation}) => {
         /> */}
       <AppText style={styles.welcomeText}>FastFood Deals</AppText>
       {isLoading ? (
-        <Spinner
-          visible={isLoading}
-          size={45}
-          animation="fade"
-          color={mycolors.blue}
-          textStyle={mycolors.white}
-          textContent={'Loading...'}
-        />
+        //   <Spinner
+        //     visible={!isLoading}
+        //     size={45}
+        //     animation="fade"
+        //     color={mycolors.blue}
+        //     textStyle={mycolors.white}
+        //     textContent={'Loading...'}
+        //   />
+        <CustomLoader />
       ) : (
         <ListFood
           MyFood={foodapidata}
