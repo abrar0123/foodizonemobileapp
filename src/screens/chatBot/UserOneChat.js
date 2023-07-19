@@ -1,8 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, Platform, StatusBar, Image} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import AppText from '../../components/UI/AppText';
 import {Bubble, GiftedChat, InputToolbar, Send} from 'react-native-gifted-chat';
-import {respHeight, respWidth} from '../../components/responsiveness/RespHeight';
+import {
+  respHeight,
+  respWidth,
+} from '../../components/responsiveness/RespHeight';
 import mycolors from '../../styles/mycolors';
 import {useEffect} from 'react';
 import {useState} from 'react';
@@ -14,6 +24,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import {DB} from '../../firebase_Configue';
 import {useCallback} from 'react';
 import moment from 'moment/moment';
+import imagesPath from '../../constants/imagesPath';
 
 const UserOneChat = ({route}) => {
   const [myMessage, setmyMessage] = useState([]);
@@ -23,26 +34,6 @@ const UserOneChat = ({route}) => {
   const date = Date.parse(new Date());
 
   // console.log('myID___:', myID, 'clientID___:', clientID);
-
-  const sendHandler = async messageArray => {
-    // const msg = messageArray[0];
-    // console.log('msg__:\n', msg);
-
-    setmyMessage(previousMessage =>
-      GiftedChat.append(previousMessage, messageArray),
-    );
-    console.log('messages345__:', messageArray, 'next\n\n', myMessage[0]);
-
-    const myCollection = await collection(DB, 'VBTChats');
-    try {
-      const insertMSG = await addDoc(myCollection, messageArray[0]);
-      insertMSG
-        .then(e => console.log('resolve', e))
-        .catch(e => console.log('reject', e));
-    } catch (error) {
-      console.log('error_:', error);
-    }
-  };
 
   useEffect(() => {
     const subscriber = firestore()
@@ -61,6 +52,22 @@ const UserOneChat = ({route}) => {
     });
   }, []);
 
+  // useEffect(() => {
+  //   setmyMessage([
+  //     {
+  //       _id: 1,
+  //       text: 'Hello developer',
+  //       createdAt: new Date(),
+  //       avatar: 'https://cdn-icons-png.flaticon.com/512/5968/5968764.png',
+  //       user: {
+  //         _id: 2,
+  //         name: 'React Native',
+  //         avatar: 'https://cdn-icons-png.flaticon.com/512/5968/5968764.png',
+  //       },
+  //     },
+  //   ]);
+  // }, []);
+
   // console.log('messages___\t', myMessage);
   const onSend = useCallback((messages = []) => {
     const msg = messages[0];
@@ -68,16 +75,12 @@ const UserOneChat = ({route}) => {
       ...msg,
       sendBy: myID,
       sendTo: clientID,
+      // image: imagesPath.profile,
+      avatar: 'https://cdn-icons-png.flaticon.com/512/5968/5968764.png',
       createdAt: firestore.FieldValue.serverTimestamp(),
     };
-    console.log('fireStoreMessage____:\n', fireStoreMessage);
-    // user side messages savd.
-    // firestore()
-    //   .collection('vbtUserChats')
-    //   .doc('123456')
-    //   .collection('messages')
-    //   .add(fireStoreMessage);
-    // client side
+    // console.log('fireStoreMessage____:\n', fireStoreMessage);
+
     firestore()
       .collection('vbtAllChats')
       .doc(myID + clientID)
@@ -114,8 +117,7 @@ const UserOneChat = ({route}) => {
   //   console.log('messages__:', myMessage);
   return (
     <View style={styles.chat}>
-      <AppText>Welcome to One User Chat 1</AppText>
-      {/* <AppText>{userID}</AppText> */}
+      <AppText style={styles.msgText}>Messages </AppText>
       <GiftedChat
         messages={myMessage}
         onSend={message => onSend(message)}
@@ -133,8 +135,12 @@ const UserOneChat = ({route}) => {
         renderSend={props => {
           return (
             <View style={styles.renderSendStyle}>
-              <Feather name="paperclip" size={25} color={mycolors.silk} />
-              <Feather name="image" size={27} color={mycolors.silk} />
+              <TouchableOpacity>
+                <Feather name="paperclip" size={25} color={mycolors.silk} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Feather name="image" size={27} color={mycolors.silk} />
+              </TouchableOpacity>
 
               <Send {...props} containerStyle={{justifyContent: 'center'}}>
                 <Feather name="send" size={30} color={mycolors.silk} />
@@ -151,8 +157,8 @@ const UserOneChat = ({route}) => {
 const styles = StyleSheet.create({
   chat: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' && StatusBar.currentHeight,
-    paddingHorizontal: respWidth(2.5),
+    // paddingTop: Platform.OS === 'android' && StatusBar.currentHeight,
+    paddingHorizontal: respWidth(2),
     backgroundColor: mycolors.white,
   },
   headerText: {
@@ -160,6 +166,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: mycolors.white,
     // alignSelf:'center'
+  },
+  msgText: {
+    marginVertical: respHeight(2),
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: mycolors.silk,
   },
   primaryText: {
     fontSize: 16,
@@ -170,7 +182,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
+    gap: 15,
     // justifyContent: 'center',
   },
   renderInput: {
