@@ -20,7 +20,7 @@ const UserOneChat = ({route}) => {
   const {clientID, myID} = route.params;
   const date = Date.parse(new Date());
 
-  // console.log('userID__', clientID, 'myID___', myID);
+  console.log('myID___:', myID, 'clientID___:', clientID);
 
   const sendHandler = async messageArray => {
     // const msg = messageArray[0];
@@ -44,8 +44,8 @@ const UserOneChat = ({route}) => {
 
   useEffect(() => {
     const subscriber = firestore()
-      .collection('vbtUserChats')
-      .doc('123456')
+      .collection('vbtAllChats')
+      .doc(myID + clientID)
       .collection('messages')
       .orderBy('createdAt', 'desc');
 
@@ -60,7 +60,9 @@ const UserOneChat = ({route}) => {
     });
   }, []);
 
-  console.log('messages___\t', myMessage);
+  //  45ae8a2e-cbee-4f40-bd7c-c23762fe5c91 773b9252-15dd-4b0e-a7c9-0cef0ee94db0
+
+  // console.log('messages___\t', myMessage);
   const onSend = useCallback((messages = []) => {
     const msg = messages[0];
     const fireStoreMessage = {
@@ -71,17 +73,24 @@ const UserOneChat = ({route}) => {
     };
     console.log('fireStoreMessage____:\n', fireStoreMessage);
     // user side messages savd.
-    firestore()
-      .collection('vbtUserChats')
-      .doc('123456')
-      .collection('messages')
-      .add(fireStoreMessage);
-    // client side
     // firestore()
-    //   .collection('vbtUserChats1')
+    //   .collection('vbtUserChats')
     //   .doc('123456')
     //   .collection('messages')
     //   .add(fireStoreMessage);
+    // client side
+    firestore()
+      .collection('vbtAllChats')
+      .doc(myID + clientID)
+      .collection('messages')
+      .add(fireStoreMessage);
+
+    // whole chats
+    firestore()
+      .collection('vbtAllChats')
+      .doc(clientID + myID)
+      .collection('messages')
+      .add(fireStoreMessage);
 
     setmyMessage(previousMessages => {
       return GiftedChat.append(previousMessages, messages);
