@@ -4,7 +4,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import mycolors from '../../styles/mycolors';
 
 const SafeArea = props => {
-  return <SafeAreaView style={styles.safestyle}>{props.children}</SafeAreaView>;
+  return (
+    <SafeAreaView style={{...styles.safestyle, ...props.style}}>
+      {props.children}
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({

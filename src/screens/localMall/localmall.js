@@ -20,6 +20,7 @@ import {getFoodData} from '../../Redux/foodapiSlice';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function Localmall({navigation}) {
   const foodapidata = useSelector(state => state.foodapi.foodapidata);
@@ -37,24 +38,21 @@ export default function Localmall({navigation}) {
   }, []);
 
   return (
-    <SafeArea>
-      <View style={styles.mystyle}>
-        <View style={styles.primaryNotiContainer}>
-          <AppText style={styles.welcomeText}>
-            What would to like to eat you
-          </AppText>
+    // <SafeArea style={{backgroundColor: mycolors.whitelight}}>
+    <View style={styles.mystyle}>
+      <View style={styles.primaryNotiContainer}>
+        {/* <AntDesign name="picture" size={30} color={mycolors.blue} /> */}
+        {/* <AppText style={styles.welcomeText}>FastFood Deals</AppText> */}
+        <Image style={{width: 65, height: 50}} source={imagesPath.burger} />
+        <Image style={{width: 65, height: 50}} source={imagesPath.food2} />
+        <Image style={{width: 65, height: 50}} source={imagesPath.kake} />
+      </View>
 
-          <Image
-            style={{width: 35, height: 30}}
-            source={imagesPath.notification}
-          />
-        </View>
-
-        <View style={{marginVertical: moderateScale(12)}}>
-          <SearchBar />
-        </View>
-        <ScrollView showsVerticalScrollIndicator>
-          <View>
+      <View style={{margin: moderateScale(10)}}>
+        <SearchBar />
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <View>
             <Smcard style={styles.primaryBox2}>
               <View style={styles.flexcolum}>
                 <AppText style={styles.box2Text}>Best Burgers Deals </AppText>
@@ -68,30 +66,45 @@ export default function Localmall({navigation}) {
                 <Image style={styles.box2imgstyle} source={imagesPath.plate2} />
               </View>
             </Smcard>
-          </View>
-          <View style={{marginVertical: moderateScale(5)}}>
-            <MyFood foodapidata={foodapidata} navigation={navigation} />
-          </View>
-        </ScrollView>
-      </View>
-    </SafeArea>
+          </View> */}
+        <View style={{marginHorizontal: moderateScale(10)}}>
+          <MyFood foodapidata={foodapidata} navigation={navigation} />
+        </View>
+      </ScrollView>
+    </View>
+    // </SafeArea>
   );
 }
 const styles = StyleSheet.create({
   mystyle: {
-    paddingHorizontal: moderateScale(10),
-    backgroundColor: mycolors.white,
+    backgroundColor: mycolors.whitelight,
   },
   welcomeText: {
-    fontSize: scale(25),
-    width: respWidth(60),
+    fontSize: scale(23),
     fontWeight: 'bold',
+    marginBottom: respHeight(2),
+    width: respWidth(47),
+    borderBottomColor: mycolors.blue,
+    borderBottomWidth: 3,
+    color: mycolors.blue,
   },
   primaryNotiContainer: {
+    backgroundColor: mycolors.pink,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    // apply shadow effect
+    shadowColor: mycolors.black,
+    shadowOffset: {
+      height: 2,
+      width: 4,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 5,
   },
   // box 2
   primaryBox2: {

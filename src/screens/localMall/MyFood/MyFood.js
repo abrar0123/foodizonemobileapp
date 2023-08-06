@@ -13,10 +13,14 @@ import ListFood from './listfood';
 import Card from '../../../components/UI/Card/Card';
 import mycolors from '../../../styles/mycolors';
 import {scale} from 'react-native-size-matters';
-import {respWidth} from '../../../components/responsiveness/RespHeight';
+import {
+  respHeight,
+  respWidth,
+} from '../../../components/responsiveness/RespHeight';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {useSelector} from 'react-redux';
 import CustomLoader from '../../../components/CustomLoader/CustomLoader';
+import SkLoader from '../../../components/CustomLoader/SkLoader';
 
 const screens = [
   {
@@ -57,7 +61,6 @@ const MyFood = ({foodapidata, navigation}) => {
 
   const pressHandler = id => {
     setind(id);
-    // console.log("food", MyFood);
   };
 
   const renderItem = ({item}) => {
@@ -92,17 +95,9 @@ const MyFood = ({foodapidata, navigation}) => {
           renderItem={renderItem}
           columnWrapperStyle={{justifyContent: 'space-evenly'}}
         /> */}
-      <AppText style={styles.welcomeText}>FastFood Deals</AppText>
+      {/* <AppText style={styles.welcomeText}>FastFood Deals</AppText> */}
       {isLoading ? (
-        //   <Spinner
-        //     visible={!isLoading}
-        //     size={45}
-        //     animation="fade"
-        //     color={mycolors.blue}
-        //     textStyle={mycolors.white}
-        //     textContent={'Loading...'}
-        //   />
-        <CustomLoader />
+        <SkLoader />
       ) : (
         <ListFood
           MyFood={foodapidata}
@@ -116,12 +111,13 @@ const MyFood = ({foodapidata, navigation}) => {
 
 const styles = StyleSheet.create({
   welcomeText: {
-    fontSize: scale(25),
+    fontSize: scale(23),
     fontWeight: 'bold',
-    marginBottom: 10,
-    width: respWidth(50),
-    borderBottomColor: mycolors.red,
+    marginBottom: respHeight(2),
+    width: respWidth(47),
+    borderBottomColor: mycolors.primaryorange,
     borderBottomWidth: 3,
+    color: mycolors.primaryorange,
   },
 });
 

@@ -31,7 +31,7 @@ export const cartSlice = createSlice({
         item => item.id === product.id,
       );
       if (productIndex !== -1) {
-        state.foodCart[productIndex].quant > 1 &&
+        state.foodCart[productIndex].quant > 0 &&
           state.foodCart[productIndex].quant--;
         state.foodCart[productIndex].subtotal =
           state.foodCart[productIndex].price *
