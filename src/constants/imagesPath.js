@@ -6,7 +6,7 @@ export default {
   profile: require('../assets/imagesIcons/profile.png'),
 
   // icons style
-
+  allrest: require('../assets/image/allfood.png'),
   burger: require('../assets/image/burger.png'),
   search: require('../assets/image/search.png'),
   filter: require('../assets/image/filter.png'),

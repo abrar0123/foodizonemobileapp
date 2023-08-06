@@ -1,12 +1,14 @@
+import imagesPath from '../../constants/imagesPath';
 import imagesPath1 from '../../constants/imagesPath1';
 
 export const storedata = [
-  {id: 0, name: 'All Data', image: imagesPath1.cake, color: 'black'},
-  {id: 1, name: 'Cakes', image: imagesPath1.cake, color: '#028A8F'},
-  {id: 2, name: 'Custom', image: imagesPath1.custom, color: '#E780A9'},
-  {id: 3, name: 'Brownie', image: imagesPath1.Brownie, color: '#9FDDC8'},
-  {id: 4, name: 'Chocolate', image: imagesPath1.chocolate, color: '#C3A9D0'},
-  {id: 5, name: 'Gulabjamun', image: imagesPath1.gulabjamun, color: '#028A8F'},
+  {id: 0, name: 'Best Foods', image: imagesPath.allrest, color: 'black'},
+  {id: 1, name: 'Burger', image: imagesPath.burger, color: '#028A8F'},
+  {id: 2, name: 'Pizza', image: imagesPath.plate, color: '#E780A9'},
+  {id: 3, name: 'Sandwitch', image: imagesPath.plate, color: '#C3A9D0'},
+  {id: 4, name: 'Shawarma', image: imagesPath.plate2, color: '#9FDDC8'},
+
+  {id: 5, name: 'IceCream', image: imagesPath1.gulabjamun, color: '#028A8F'},
 ];
 
 export const cakes = [

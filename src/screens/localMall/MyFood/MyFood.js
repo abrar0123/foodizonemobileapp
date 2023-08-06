@@ -21,6 +21,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import {useSelector} from 'react-redux';
 import CustomLoader from '../../../components/CustomLoader/CustomLoader';
 import SkLoader from '../../../components/CustomLoader/SkLoader';
+import PlacesModal from '../../../components/CustomModal/PlacesModal';
 
 const screens = [
   {
@@ -35,7 +36,7 @@ const screens = [
   },
 ];
 
-const MyFood = ({foodapidata, searchedFood, navigation}) => {
+const MyFood = ({foodapidata, searchedFood, openModal1, navigation}) => {
   // const [MyFood, setMyFood] = useState([]);
   const [ind, setind] = useState(1);
   const [Loader, setLoader] = useState(false);
@@ -85,7 +86,7 @@ const MyFood = ({foodapidata, searchedFood, navigation}) => {
       </View>
     );
   };
-
+  console.log('openModal1__', openModal1);
   return (
     <React.Fragment>
       {/* <FlatList
@@ -100,11 +101,12 @@ const MyFood = ({foodapidata, searchedFood, navigation}) => {
         <SkLoader />
       ) : (
         <ListFood
-          MyFood={searchedFood ? searchedFood : foodapidata}
+          MyFood={searchedFood.length > 0 ? searchedFood : foodapidata}
           Loader={Loader}
           navigation={navigation}
         />
       )}
+      {openModal1 && <PlacesModal isVisible={openModal1} />}
     </React.Fragment>
   );
 };

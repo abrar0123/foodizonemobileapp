@@ -13,12 +13,13 @@ import Smcard from '../UI/SmallCard/smcard';
 import {respWidth} from '../responsiveness/RespHeight';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useSelector} from 'react-redux';
+import PlacesModal from '../CustomModal/PlacesModal';
+import AppText from '../UI/AppText';
 
-const SearchBar = ({userSearchedFood1}) => {
+const SearchBar = ({userSearchedFood1, openModal}) => {
   const [userSearch, setuserSearch] = useState('');
   const [MySearchdFood, setMySearchdFood] = useState([]);
   const foodapidata = useSelector(state => state.foodapi.foodapidata);
-
   const searchUserFood = () => {
     const data = foodapidata.filter(item => {
       const prodTitle = item.title.toLowerCase();
@@ -35,6 +36,10 @@ const SearchBar = ({userSearchedFood1}) => {
   }, [userSearch]);
 
   // console.log('userSearch__', userSearch);
+
+  const myOpenModal = () => {
+    openModal(true);
+  };
   return (
     <View style={styles.searchContainer}>
       <Smcard style={styles.inputContainer}>
@@ -53,7 +58,7 @@ const SearchBar = ({userSearchedFood1}) => {
           paddingHorizontal: moderateScale(7),
           borderRadius: 5,
         }}>
-        <TouchableOpacity activeOpacity={0.3}>
+        <TouchableOpacity activeOpacity={0.3} onPress={myOpenModal}>
           <Image source={imagesPath.filter} style={styles.imagstyle} />
         </TouchableOpacity>
       </Smcard>

@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import stackscreens from '../../constants/stackscreens';
 import Home1 from '../../screens/Home/Home1';
@@ -25,10 +25,12 @@ import Notification from '../../screens/ChatNotification/Notification';
 import ChatBot from '../../screens/chatBot/chatBot';
 import UserChat from '../../screens/chatBot/userChat';
 import UserOneChat from '../../screens/chatBot/UserOneChat';
+import axios from 'axios';
 
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
 
+  // console.log('vvvv_____:');
   return (
     <Stack.Navigator
       screenOptions={{
@@ -89,7 +91,10 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.restaurant}
         component={Restaurants}
-        options={{headerShown: false}}
+        options={{
+          title: 'Best Restuarants',
+          headerStyle: {backgroundColor: mycolors.pink},
+        }}
       />
       <Stack.Screen
         name={stackscreens.notification}

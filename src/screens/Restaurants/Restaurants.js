@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -20,18 +20,35 @@ import {brownie, cakes, chocolate, custom, gulabjamun, storedata} from './data';
 
 import {useState} from 'react';
 import {StatusBar} from 'react-native';
+import axios from 'axios';
+import {BestFoods} from '../../assets/MainData/bestFoods';
+import {src} from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
+import {Burger} from '../../assets/MainData/Burger';
+import {Pizza} from '../../assets/MainData/Pizza';
+import {Sandwitch} from '../../assets/MainData/Sandwitch';
+import {IceCream} from '../../assets/MainData/IceCream';
+
 const allstoredata = cakes.concat(custom, brownie, chocolate);
 
 const Restaurants = () => {
-  const [selectIndex, setselectIndex] = useState({id: 0, bgc: mycolors.black});
-
-  // console.log('data:\n', cakes.concat(custom, brownie));
+  const [selectIndex, setselectIndex] = useState({id: 1});
+  let bestFoods = BestFoods;
+  let burger = Burger;
+  let pizza = Pizza;
+  let sandwitch = Sandwitch;
+  let iceCream = IceCream;
+  bestFoods.length = 16;
+  burger.length = 16;
+  pizza.length = 16;
+  iceCream.length = 16;
 
   const selectHandler = (ind, bgc) => {
     setselectIndex({id: ind, bgc: bgc});
   };
-  console.log('select', selectIndex);
 
+  // console.log('select', selectIndex);
+
+  // **************** Horizontal line render Item  ****************
   const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity
@@ -41,7 +58,7 @@ const Restaurants = () => {
           style={{
             ...styles.storeCardStyle,
             backgroundColor:
-              item.id === selectIndex.id ? item.color : mycolors.lightgrey,
+              item.id === selectIndex.id ? mycolors.pink : mycolors.lightgrey,
           }}>
           <Image source={item.image} style={styles.img} />
           <AppText
@@ -57,44 +74,61 @@ const Restaurants = () => {
     );
   };
 
+  // **************** Cakes data render Item  ****************
+
   const renderCakes = ({item, index}) => {
+    // console.log('img__', item?.img);
+    // const imageUrl = `${item.img}.jpg`;
+
     return (
       <TouchableOpacity activeOpacity={0.9}>
-        <View
-          style={{
-            ...styles.storeCakeStyle,
-            backgroundColor: selectIndex.bgc,
-          }}>
-          <Image source={item.img} style={styles.cakeimg} />
-          <AppText style={styles.cakeTitle}>{item.name}</AppText>
-        </View>
+        <Smcard style={styles.storeCakeStyle}>
+          {/* sometime image not be displays because of error */}
+
+          <Image source={{uri: item?.img}} style={styles.cakeimg} />
+          <AppText lines={1} style={styles.cakeTitle}>
+            {item.name}
+          </AppText>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}>
+            <AppText style={styles.cakeTitle}>{`$ ${item.price}`}</AppText>
+            <AppText style={styles.cakeTitle}>{`${item.rate} s`}</AppText>
+          </View>
+          <AppText
+            lines={1}
+            style={styles.cakeTitle}>{`${item.country}`}</AppText>
+        </Smcard>
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.parent}>
-      <Smcard style={{...styles.cardStyle, backgroundColor: selectIndex.bgc}}>
+      {/* <Smcard style={{...styles.cardStyle, backgroundColor: selectIndex.bgc}}>
         <AppText style={{...styles.headerText}}>Jdk Store</AppText>
-      </Smcard>
+      </Smcard> */}
 
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
         data={storedata}
         contentContainerStyle={{
-          paddingBottom: selectIndex.id === 0 ? respHeight(7) : 5,
+          paddingBottom: selectIndex.id === 0 ? respHeight(7) : 15,
         }}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        ItemSeparatorComponent={() => <View style={{width: 10}} />}
+        ItemSeparatorComponent={() => <View style={{width: 15}} />}
       />
 
       {selectIndex.id === 0 ? (
         <FlatList
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{paddingBottom: respHeight(38)}}
-          data={allstoredata}
+          data={bestFoods}
           numColumns={2}
           keyExtractor={item => item.id}
           renderItem={renderCakes}
@@ -102,17 +136,18 @@ const Restaurants = () => {
         />
       ) : (
         <FlatList
-          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom: 100}}
+          showsVerticalScrollIndicator={false}
           data={
             selectIndex.id === 1
-              ? cakes
+              ? burger
               : selectIndex.id === 2
-              ? custom
+              ? pizza
               : selectIndex.id === 3
-              ? brownie
+              ? sandwitch
               : selectIndex.id === 4
-              ? chocolate
-              : selectIndex.id === 5 && gulabjamun
+              ? sandwitch
+              : selectIndex.id === 5 && iceCream
           }
           numColumns={2}
           keyExtractor={item => item.id}
@@ -129,7 +164,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: respHeight(1.5),
     paddingTop: respHeight(2),
     // paddingTop: (Platform.OS = 'android' && StatusBar.currentHeight),
-    backgroundColor: mycolors.white,
+    backgroundColor: mycolors.whitelight,
   },
   headerText: {
     fontSize: scale(22),
@@ -145,47 +180,47 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 
-  // ------
+  // ------ horixontal renderItem
   storeCardStyle: {
-    width: respWidth(36),
-    height: respHeight(18),
+    // width: respWidth(35),
+    height: respHeight(8),
     borderRadius: 10,
     overflow: 'hidden',
-    // paddingVertical: respHeight(1),
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
   img: {
-    width: respWidth(35),
-    height: respHeight(22),
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    resizeMode: 'contain',
-    position: 'relative',
-    bottom: respHeight(6),
-    left: respHeight(7),
+    width: respWidth(16),
+    height: respHeight(6.5),
+    resizeMode: 'center',
+    padding: 10,
   },
   title: {
     fontSize: scale(18),
     paddingHorizontal: respWidth(3),
     paddingVertical: respHeight(1.1),
-
     fontWeight: 'bold',
     color: mycolors.white,
-    position: 'relative',
-    bottom: respHeight(10),
   },
 
+  // cakes data render
   storeCakeStyle: {
     width: respWidth(44),
-    height: respHeight(16.3),
+    height: respHeight(30),
+    backgroundColor: mycolors.white,
     marginVertical: moderateScale(5),
-    borderRadius: 10,
+    borderRadius: 12,
     overflow: 'hidden',
+    display: 'flex',
+    gap: 10,
   },
+
   cakeimg: {
-    width: '80%',
-    height: respHeight(11),
-    resizeMode: 'contain',
+    width: '100%',
+    height: respHeight(15),
+    resizeMode: 'cover',
     alignSelf: 'center',
   },
   cakeTitle: {
@@ -193,7 +228,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     // marginVertical: respWidth(0.6),
     fontWeight: 'bold',
-    color: mycolors.white,
+    color: mycolors.black,
   },
 });
 

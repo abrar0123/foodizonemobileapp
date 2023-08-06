@@ -26,8 +26,9 @@ export default function Localmall({navigation}) {
   const [searchedFood, setsearchedFood] = useState([]);
   const foodapidata = useSelector(state => state.foodapi.foodapidata);
   const isLoading = useSelector(state => state.foodapi.loading);
-
+  const [openModal1, setopenModal1] = useState(false);
   // console.log('foodapidata__', foodapidata, isLoading);
+  
   const Dispatch = useDispatch();
   useEffect(() => {
     // console.log('fooddata__');
@@ -41,7 +42,9 @@ export default function Localmall({navigation}) {
   const userSearchedFood = data => {
     setsearchedFood(data);
   };
-
+  const openModal = data => {
+    setopenModal1(data);
+  };
   // console.log('searchedFood__New', searchedFood);
   return (
     // <SafeArea style={{backgroundColor: mycolors.whitelight}}>
@@ -55,7 +58,7 @@ export default function Localmall({navigation}) {
       </View>
 
       <View style={{margin: moderateScale(10)}}>
-        <SearchBar userSearchedFood1={userSearchedFood} />
+        <SearchBar userSearchedFood1={userSearchedFood} openModal={openModal} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* <View>
@@ -78,6 +81,7 @@ export default function Localmall({navigation}) {
             foodapidata={foodapidata}
             navigation={navigation}
             searchedFood={searchedFood}
+            openModal1={openModal1}
           />
         </View>
       </ScrollView>
