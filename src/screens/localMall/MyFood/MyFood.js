@@ -35,7 +35,7 @@ const screens = [
   },
 ];
 
-const MyFood = ({foodapidata, navigation}) => {
+const MyFood = ({foodapidata, searchedFood, navigation}) => {
   // const [MyFood, setMyFood] = useState([]);
   const [ind, setind] = useState(1);
   const [Loader, setLoader] = useState(false);
@@ -52,7 +52,7 @@ const MyFood = ({foodapidata, navigation}) => {
       );
       const response = await data.json();
       // console.log("MyFood_API__:\n\n\n", response.categories);
-      setMyFood(response.categories);
+      // setMyFood(response.categories);
     } catch (error) {
       console.log('MyFood_API___Error___:', error);
     }
@@ -100,7 +100,7 @@ const MyFood = ({foodapidata, navigation}) => {
         <SkLoader />
       ) : (
         <ListFood
-          MyFood={foodapidata}
+          MyFood={searchedFood ? searchedFood : foodapidata}
           Loader={Loader}
           navigation={navigation}
         />

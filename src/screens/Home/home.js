@@ -47,7 +47,7 @@ const Home = ({navigation}) => {
           </View>
         </SmCard>
         <View style={{marginVertical: moderateScale(20)}}>
-          <Search />
+          {/* <Search /> */}
         </View>
         
         {/* box 2  food delivery */}

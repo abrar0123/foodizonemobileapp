@@ -1,17 +1,51 @@
-import React from 'react';
-import {View, StyleSheet, Image, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import imagesPath from '../../constants/imagesPath';
 import mycolors from '../../styles/mycolors';
 import {moderateScale, scale} from 'react-native-size-matters';
 import Smcard from '../UI/SmallCard/smcard';
 import {respWidth} from '../responsiveness/RespHeight';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {useSelector} from 'react-redux';
 
-const SearchBar = () => {
+const SearchBar = ({userSearchedFood1}) => {
+  const [userSearch, setuserSearch] = useState('');
+  const [MySearchdFood, setMySearchdFood] = useState([]);
+  const foodapidata = useSelector(state => state.foodapi.foodapidata);
+
+  const searchUserFood = () => {
+    const data = foodapidata.filter(item => {
+      const prodTitle = item.title.toLowerCase();
+      const userrsearch = userSearch?.toLowerCase();
+      return prodTitle?.includes(userrsearch);
+    });
+    // setMySearchdFood(data);
+    userSearchedFood1(data);
+  };
+
+  useEffect(() => {
+    searchUserFood();
+    // console.log('MySearchdFood___1:\n\n', MySearchdFood);
+  }, [userSearch]);
+
+  // console.log('userSearch__', userSearch);
   return (
     <View style={styles.searchContainer}>
       <Smcard style={styles.inputContainer}>
         <Image source={imagesPath.search} style={styles.imagstyle} />
-        <TextInput style={styles.textInput} placeholder="Search for Foods" />
+        {/* <FontAwesome name="search" size={30}  /> */}
+        <TextInput
+          value={userSearch}
+          onChangeText={event => setuserSearch(event)}
+          style={styles.textInput}
+          placeholder="Search for Foods"
+        />
       </Smcard>
       <Smcard
         style={{
@@ -19,7 +53,9 @@ const SearchBar = () => {
           paddingHorizontal: moderateScale(7),
           borderRadius: 5,
         }}>
-        <Image source={imagesPath.filter} style={styles.imagstyle} />
+        <TouchableOpacity activeOpacity={0.3}>
+          <Image source={imagesPath.filter} style={styles.imagstyle} />
+        </TouchableOpacity>
       </Smcard>
     </View>
   );

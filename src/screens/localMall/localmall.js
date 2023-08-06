@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Image, ScrollView, LogBox} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import AppText from '../../components/UI/AppText';
 import MyFood from './MyFood/MyFood';
 import SearchBar from '../../components/Search/SearchBar';
@@ -23,6 +23,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function Localmall({navigation}) {
+  const [searchedFood, setsearchedFood] = useState([]);
   const foodapidata = useSelector(state => state.foodapi.foodapidata);
   const isLoading = useSelector(state => state.foodapi.loading);
 
@@ -37,6 +38,11 @@ export default function Localmall({navigation}) {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
 
+  const userSearchedFood = data => {
+    setsearchedFood(data);
+  };
+
+  // console.log('searchedFood__New', searchedFood);
   return (
     // <SafeArea style={{backgroundColor: mycolors.whitelight}}>
     <View style={styles.mystyle}>
@@ -49,7 +55,7 @@ export default function Localmall({navigation}) {
       </View>
 
       <View style={{margin: moderateScale(10)}}>
-        <SearchBar />
+        <SearchBar userSearchedFood1={userSearchedFood} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* <View>
@@ -68,7 +74,11 @@ export default function Localmall({navigation}) {
             </Smcard>
           </View> */}
         <View style={{marginHorizontal: moderateScale(10)}}>
-          <MyFood foodapidata={foodapidata} navigation={navigation} />
+          <MyFood
+            foodapidata={foodapidata}
+            navigation={navigation}
+            searchedFood={searchedFood}
+          />
         </View>
       </ScrollView>
     </View>
