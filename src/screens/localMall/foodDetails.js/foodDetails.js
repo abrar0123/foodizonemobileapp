@@ -56,83 +56,110 @@ const FoodDetails = ({route}) => {
 
   return (
     <View style={styles.mainDetails}>
-      <View style={styles.mainContainer}>
-        <Image source={{uri: imageUrl}} style={styles.imgStyle} />
+      <View style={styles.secondaryContainer}>
+        <View style={styles.mainContainer}>
+          <View style={styles.imageContainer}>
+            <Image source={{uri: imageUrl}} style={styles.imgStyle} />
+          </View>
 
-        <AppText lines={1} style={styles.welcomText}>
-          {oneFood.title}
-        </AppText>
-        <AppText style={styles.descriptionText}>
-          Best pizza forever , please go order and enjoy best pizza
-        </AppText>
-        <View style={styles.ratingContainer}>
-          <AppText style={{fontSize: 18, fontWeight: 'bold'}}>
-            Price{'  '} ${oneFood.readyInMinutes}
+          <AppText lines={1} style={styles.welcomText}>
+            {oneFood.title}
           </AppText>
-          <View style={{...styles.ratingContainer}}>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={removeToCartHandler.bind(this, oneFood.id)}>
-              <View style={styles.iconContainer}>
-                <AppText style={{fontSize: 25, color: mycolors.white}}>
-                  -
+          <AppText style={styles.descriptionText}>
+            Best pizza forever , please go order and enjoy best pizza
+          </AppText>
+          <View
+            style={{
+              ...styles.ratingContainer,
+              position: 'relative',
+              bottom: respHeight(12),
+            }}>
+            <AppText style={{fontSize: 18, fontWeight: 'bold'}}>
+              Price{'  '} ${oneFood.readyInMinutes}
+            </AppText>
+            <View style={{...styles.ratingContainer}}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={removeToCartHandler.bind(this, oneFood.id)}>
+                <View style={styles.iconContainer}>
+                  <AppText style={{fontSize: 25, color: mycolors.white}}>
+                    -
+                  </AppText>
+                </View>
+              </TouchableOpacity>
+              <View
+                style={{
+                  backgroundColor: mycolors.red,
+                  paddingHorizontal: moderateScale(12),
+                  paddingVertical: moderateScale(9),
+                }}>
+                <AppText style={{fontSize: 18, color: mycolors.white}}>
+                  {FoodQuant?.quant ? FoodQuant.quant : 0}
                 </AppText>
               </View>
-            </TouchableOpacity>
-            <View
-              style={{
-                backgroundColor: mycolors.red,
-                paddingHorizontal: moderateScale(12),
-                paddingVertical: moderateScale(9),
-              }}>
-              <AppText style={{fontSize: 18, color: mycolors.white}}>
-                {FoodQuant?.quant ? FoodQuant.quant : 0}
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={addTOCartHandler.bind(
+                  this,
+                  oneFood.id,
+                  oneFood.title,
+                  imageUrl,
+                  oneFood.readyInMinutes,
+                )}>
+                <View style={styles.iconContainer2}>
+                  <AppText style={{fontSize: 25, color: mycolors.white}}>
+                    +
+                  </AppText>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View
+            style={{
+              ...styles.ratingContainer,
+              position: 'relative',
+              bottom: respHeight(12),
+            }}>
+            <AppText style={{fontSize: 18, fontWeight: 'bold'}}>
+              Delivery Time {'   '}
+              <AppText style={{color: mycolors.l2black}}>
+                {' '}
+                {oneFood.readyInMinutes} Mins
+              </AppText>
+            </AppText>
+          </View>
+          <View
+            style={{
+              alignSelf: 'center',
+              position: 'relative',
+              bottom: respHeight(12),
+            }}>
+            <Rating
+              rating={handleStar}
+              max={6}
+              style={{marginHorizental: 10}}
+            />
+            {/* <AppText style={{fontWeight: 'bold'}}>rating(190)</AppText> */}
+          </View>
+        </View>
+        <View
+          style={{
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity activeOpacity={0.7} onPress={backHandler}>
+            <View style={styles.cartbtn}>
+              <AppText
+                style={{
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  color: mycolors.white,
+                }}>
+                Add to Cart {FoodQuant?.subtotal && `$${FoodQuant?.subtotal}`}
               </AppText>
             </View>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={addTOCartHandler.bind(
-                this,
-                oneFood.id,
-                oneFood.title,
-                imageUrl,
-                oneFood.readyInMinutes,
-              )}>
-              <View style={styles.iconContainer2}>
-                <AppText style={{fontSize: 25, color: mycolors.white}}>
-                  +
-                </AppText>
-              </View>
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         </View>
-
-        <View style={styles.ratingContainer}>
-          <AppText style={{fontSize: 18, fontWeight: 'bold'}}>
-            Delivery Time {'   '}
-            <AppText style={{color: mycolors.l2black}}>
-              {' '}
-              {oneFood.readyInMinutes} Mins
-            </AppText>
-          </AppText>
-        </View>
-        <View style={{alignSelf: 'center'}}>
-          <Rating rating={handleStar} max={6} style={{marginHorizental: 10}} />
-          {/* <AppText style={{fontWeight: 'bold'}}>rating(190)</AppText> */}
-        </View>
-      </View>
-      <View
-        style={{
-          alignItems: 'center',
-        }}>
-        <TouchableOpacity activeOpacity={0.7} onPress={backHandler}>
-          <View style={styles.cartbtn}>
-            <AppText
-              style={{fontSize: 18, fontWeight: 'bold', color: mycolors.white}}>
-              Add to Cart {FoodQuant?.subtotal && `$${FoodQuant?.subtotal}`}
-            </AppText>
-          </View>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -141,16 +168,24 @@ const FoodDetails = ({route}) => {
 const styles = StyleSheet.create({
   mainDetails: {
     flex: 1,
-    justifyContent: 'space-between',
+    backgroundColor: mycolors.red,
+  },
+  secondaryContainer: {
+    marginTop: respHeight(20),
     backgroundColor: mycolors.white,
+    justifyContent: 'space-between',
     paddingBottom: moderateScale(5),
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    flex: 1,
+    position: 'relative',
   },
   mainContainer: {
     paddingHorizontal: moderateScale(10),
-    // flex: 1,
     display: 'flex',
     flexDirection: 'column',
     gap: respHeight(1.9),
+
     // justifyContent: 'space-between',
   },
   iconContainer: {
@@ -180,25 +215,42 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(105),
     paddingVertical: moderateScale(12),
     borderRadius: moderateScale(25),
+    position: 'relative',
+    bottom: respHeight(8),
+  },
+  imageContainer: {
+    width: '75%',
+    height: respHeight(34),
+    padding: 10,
+    backgroundColor: mycolors.lightgrey,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+
+    position: 'relative',
+    bottom: respHeight(14),
+    borderRadius: moderateScale(155),
   },
   imgStyle: {
-    // width: '100%',
-    height: respHeight(40),
-    marginTop: moderateScale(15),
-    // backgroundColor: mycolors.lightgrey,
+    width: '100%',
+    height: '100%',
     resizeMode: 'contain',
-    borderRadius: moderateScale(8),
+    borderRadius: moderateScale(155),
   },
   welcomText: {
     fontSize: scale(22),
     fontWeight: '700',
-    paddingHorizontal: moderateScale(4),
-
+    paddingHorizontal: moderateScale(5),
+    position: 'relative',
+    bottom: respHeight(12),
     // alignSelf: 'center',
   },
   descriptionText: {
     textAlign: 'justify',
     paddingHorizontal: moderateScale(4),
+    position: 'relative',
+    bottom: respHeight(12),
   },
   gobtn: {
     paddingTop: moderateScale(20),

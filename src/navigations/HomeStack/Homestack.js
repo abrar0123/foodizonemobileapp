@@ -110,7 +110,11 @@ const Homestack = ({navigation}) => {
           headerStyle: {backgroundColor: mycolors.silk},
         }}
       />
-      <Stack.Screen name={stackscreens.foodDetail} component={FoodDetails} />
+      <Stack.Screen
+        name={stackscreens.foodDetail}
+        component={FoodDetails}
+        options={{headerStyle: {backgroundColor: mycolors.red}}}
+      />
       <Stack.Screen
         name={stackscreens.userOneChat}
         component={UserOneChat}
