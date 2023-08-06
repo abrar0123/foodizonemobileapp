@@ -26,6 +26,8 @@ import ChatBot from '../../screens/chatBot/chatBot';
 import UserChat from '../../screens/chatBot/userChat';
 import UserOneChat from '../../screens/chatBot/UserOneChat';
 import axios from 'axios';
+import FoodiMart from '../../screens/Restaurants/FoodiMart';
+import FoodiMartDetails from '../../screens/Restaurants/FoodiMartDetails';
 
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
@@ -88,11 +90,28 @@ const Homestack = ({navigation}) => {
         component={MyTabsView}
         options={{headerShown: false}}
       />
+      
       <Stack.Screen
         name={stackscreens.restaurant}
         component={Restaurants}
         options={{
           title: 'Best Restuarants',
+          headerStyle: {backgroundColor: mycolors.pink},
+        }}
+      />
+       <Stack.Screen
+        name={stackscreens.foodiMartDetails}
+        component={FoodiMartDetails}
+        options={{
+          title: 'Best FoodiMart Details',
+          headerStyle: {backgroundColor: mycolors.pink},
+        }}
+      />
+      <Stack.Screen
+        name={stackscreens.foodiMart}
+        component={FoodiMart}
+        options={{
+          title: 'Best Foodi Mart',
           headerStyle: {backgroundColor: mycolors.pink},
         }}
       />

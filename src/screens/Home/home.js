@@ -30,6 +30,9 @@ const Home = ({navigation}) => {
   const goResaurant = () => {
     navigation.navigate(stackscreens.restaurant);
   };
+  const goFoodiMart = () => {
+    navigation.navigate(stackscreens.foodiMart);
+  };
 
   return (
     <ScrollView>
@@ -49,7 +52,7 @@ const Home = ({navigation}) => {
         <View style={{marginVertical: moderateScale(20)}}>
           {/* <Search /> */}
         </View>
-        
+
         {/* box 2  food delivery */}
         <TouchableOpacity onPress={goResaurant} activeOpacity={0.95}>
           <SmCard style={styles.primaryBox2}>
@@ -69,22 +72,29 @@ const Home = ({navigation}) => {
         {/* box 3 added */}
         <Card style={{marginVertical: 15}}>
           <View style={styles.primaryBox3}>
-            <SmCard style={styles.Box3container1}>
-              <AppText style={styles.box3Text}>Foodie Mart </AppText>
-              <AppText
-                style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-                Best Mart Shops
-              </AppText>
-              <Image style={styles.box3imgstyle} source={imagesPath.kake} />
-              <AppText
-                style={{...styles.box2Text, fontSize: 14, fontWeight: 'bold'}}>
-                Everyday upto 20% OFF
-              </AppText>
-              <AppText
-                style={{...styles.box2Text, fontSize: 14, fontWeight: '400'}}>
-                Go your Favourite Shop and place Order
-              </AppText>
-            </SmCard>
+            <TouchableOpacity activeOpacity={0.9} onPress={goFoodiMart}>
+              <SmCard style={styles.Box3container1}>
+                <AppText style={styles.box3Text}>Foodie Mart </AppText>
+                <AppText
+                  style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
+                  Best Mart Shops
+                </AppText>
+                <Image style={styles.box3imgstyle} source={imagesPath.kake} />
+                <AppText
+                  style={{
+                    ...styles.box2Text,
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                  }}>
+                  Everyday upto 20% OFF
+                </AppText>
+                <AppText
+                  style={{...styles.box2Text, fontSize: 14, fontWeight: '400'}}>
+                  Go your Favourite Shop and place Order
+                </AppText>
+              </SmCard>
+            </TouchableOpacity>
+
             <View style={{display: 'flex', flexDirection: 'column', gap: 10}}>
               <SmCard style={styles.Box3container2}>
                 <AppText style={styles.box3Text}>Foodie Pickup </AppText>

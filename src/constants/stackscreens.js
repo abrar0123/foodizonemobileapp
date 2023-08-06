@@ -23,4 +23,6 @@ export default {
   chatBot: 'chatBot',
   userChat: 'UserChat',
   userOneChat: 'UserOneChat',
+  foodiMart: 'FoodiMart',
+  foodiMartDetails: 'FoodiMartDetails',
 };
