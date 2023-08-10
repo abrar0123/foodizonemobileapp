@@ -145,11 +145,7 @@ const Homestack = ({navigation}) => {
         component={UserOneChat}
         options={{headerStyle: {backgroundColor: mycolors.silk}}}
       />
-      <Stack.Screen
-        name={stackscreens.formikLogin}
-        component={FormikLogin}
-        options={{headerStyle: {backgroundColor: mycolors.silk}}}
-      />
+      
     </Stack.Navigator>
   );
 };

@@ -29,24 +29,26 @@ const Splash = ({navigation}) => {
   });
 
   return (
-    <View style={styles.splashContainer}>
-      <View style={styles.imgStyle}>
-        <Image source={pic} style={styles.imgStyle} />
+    <>
+      <View style={styles.splashContainer}>
+        <View style={styles.imgStyle}>
+          <Image source={pic} style={styles.imgStyle} />
+        </View>
+        <AppText style={styles.welcomText}>Welcome to Food Zone </AppText>
+        <AppText style={styles.descriptionText}>
+          welcome to our Food Orderin Mobile app , we provide best food to our
+          customer and always achive best satifaction, Lets do Order Food at
+          your Home and Enjoy Food.
+        </AppText>
+        <View style={styles.gobtn}>
+          <Button onPress={goHandler}>
+            <AppText style={{color: mycolors.white, textAlign: 'center'}}>
+              Let's Go
+            </AppText>
+          </Button>
+        </View>
       </View>
-      <AppText style={styles.welcomText}>Welcome to Food Zone </AppText>
-      <AppText style={styles.descriptionText}>
-        welcome to our Food Orderin Mobile app , we provide best food to our
-        customer and always achive best satifaction, Lets do Order Food at your
-        Home and Enjoy Food.
-      </AppText>
-      <View style={styles.gobtn}>
-        <Button onPress={goHandler}>
-          <AppText style={{color: mycolors.white, textAlign: 'center'}}>
-            Let's Go
-          </AppText>
-        </Button>
-      </View>
-    </View>
+    </>
   );
 };
 

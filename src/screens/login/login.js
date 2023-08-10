@@ -25,12 +25,14 @@ import {authActions} from '../../Redux/authSlice';
 import {apiEndpoints, authApiKey} from '../../firebase_Configue';
 import Entypo from 'react-native-vector-icons/Entypo';
 import firestore from '@react-native-firebase/firestore';
+import CustomLoader from '../../components/CustomLoader/CustomLoader';
 
 const Login = ({navigation}) => {
   const [email, setemail] = useState('foodizone@gmail.com');
-  const [password, setpassword] = useState('foodizone1');
+  const [password, setpassword] = useState('foodizone');
   const [showpassword, setshowpassword] = useState(true);
   const [errors, seterrors] = useState({Email: '', Password: ''});
+  const [isLoading, setisLoading] = useState(false);
 
   const emailError = 'Empty Email not allowed';
   const emailvalidation = 'please enter valid Email';
@@ -117,6 +119,7 @@ const Login = ({navigation}) => {
   };
 
   const firestreLoginCheck = () => {
+    setisLoading(true);
     try {
       firestore()
         .collection('RegisterUsers')
@@ -127,6 +130,7 @@ const Login = ({navigation}) => {
           Dispatch(authActions.login({loggedIn: res.docs[0].data()}));
           // console.log('login__here23:\n');
           Alert.alert('Founded', 'Your Email is Founded here');
+          setisLoading(false);
         })
         .catch(e => {
           console.log('error31__:\n', e);
@@ -144,6 +148,7 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.loginStyle}>
+      {isLoading && <CustomLoader />}
       <KeyboardAvoidingView behavior="position">
         <View style={styles.imgStyle}>
           <Image source={pic} style={styles.imgStyle} />

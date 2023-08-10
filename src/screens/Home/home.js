@@ -26,16 +26,13 @@ import stackscreens from '../../constants/stackscreens';
 import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
 
 const Home = ({navigation}) => {
+  // const loginEmail = useSelector(state => state.auth.loginEmail);
 
   const goResaurant = () => {
     navigation.navigate(stackscreens.restaurant);
   };
   const goFoodiMart = () => {
     navigation.navigate(stackscreens.foodiMart);
-  };
-
-  const goFormikLogin = () => {
-    navigation.navigate(stackscreens.formikLogin);
   };
 
   return (
@@ -100,7 +97,7 @@ const Home = ({navigation}) => {
             </TouchableOpacity>
 
             <View style={{display: 'flex', flexDirection: 'column', gap: 10}}>
-              <TouchableOpacity onPress={goFormikLogin}>
+              <TouchableOpacity>
                 <SmCard style={styles.Box3container2}>
                   <AppText style={styles.box3Text}>Foodie Pickup </AppText>
                   <AppText

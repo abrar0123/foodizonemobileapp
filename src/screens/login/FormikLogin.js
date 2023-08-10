@@ -102,16 +102,13 @@ const FormikLogin = ({navigation}) => {
         .then(res => {
           console.log('login__here23:\n', res);
           Dispatch(authActions.login({loggedIn: res.docs[0].data()}));
-          Alert.alert('Founded', 'Your Email is Founded here');
+          setisLoading(false);
         })
         .catch(e => {
           console.log('error31__:\n', e);
         });
-      setisLoading(false);
     } catch (error) {
       console.log('error333', error);
-    } finally {
-      setisLoading(false);
     }
   };
 
@@ -123,116 +120,104 @@ const FormikLogin = ({navigation}) => {
 
   return (
     <React.Fragment>
-      <ImageBackground
-        source={imagesPath.background}
-        style={{width: '100%', height: respHeight(100)}}>
-        {/* {isLoading && <CustomLoader />} */}
-        <Formik
-          initialValues={{email: 'test1@gmail.com', password: ''}}
-          validationSchema={validationshema}
-          onSubmit={onSubmitHandler}>
-          {({
-            handleChange,
-            handleSubmit,
-            handleBlur,
-            values,
-            touched,
-            errors,
-          }) => (
-            <View style={styles.loginStyle}>
-              <KeyboardAvoidingView behavior="position">
-                <View style={styles.imgStyle}>
-                  <Image source={pic} style={styles.imgStyle} />
+      {isLoading && <CustomLoader />}
+      <Formik
+        initialValues={{email: 'test@gmail.com', password: 'test12'}}
+        validationSchema={validationshema}
+        onSubmit={onSubmitHandler}>
+        {({
+          handleChange,
+          handleSubmit,
+          handleBlur,
+          values,
+          touched,
+          errors,
+        }) => (
+          <View style={styles.loginStyle}>
+            <KeyboardAvoidingView behavior="position">
+              <View style={styles.imgStyle}>
+                <Image source={pic} style={styles.imgStyle} />
+              </View>
+              <View style={styles.primaryInputsContainer}>
+                <View style={styles.inputcontainer}>
+                  <Entypo
+                    name="mail"
+                    size={30}
+                    color={mycolors.blue}
+                    style={{marginRight: respWidth(1.5)}}
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter Email"
+                    value={values.email}
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                  />
                 </View>
-                <View style={styles.primaryInputsContainer}>
-                  <View style={styles.inputcontainer}>
-                    <Entypo
-                      name="mail"
-                      size={30}
-                      color={mycolors.blue}
-                      style={{marginRight: respWidth(1.5)}}
-                    />
-                    <TextInput
-                      style={styles.input}
-                      placeholder="Enter Email"
-                      value={values.email}
-                      onChangeText={handleChange('email')}
-                      onBlur={handleBlur('email')}
-                    />
-                  </View>
 
-                  {/* {touched.email && errors.email && (
+                {/* {touched.email && errors.email && (
                     <Text style={styles.errorText}>
                       {errors.email ? errors.email : firebaseError?.emailError}
                     </Text>
                   )} */}
-                  {touched.email && errors.email ? (
-                    <Text style={styles.errorText}>{errors.email}</Text>
-                  ) : (
-                    firebaseError?.emailError && (
-                      <Text style={styles.errorText}>
-                        {firebaseError?.emailError}
-                      </Text>
-                    )
-                  )}
+                {touched.email && errors.email ? (
+                  <Text style={styles.errorText}>{errors.email}</Text>
+                ) : (
+                  firebaseError?.emailError && (
+                    <Text style={styles.errorText}>
+                      {firebaseError?.emailError}
+                    </Text>
+                  )
+                )}
 
-                  <View style={styles.inputcontainer}>
-                    <TouchableOpacity
-                      onPress={() => setisPassword(!isPassword)}>
-                      <Entypo
-                        name={isPassword === false ? 'eye' : 'eye-with-line'}
-                        size={30}
-                        color={mycolors.blue}
-                        style={{marginRight: respWidth(1.9)}}
-                      />
-                    </TouchableOpacity>
-
-                    <TextInput
-                      style={styles.input}
-                      placeholder="Enter Password"
-                      value={values.password}
-                      onChangeText={handleChange('password')}
-                      onBlur={handleBlur('password')}
-                      secureTextEntry={isPassword}
+                <View style={styles.inputcontainer}>
+                  <TouchableOpacity onPress={() => setisPassword(!isPassword)}>
+                    <Entypo
+                      name={isPassword === false ? 'eye' : 'eye-with-line'}
+                      size={30}
+                      color={mycolors.blue}
+                      style={{marginRight: respWidth(1.9)}}
                     />
-                  </View>
-                  {touched.password && errors.password ? (
-                    <Text style={styles.errorText}>{errors.password}</Text>
-                  ) : (
-                    firebaseError?.passwordError && (
-                      <Text style={styles.errorText}>
-                        {firebaseError?.passwordError}
-                      </Text>
-                    )
-                  )}
+                  </TouchableOpacity>
 
-                  <TouchableOpacity
-                    activeOpacity={0.5}
-                    onPress={goforgotHandler}>
-                    <AppText style={styles.forgotText}>
-                      Forgot Password ?
-                    </AppText>
-                  </TouchableOpacity>
-                  <View style={styles.loginbtn}>
-                    <Button onPress={handleSubmit}>Login </Button>
-                  </View>
-                  <TouchableOpacity
-                    activeOpacity={0.5}
-                    onPress={gosignupHandler}>
-                    <AppText style={styles.signupText}>
-                      Dont have an Account?
-                      <AppText
-                        style={{color: mycolors.blue, fontWeight: 'bold'}}>
-                        Signup here
-                      </AppText>
-                    </AppText>
-                  </TouchableOpacity>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter Password"
+                    value={values.password}
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    secureTextEntry={isPassword}
+                  />
                 </View>
-              </KeyboardAvoidingView>
-            </View>
-          )}
-        </Formik>
-      </ImageBackground>
+                {touched.password && errors.password ? (
+                  <Text style={styles.errorText}>{errors.password}</Text>
+                ) : (
+                  firebaseError?.passwordError && (
+                    <Text style={styles.errorText}>
+                      {firebaseError?.passwordError}
+                    </Text>
+                  )
+                )}
+
+                <TouchableOpacity activeOpacity={0.5} onPress={goforgotHandler}>
+                  <AppText style={styles.forgotText}>Forgot Password ?</AppText>
+                </TouchableOpacity>
+                <View style={styles.loginbtn}>
+                  <Button onPress={handleSubmit}>Login </Button>
+                </View>
+                <TouchableOpacity activeOpacity={0.5} onPress={gosignupHandler}>
+                  <AppText style={styles.signupText}>
+                    Dont have an Account?
+                    <AppText style={{color: mycolors.blue, fontWeight: 'bold'}}>
+                      Signup here
+                    </AppText>
+                  </AppText>
+                </TouchableOpacity>
+              </View>
+            </KeyboardAvoidingView>
+          </View>
+        )}
+      </Formik>
     </React.Fragment>
   );
 };
