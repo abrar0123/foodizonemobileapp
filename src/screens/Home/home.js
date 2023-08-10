@@ -23,15 +23,19 @@ import Card from '../../components/UI/Card/Card';
 import SmCard from '../../components/UI/SmallCard/smcard';
 import Search from '../../components/Search/SearchBar';
 import stackscreens from '../../constants/stackscreens';
+import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
 
 const Home = ({navigation}) => {
-  const loginEmail = useSelector(state => state.auth.loginEmail);
 
   const goResaurant = () => {
     navigation.navigate(stackscreens.restaurant);
   };
   const goFoodiMart = () => {
     navigation.navigate(stackscreens.foodiMart);
+  };
+
+  const goFormikLogin = () => {
+    navigation.navigate(stackscreens.formikLogin);
   };
 
   return (
@@ -96,14 +100,24 @@ const Home = ({navigation}) => {
             </TouchableOpacity>
 
             <View style={{display: 'flex', flexDirection: 'column', gap: 10}}>
-              <SmCard style={styles.Box3container2}>
-                <AppText style={styles.box3Text}>Foodie Pickup </AppText>
-                <AppText
-                  style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-                  Order Food You Love
-                </AppText>
-                <Image style={styles.box2imgstyle} source={imagesPath.plate} />
-              </SmCard>
+              <TouchableOpacity onPress={goFormikLogin}>
+                <SmCard style={styles.Box3container2}>
+                  <AppText style={styles.box3Text}>Foodie Pickup </AppText>
+                  <AppText
+                    style={{
+                      ...styles.box2Text,
+                      fontSize: 14,
+                      fontWeight: '200',
+                    }}>
+                    Order Food You Love
+                  </AppText>
+                  <Image
+                    style={styles.box2imgstyle}
+                    source={imagesPath.plate}
+                  />
+                </SmCard>
+              </TouchableOpacity>
+
               <SmCard style={styles.Box3container3}>
                 <View style={{width: '45%'}}>
                   <AppText style={styles.box3Text}>Shops </AppText>

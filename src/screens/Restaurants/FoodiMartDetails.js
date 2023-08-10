@@ -19,6 +19,7 @@ import {
 } from '../../components/responsiveness/RespHeight';
 import {moderateScale, scale} from 'react-native-size-matters';
 import mycolors from '../../styles/mycolors';
+import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
 
 const FoodiMartDetails = ({route}) => {
   const {data} = route.params;
@@ -32,11 +33,14 @@ const FoodiMartDetails = ({route}) => {
   pizza.length = 16;
   iceCream.length = 16;
 
+
+
   // **************** Cakes data render Item  ****************
 
   const renderCakes = ({item, index}) => {
     // console.log('img__', item?.img);
     // const imageUrl = `${item.img}.jpg`;
+    // console.log('useGetAllProductsQuery__', useGetAllProductsQuery);
 
     return (
       <TouchableOpacity activeOpacity={0.9}>

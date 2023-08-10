@@ -11,6 +11,7 @@ import mycolors from '../../styles/mycolors';
 import Forgotpassword from '../../screens/forgotpass/forgotpassword';
 import Home from '../../screens/Home/home';
 import Localmall from '../../screens/localMall/localmall';
+import FormikLogin from '../../screens/login/FormikLogin';
 
 const Authnavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -28,6 +29,7 @@ const Authnavigation = () => {
         component={Splash}
         options={{headerShown: false}}
       />
+      <Stack.Screen name={stackscreens.formikLogin} component={FormikLogin} />
       <Stack.Screen name={stackscreens.login} component={Login} />
       <Stack.Screen name={stackscreens.register} component={Register} />
       <Stack.Screen name={stackscreens.forgotpass} component={Forgotpassword} />

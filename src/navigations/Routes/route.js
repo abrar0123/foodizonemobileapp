@@ -5,9 +5,11 @@ import Authnavigation from '../AuthStack/authnavigation';
 import {useSelector} from 'react-redux';
 import Homestack from '../HomeStack/Homestack';
 import Tabroutes from '../Tabroutes/tabroutes';
+
 const Route = () => {
   const loginEmail = useSelector(state => state.auth.loginEmail);
 
+  // console.log('loginEmail__', loginEmail);
   return (
     <NavigationContainer>
       {loginEmail ? <Homestack /> : <Authnavigation />}

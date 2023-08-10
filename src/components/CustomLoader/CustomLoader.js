@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ActivityIndicator, Dimensions} from 'react-native';
+import {View, StyleSheet, ActivityIndicator, Dimensions,Text} from 'react-native';
 import {Modal} from 'react-native';
 import mycolors from '../../styles/mycolors';
 import {respHeight, respWidth} from '../responsiveness/RespHeight';
@@ -10,6 +10,7 @@ const CustomLoader = ({visible}) => {
       <View style={styles.modalView}>
         <View style={styles.mainView}>
           <ActivityIndicator size={'large'} color={mycolors.primaryorange} />
+          <Text>please wait...</Text>
         </View>
       </View>
     </Modal>

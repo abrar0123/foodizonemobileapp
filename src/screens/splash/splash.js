@@ -11,21 +11,22 @@ import Button from '../../components/UI/Button/Button';
 import mycolors from '../../styles/mycolors';
 import stackscreens from '../../constants/stackscreens';
 import {useSelector} from 'react-redux';
-import { respHeight } from '../../components/responsiveness/RespHeight';
+import {respHeight} from '../../components/responsiveness/RespHeight';
 
 const Splash = ({navigation}) => {
   // const loginEmail = useSelector(state => state.auth.loginEmail);
   // console.log('loginEmail__', loginEmail);
 
   const goHandler = () => {
-    navigation.navigate(stackscreens.login);
+    navigation.navigate(stackscreens.formikLogin);
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     goHandler();
-  //   }, 2000);
-  // });
+  useEffect(() => {
+    const time = setTimeout(() => {
+      goHandler();
+    }, 2000);
+    // return clearTimeout(time);
+  });
 
   return (
     <View style={styles.splashContainer}>

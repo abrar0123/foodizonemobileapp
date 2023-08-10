@@ -25,4 +25,5 @@ export default {
   userOneChat: 'UserOneChat',
   foodiMart: 'FoodiMart',
   foodiMartDetails: 'FoodiMartDetails',
+  formikLogin:'Formik Login'
 };

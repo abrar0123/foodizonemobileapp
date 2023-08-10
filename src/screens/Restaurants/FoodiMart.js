@@ -16,20 +16,12 @@ import {
   respWidth,
 } from '../../components/responsiveness/RespHeight';
 import {moderateScale, scale} from 'react-native-size-matters';
-import {brownie, cakes, chocolate, custom, gulabjamun, storedata} from './data';
+import {storedata} from './data';
 
 import {useState} from 'react';
-import {StatusBar} from 'react-native';
-import axios from 'axios';
-import {BestFoods} from '../../assets/MainData/bestFoods';
-import {src} from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
-import {Burger} from '../../assets/MainData/Burger';
-import {Pizza} from '../../assets/MainData/Pizza';
-import {Sandwitch} from '../../assets/MainData/Sandwitch';
-import {IceCream} from '../../assets/MainData/IceCream';
-import stackscreens from '../../constants/stackscreens';
 
-const allstoredata = cakes.concat(custom, brownie, chocolate);
+import stackscreens from '../../constants/stackscreens';
+// import {useGetDataQuery} from '../../Redux/rtxQuery/apiSliceProducts';
 
 const FoodiMart = ({navigation}) => {
   const [selectIndex, setselectIndex] = useState({id: -1});
@@ -38,6 +30,10 @@ const FoodiMart = ({navigation}) => {
     setselectIndex({id: ind, bgc: bgc});
     navigation.navigate(stackscreens.foodiMartDetails, {data: ind});
   };
+
+  // const {data} = useGetDataQuery();
+
+  // console.log('rtxQuery__:', data);
 
   // console.log('select', selectIndex);
 
@@ -94,6 +90,7 @@ const styles = StyleSheet.create({
     // paddingTop: (Platform.OS = 'android' && StatusBar.currentHeight),
     backgroundColor: mycolors.whitelight,
   },
+
   headerText: {
     fontSize: scale(22),
     fontWeight: 'bold',
@@ -126,6 +123,7 @@ const styles = StyleSheet.create({
     resizeMode: 'center',
     padding: 10,
   },
+
   title: {
     fontSize: scale(27),
     paddingHorizontal: respWidth(3),

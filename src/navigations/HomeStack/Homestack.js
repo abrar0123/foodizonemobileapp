@@ -28,6 +28,7 @@ import UserOneChat from '../../screens/chatBot/UserOneChat';
 import axios from 'axios';
 import FoodiMart from '../../screens/Restaurants/FoodiMart';
 import FoodiMartDetails from '../../screens/Restaurants/FoodiMartDetails';
+import FormikLogin from '../../screens/login/FormikLogin';
 
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
@@ -142,6 +143,11 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.userOneChat}
         component={UserOneChat}
+        options={{headerStyle: {backgroundColor: mycolors.silk}}}
+      />
+      <Stack.Screen
+        name={stackscreens.formikLogin}
+        component={FormikLogin}
         options={{headerStyle: {backgroundColor: mycolors.silk}}}
       />
     </Stack.Navigator>
