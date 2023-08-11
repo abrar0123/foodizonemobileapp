@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -24,10 +24,17 @@ import Card from '../../components/UI/Card/Card';
 import CartButton from '../../components/Buttons/AppButtons/CartButton';
 import {collection, addDoc} from 'firebase/firestore';
 import {DB} from '../../firebase_Configue';
+import SelectDropdown from 'react-native-select-dropdown';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+import {Button} from 'react-native-vector-icons/Entypo';
+const options = ['Gujrat', 'Lahore', 'LalaMosa', 'Islamabad'];
 
 const Checkout = () => {
   const foodCart = useSelector(state => state.cart.foodCart);
   // console.log('foodCart', foodCart);
+
+  // console.log('selectedOption__', selectedOption);
   const deliverTo = {
     name: 'Abrar Hussain',
     address: 'chak road shah e noor bazar shop 29, lahore,punjab',
@@ -64,6 +71,12 @@ const Checkout = () => {
     } catch (error) {
       console.log('err', error);
     }
+  };
+  const validationSchema = Yup.object().shape({
+    selectCity: Yup.string().required('Must select City'),
+  });
+  const formikSubmitHandler = values => {
+    console.log('select', values);
   };
 
   useEffect(() => {
@@ -112,8 +125,48 @@ const Checkout = () => {
               Estimated Delivery : <AppText>{deliverTo.estimatedTime}</AppText>
             </AppText>
           </Smcard>
-          {/* food items details */}
+          {/* formik form  */}
+          <Formik
+            initialValues={{selectedOption: ''}}
+            onSubmit={formikSubmitHandler}
+            validate={values => {
+              const errors = {};
+              if (!values.selectedOption) {
+                errors.selectedOption = 'Please select an option';
+              }
+              return errors;
+            }}>
+            {({
+              handleChange,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+            }) => (
+              <View>
+                <AppText>Select an option:</AppText>
+                <SelectDropdown
+                  data={options}
+                  onSelect={handleChange('selectedOption')}
+                  buttonTextAfterSelection={(selectedItem, index) =>
+                    selectedItem
+                  }
+                />
 
+                {touched.selectedOption && errors.selectedOption && (
+                  <AppText style={{color: mycolors.red}}>
+                    error: {errors.selectedOption}
+                  </AppText>
+                )}
+
+                <Button onPress={handleSubmit}>Submit</Button>
+              </View>
+            )}
+          </Formik>
+
+          {/* {selectedOption && <AppText>You selected: {selectedOption}</AppText>} */}
+
+          {/* food items details */}
           <Smcard style={styles.ordersummaryContainer}>
             <AppText style={{...styles.deliveryText}}>BBQ Fast Food </AppText>
             <View style={styles.line} />

@@ -29,6 +29,8 @@ import axios from 'axios';
 import FoodiMart from '../../screens/Restaurants/FoodiMart';
 import FoodiMartDetails from '../../screens/Restaurants/FoodiMartDetails';
 import FormikLogin from '../../screens/login/FormikLogin';
+import LineChart from '../../screens/ChartKit/LineChart';
+import MyLineChart from '../../screens/ChartKit/LineChart';
 
 const Homestack = ({navigation}) => {
   const Stack = createNativeStackNavigator();
@@ -91,7 +93,7 @@ const Homestack = ({navigation}) => {
         component={MyTabsView}
         options={{headerShown: false}}
       />
-      
+
       <Stack.Screen
         name={stackscreens.restaurant}
         component={Restaurants}
@@ -100,7 +102,7 @@ const Homestack = ({navigation}) => {
           headerStyle: {backgroundColor: mycolors.pink},
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name={stackscreens.foodiMartDetails}
         component={FoodiMartDetails}
         options={{
@@ -145,7 +147,11 @@ const Homestack = ({navigation}) => {
         component={UserOneChat}
         options={{headerStyle: {backgroundColor: mycolors.silk}}}
       />
-      
+      <Stack.Screen
+        name={stackscreens.lineChart}
+        component={MyLineChart}
+        options={{headerStyle: {backgroundColor: mycolors.silk}}}
+      />
     </Stack.Navigator>
   );
 };

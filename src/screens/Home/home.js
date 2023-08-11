@@ -35,6 +35,9 @@ const Home = ({navigation}) => {
     navigation.navigate(stackscreens.foodiMart);
   };
 
+  const goLineChart = () => {
+    navigation.navigate(stackscreens.lineChart);
+  };
   return (
     <ScrollView>
       <View style={styles.homeStyle}>
@@ -97,7 +100,7 @@ const Home = ({navigation}) => {
             </TouchableOpacity>
 
             <View style={{display: 'flex', flexDirection: 'column', gap: 10}}>
-              <TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.85} onPress={goLineChart}>
                 <SmCard style={styles.Box3container2}>
                   <AppText style={styles.box3Text}>Foodie Pickup </AppText>
                   <AppText

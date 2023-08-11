@@ -25,5 +25,6 @@ export default {
   userOneChat: 'UserOneChat',
   foodiMart: 'FoodiMart',
   foodiMartDetails: 'FoodiMartDetails',
-  formikLogin:'Formik Login'
+  formikLogin: 'Formik Login',
+  lineChart: 'Line Chart',
 };
