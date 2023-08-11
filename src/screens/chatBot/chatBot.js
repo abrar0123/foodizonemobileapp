@@ -12,11 +12,9 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import {addDoc, collection} from 'firebase/firestore';
 import {DB} from '../../firebase_Configue';
-import {useRoute} from '@react-navigation/native';
 
 const ChatBot = () => {
   const [myMessage, setmyMessage] = useState([]);
-  const route = useRoute();
 
   // console.log('route\n:', route.params.data);
   useEffect(() => {

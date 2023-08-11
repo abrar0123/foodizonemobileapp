@@ -18,13 +18,10 @@ import {useEffect} from 'react';
 import {useState} from 'react';
 import {addDoc, collection} from 'firebase/firestore';
 import firestore from '@react-native-firebase/firestore';
-import imagespath from '../../constants/imagesPath';
 import Feather from 'react-native-vector-icons/Feather';
 
-import {DB} from '../../firebase_Configue';
 import {useCallback} from 'react';
 import moment from 'moment/moment';
-import imagesPath from '../../constants/imagesPath';
 
 const UserOneChat = ({route}) => {
   const [myMessage, setmyMessage] = useState([]);

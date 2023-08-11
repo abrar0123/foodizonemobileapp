@@ -9,6 +9,7 @@ import mycolors from '../../styles/mycolors';
 import imagesPath from '../../constants/imagesPath';
 import Localmall from '../../screens/localMall/localmall';
 import MyFood from '../../screens/localMall/MyFood/MyFood';
+import TrackOrder from '../../screens/track';
 
 const Tabroutes = () => {
   const Tab = createBottomTabNavigator();
@@ -65,6 +66,23 @@ const Tabroutes = () => {
             return (
               <Image
                 source={imagesPath.cart}
+                style={{
+                  ...styles.imagestyle,
+                  tintColor: focused ? mycolors.jaman : mycolors.black,
+                }}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name={stackscreens.trackOrder}
+        component={TrackOrder}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <Image
+                source={imagesPath.filter}
                 style={{
                   ...styles.imagestyle,
                   tintColor: focused ? mycolors.jaman : mycolors.black,

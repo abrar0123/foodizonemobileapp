@@ -25,7 +25,8 @@ const UserChat = ({navigation}) => {
   const [fireStoreUsres, setfireStoreUsres] = useState([]);
 
   const myEmail = useSelector(state => state.auth.loggedInCredential);
-  //   console.log('fireStoreUsres__', fireStoreUsres);
+  // console.log('fireStoreUser__1\n', myEmail);
+  // {"Time": "Jul 6, 2023 5:31 PM", "email": "foodizone@gmail.com", "password": "foodizone", "userId": "45ae8a2e-cbee-4f40-bd7c-c23762fe5c91", "username": "abrar"}
   const email = myEmail.email;
   const myID = myEmail.userId;
   // console.log('myID__', myID);

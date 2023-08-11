@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   LogBox,
+  Alert,
 } from 'react-native';
 import mycolors from '../../styles/mycolors';
 import {
@@ -14,7 +15,7 @@ import {
 } from '../../components/responsiveness/RespHeight';
 import AppText from '../../components/UI/AppText';
 import Smcard from '../../components/UI/SmallCard/smcard';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   moderateScale,
   moderateVerticalScale,
@@ -25,16 +26,22 @@ import CartButton from '../../components/Buttons/AppButtons/CartButton';
 import {collection, addDoc} from 'firebase/firestore';
 import {DB} from '../../firebase_Configue';
 import SelectDropdown from 'react-native-select-dropdown';
-import {Formik} from 'formik';
-import * as Yup from 'yup';
-import {Button} from 'react-native-vector-icons/Entypo';
+import firestore from '@react-native-firebase/firestore';
+import {insert} from 'formik';
+import stackscreens from '../../constants/stackscreens';
+import { cartActions } from '../../Redux/cartSlice';
+
 const options = ['Gujrat', 'Lahore', 'LalaMosa', 'Islamabad'];
 
-const Checkout = () => {
+const Checkout = ({navigation}) => {
   const foodCart = useSelector(state => state.cart.foodCart);
-  // console.log('foodCart', foodCart);
+  const loggedIn = useSelector(state => state.auth.loggedInCredential);
 
+  // console.log('myEmail__:', loggedIn);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectError, setselectError] = useState('');
   // console.log('selectedOption__', selectedOption);
+const Dispatch=useDispatch();
   const deliverTo = {
     name: 'Abrar Hussain',
     address: 'chak road shah e noor bazar shop 29, lahore,punjab',
@@ -55,28 +62,49 @@ const Checkout = () => {
     megaTotal: megaTotal,
   };
 
+  // ******************* Order Placed at Firestore *******************
+
   const orderPlaceAtFirestore = () => {
-    const mycollection = collection(DB, 'userOrders');
-    try {
-      const response = addDoc(mycollection, {
-        UpdatedOrder: {
-          DeliverTo: deliverTo,
-          UserFoodItems: foodCart,
-          OrderSummary: OrderSummary,
-        },
-      });
-      response
-        .then(e => console.log('resolved', e))
-        .catch(e => console.log('reject', e));
-    } catch (error) {
-      console.log('err', error);
+    if (selectedOption === null || selectedOption === '') {
+      setselectError('City Must Select');
+      return;
     }
-  };
-  const validationSchema = Yup.object().shape({
-    selectCity: Yup.string().required('Must select City'),
-  });
-  const formikSubmitHandler = values => {
-    console.log('select', values);
+    setselectError('');
+    try {
+      const UpdatedOrder = {
+        DeliverTo: deliverTo,
+        UserFoodItems: foodCart,
+        OrderSummary: OrderSummary,
+      };
+      const res = firestore()
+        .collection('AllFoodOrders')
+        .doc(loggedIn.userId)
+        .collection('userOrder')
+        .add(UpdatedOrder);
+        Dispatch(cartActions.removeFullCart());
+      Alert.alert('Order Placed', 'your order is placed successfully', [
+        {text: 'See', onPress: () => console.log('object')},
+        {text: 'Track', onPress: () => console.log('object')},
+        {text: 'Ok', onPress: () => navigation.navigate(stackscreens.home)},
+      ]);
+    } catch (error) {
+      console.log('error__', error);
+    }
+    // const mycollection = collection(DB, 'userOrders');
+    // try {
+    //   const response = addDoc(mycollection, {
+    //     UpdatedOrder: {
+    //       DeliverTo: deliverTo,
+    //       UserFoodItems: foodCart,
+    //       OrderSummary: OrderSummary,
+    //     },
+    //   });
+    //   response
+    //     .then(e => console.log('resolved', e))
+    //     .catch(e => console.log('reject', e));
+    // } catch (error) {
+    //   console.log('err', error);
+    // }
   };
 
   useEffect(() => {
@@ -125,48 +153,29 @@ const Checkout = () => {
               Estimated Delivery : <AppText>{deliverTo.estimatedTime}</AppText>
             </AppText>
           </Smcard>
-          {/* formik form  */}
-          <Formik
-            initialValues={{selectedOption: ''}}
-            onSubmit={formikSubmitHandler}
-            validate={values => {
-              const errors = {};
-              if (!values.selectedOption) {
-                errors.selectedOption = 'Please select an option';
-              }
-              return errors;
-            }}>
-            {({
-              handleChange,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-            }) => (
-              <View>
-                <AppText>Select an option:</AppText>
-                <SelectDropdown
-                  data={options}
-                  onSelect={handleChange('selectedOption')}
-                  buttonTextAfterSelection={(selectedItem, index) =>
-                    selectedItem
-                  }
-                />
-
-                {touched.selectedOption && errors.selectedOption && (
-                  <AppText style={{color: mycolors.red}}>
-                    error: {errors.selectedOption}
-                  </AppText>
-                )}
-
-                <Button onPress={handleSubmit}>Submit</Button>
-              </View>
+          {/* select drop down list  */}
+          <SelectDropdown
+            data={options}
+            onSelect={(selectedItem, index) => {
+              setSelectedOption(selectedItem);
+              setselectError('');
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              // Text to display after an option is selected
+              return selectedItem;
+            }}
+            buttonStyle={styles.dropdownButton}
+            buttonTextStyle={styles.dropdownText}
+            renderDropdownIcon={() => (
+              <AppText style={styles.dropdownIcon}>▼</AppText>
             )}
-          </Formik>
-
-          {/* {selectedOption && <AppText>You selected: {selectedOption}</AppText>} */}
+          />
+          {selectError && (
+            <AppText style={{color: mycolors.red}}> {selectError}</AppText>
+          )}
 
           {/* food items details */}
+
           <Smcard style={styles.ordersummaryContainer}>
             <AppText style={{...styles.deliveryText}}>BBQ Fast Food </AppText>
             <View style={styles.line} />
@@ -261,6 +270,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'column',
     // gap: 10,
+  },
+  dropdownButton: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+  },
+  dropdownText: {
+    color: 'black',
+    fontSize: 16,
+  },
+  dropdownIcon: {
+    fontSize: 16,
   },
 });
 

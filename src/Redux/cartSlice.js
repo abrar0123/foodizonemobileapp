@@ -7,7 +7,6 @@ export const cartSlice = createSlice({
   initialState: {
     foodCart: [],
     cartItems: 10,
-    
   },
 
   reducers: {
@@ -49,6 +48,9 @@ export const cartSlice = createSlice({
       if (productIndex !== -1) {
         state.foodCart.splice(productIndex, 1);
       }
+    },
+    removeFullCart: (state, action) => {
+      state.foodCart = [];
     },
   },
 });
