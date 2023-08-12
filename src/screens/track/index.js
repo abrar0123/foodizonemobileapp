@@ -25,6 +25,7 @@ const TrackOrder = () => {
   // console.log('userOrderID: --- ', userOrderID);
 
   const [fireStoreFood, setfireStoreFood] = useState([]);
+  const [food, setfood] = useState({id: ''});
 
   // console.log('loggedIn__', );
   useEffect(() => {
@@ -41,6 +42,7 @@ const TrackOrder = () => {
             querySnapShot.forEach(e => {
               // console.log('dta_a_>>>New:\n\n', e.data());
               setfireStoreFood(e.data());
+              setfood({id: e.id});
             });
           });
       } catch (error) {
@@ -50,7 +52,7 @@ const TrackOrder = () => {
     getMyOrder();
   }, []);
 
-  console.log('fireStoreFood__1:\n\n', fireStoreFood?.DeliverTo);
+  // console.log('fireStoreFood__1:\n\n', fireStoreFood?.DeliverTo);
 
   const itemsRender = ({item}) => {
     return (
@@ -78,6 +80,20 @@ const TrackOrder = () => {
     );
   };
 
+  const deleteOrderHandler = () => {
+    try {
+      firestore()
+        .collection('AllFoodOrders')
+        .doc(loggedIn.userId)
+        .collection('userOrder')
+        .doc(userOrderID)
+        .collection('food')
+        .doc(food?.id)
+        .delete();
+    } catch (error) {
+      console.log('data error!', error);
+    }
+  };
   return (
     <View style={styles.checkout}>
       {/* primary Header */}
@@ -143,7 +159,9 @@ const TrackOrder = () => {
             <AppText>${fireStoreFood?.OrderSummary?.megaTotal}</AppText>
           </View>
         </Smcard>
-        <CartButton style={{marginTop: 3}}>Track Your Order</CartButton>
+        <CartButton style={{marginTop: 3}} onPress={deleteOrderHandler}>
+          Delete Order
+        </CartButton>
       </ScrollView>
     </View>
   );

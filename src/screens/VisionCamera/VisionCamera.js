@@ -38,7 +38,7 @@ const VisionCamera = () => {
   };
 
   getItem();
-  console.log('photoCollection__:\n\n', photoCollection);
+  console.log('PhotoCollection__:\n\n', photoCollection);
 
   const photoClick = async () => {
     const photo = await cammeraRef.current.takePhoto();

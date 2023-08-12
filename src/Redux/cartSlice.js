@@ -8,6 +8,7 @@ export const cartSlice = createSlice({
     foodCart: [],
     cartItems: 10,
     userOrderID: '',
+    profilePic: '',
   },
 
   reducers: {
@@ -57,6 +58,10 @@ export const cartSlice = createSlice({
       const {orderID} = actions.payload;
       console.log('current_Order :----\n', orderID);
       state.userOrderID = orderID;
+    },
+    profilepicSave: (state, actions) => {
+      const {profile} = actions.payload;
+      state.profilePic = profile;
     },
   },
 });

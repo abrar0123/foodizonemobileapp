@@ -1,5 +1,11 @@
-import React from 'react';
-import {View, StyleSheet, Image, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import AppText from '../../../components/UI/AppText';
 import mycolors from '../../../styles/mycolors';
 import {
@@ -13,31 +19,66 @@ import CartButton from '../../../components/Buttons/AppButtons/CartButton';
 import {authActions} from '../../../Redux/authSlice';
 import imagesPath from '../../../constants/imagesPath';
 import Foundation from 'react-native-vector-icons/Foundation';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import FontAwesome, {Button} from 'react-native-vector-icons/FontAwesome';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {cartActions} from '../../../Redux/cartSlice';
 
 const Account = () => {
   const loggedInCred = useSelector(state => state.auth.loggedInCredential);
+  const myProfile = useSelector(state => state.cart.profilePic);
+  // console.log('profilePic__:', myProfile);
 
-  console.log('loggedInCred__:', loggedInCred);
   const Dispatch = useDispatch();
 
   const logoutHandler = () => {
     Dispatch(authActions.logout());
   };
 
+  const imagePicker = () => {
+    const options = {
+      storageOptions: {
+        path: 'image',
+      },
+    };
+
+    console.log('uploaded');
+    launchImageLibrary(options, res => {
+      // console.log('res:', res);
+      if (res.didCancel !== true) {
+        Dispatch(cartActions.profilepicSave({profile: res?.assets[0]?.uri}));
+        // setselectedImage(res?.assets[0]?.uri);
+      }
+    });
+  };
+
   return (
     <View style={styles.profile}>
       {/* new design */}
       <View style={styles.newDesignView}>
-        <Image
-          source={imagesPath.profilePic}
-          style={{
-            height: respHeight(14),
-            resizeMode: 'center',
-          }}
-        />
+        {myProfile ? (
+          <TouchableOpacity onPress={imagePicker}>
+            <Image
+              source={{uri: myProfile}}
+              style={{
+                height: respHeight(12),
+                resizeMode: 'center',
+                width: respWidth(25),
+                borderRadius: 150,
+              }}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={imagePicker}>
+            <Ionicons
+              name="person-circle-outline"
+              size={80}
+              color={mycolors.blue}
+            />
+          </TouchableOpacity>
+        )}
+
         <AppText style={styles.profileText}>
           {loggedInCred?.username?.toUpperCase()} Software Engr.
         </AppText>
