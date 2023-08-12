@@ -29,19 +29,22 @@ import SelectDropdown from 'react-native-select-dropdown';
 import firestore from '@react-native-firebase/firestore';
 import {insert} from 'formik';
 import stackscreens from '../../constants/stackscreens';
-import { cartActions } from '../../Redux/cartSlice';
-
+import {cartActions} from '../../Redux/cartSlice';
+import uuid from 'react-native-uuid';
+import {authActions} from '../../Redux/authSlice';
 const options = ['Gujrat', 'Lahore', 'LalaMosa', 'Islamabad'];
 
 const Checkout = ({navigation}) => {
   const foodCart = useSelector(state => state.cart.foodCart);
   const loggedIn = useSelector(state => state.auth.loggedInCredential);
+  const orderID = uuid.v4();
+  console.log('uuid_:-', orderID);
 
   // console.log('myEmail__:', loggedIn);
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectError, setselectError] = useState('');
   // console.log('selectedOption__', selectedOption);
-const Dispatch=useDispatch();
+  const Dispatch = useDispatch();
   const deliverTo = {
     name: 'Abrar Hussain',
     address: 'chak road shah e noor bazar shop 29, lahore,punjab',
@@ -80,8 +83,11 @@ const Dispatch=useDispatch();
         .collection('AllFoodOrders')
         .doc(loggedIn.userId)
         .collection('userOrder')
+        .doc(orderID)
+        .collection('food')
         .add(UpdatedOrder);
-        Dispatch(cartActions.removeFullCart());
+      Dispatch(cartActions.placedOrder({orderID: orderID}));
+      Dispatch(cartActions.removeFullCart());
       Alert.alert('Order Placed', 'your order is placed successfully', [
         {text: 'See', onPress: () => console.log('object')},
         {text: 'Track', onPress: () => console.log('object')},

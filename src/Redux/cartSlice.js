@@ -7,6 +7,7 @@ export const cartSlice = createSlice({
   initialState: {
     foodCart: [],
     cartItems: 10,
+    userOrderID: '',
   },
 
   reducers: {
@@ -51,6 +52,11 @@ export const cartSlice = createSlice({
     },
     removeFullCart: (state, action) => {
       state.foodCart = [];
+    },
+    placedOrder: (state, actions) => {
+      const {orderID} = actions.payload;
+      console.log('current_Order :----\n', orderID);
+      state.userOrderID = orderID;
     },
   },
 });

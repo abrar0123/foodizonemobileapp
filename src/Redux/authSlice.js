@@ -19,9 +19,8 @@ export const authSlice = createSlice({
       state.loginEmail = null;
       state.password = null;
       state.username = null;
-
-      //   state.login.pass = pass;
     },
+  
   },
 });
 const persistConfigue = {
