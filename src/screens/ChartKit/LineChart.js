@@ -8,7 +8,7 @@ import {LineChart} from 'react-native-chart-kit';
 
 const MyLineChart = () => {
   return (
-    <View style={styles.homeStyle}>
+    <View style={styles.homeStyle} >
       <AppText style={styles.headerText}>welcome to chart kit</AppText>
       <View>
         <AppText>Bezier Line Chart</AppText>

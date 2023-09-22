@@ -12,8 +12,6 @@ const styles = StyleSheet.create({
     backgroundColor: mycolors.white,
 
     //  add a shadow property
-
-    background: mycolors.white,
     shadowColor: mycolors.black,
     // borderRadius: 10,
     shadowOffset: {

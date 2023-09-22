@@ -8,3 +8,5 @@ const CatagoryDetails = () => {
 const styles = StyleSheet.create({});
 
 export default CatagoryDetails;
+
+

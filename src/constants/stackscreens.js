@@ -27,5 +27,6 @@ export default {
   foodiMartDetails: 'FoodiMartDetails',
   formikLogin: 'Formik Login',
   lineChart: 'Line Chart',
-  trackOrder:'Track Order'
+  trackOrder:'Track Order',
+  foodiMartDetails1:'FoodiMartDetails1'
 };

@@ -25,17 +25,15 @@ import Notification from '../../screens/ChatNotification/Notification';
 import ChatBot from '../../screens/chatBot/chatBot';
 import UserChat from '../../screens/chatBot/userChat';
 import UserOneChat from '../../screens/chatBot/UserOneChat';
-import axios from 'axios';
 import FoodiMart from '../../screens/Restaurants/FoodiMart';
 import FoodiMartDetails from '../../screens/Restaurants/FoodiMartDetails';
 import FormikLogin from '../../screens/login/FormikLogin';
 import LineChart from '../../screens/ChartKit/LineChart';
 import MyLineChart from '../../screens/ChartKit/LineChart';
+import FoodiMartDetails1 from '../../screens/Restaurants/FoodiMartDetails1';
 
-const Homestack = ({navigation}) => {
+const Homestack = () => {
   const Stack = createNativeStackNavigator();
-
-  // console.log('vvvv_____:');
   return (
     <Stack.Navigator
       screenOptions={{
@@ -105,6 +103,14 @@ const Homestack = ({navigation}) => {
       <Stack.Screen
         name={stackscreens.foodiMartDetails}
         component={FoodiMartDetails}
+        options={{
+          title: 'Best FoodiMart Details',
+          headerStyle: {backgroundColor: mycolors.pink},
+        }}
+      />
+       <Stack.Screen
+        name={stackscreens.foodiMartDetails1}
+        component={FoodiMartDetails1}
         options={{
           title: 'Best FoodiMart Details',
           headerStyle: {backgroundColor: mycolors.pink},

@@ -13,7 +13,9 @@ import Smcard from '../../components/UI/SmallCard/smcard';
 
 import {
   respHeight,
+  respHeight1,
   respWidth,
+  respWidth1,
 } from '../../components/responsiveness/RespHeight';
 import {moderateScale, scale} from 'react-native-size-matters';
 import {storedata} from './data';
@@ -21,15 +23,24 @@ import {storedata} from './data';
 import {useState} from 'react';
 
 import stackscreens from '../../constants/stackscreens';
+import {moderateScaleVertical} from '../../components/responsiveness copy/responsive';
 // import {useGetDataQuery} from '../../Redux/rtxQuery/apiSliceProducts';
 
 const FoodiMart = ({navigation}) => {
   const [selectIndex, setselectIndex] = useState({id: -1});
 
+  // s1
   const selectHandler_goFoodie = (ind, bgc) => {
     setselectIndex({id: ind, bgc: bgc});
-    navigation.navigate(stackscreens.foodiMartDetails, {data: ind});
+    navigation.navigate(stackscreens.foodiMartDetails1, {data: ind});
   };
+
+  useEffect(() => {
+    console.log('First');
+    return () => {
+    
+    };
+  }, []);
 
   // const {data} = useGetDataQuery();
 
@@ -107,8 +118,11 @@ const styles = StyleSheet.create({
 
   // ------ horixontal renderItem
   storeCardStyle: {
-    // width: respWidth(35),
-    height: respHeight(18),
+    // width: respWidth1(200),
+    // height: respHeight(18),
+    // height: 170,
+    height: moderateScaleVertical(170),
+    // height: respHeight1(170),
     borderRadius: 10,
     marginTop: 15,
     overflow: 'hidden',

@@ -20,12 +20,12 @@ import {
 import {moderateScale, scale} from 'react-native-size-matters';
 import mycolors from '../../styles/mycolors';
 import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
+import {FlashList} from '@shopify/flash-list';
 
-const FoodiMartDetails = ({route}) => {
+const FoodiMartDetails1 = ({route}) => {
   const {data} = route.params;
   let bestFoods = BestFoods;
   let burger = Burger1;
-  console.log('Burger====>>> 1: ', Burger1.length);
   let pizza = Pizza;
   let sandwitch = Sandwitch;
   let iceCream = IceCream;
@@ -81,10 +81,9 @@ const FoodiMartDetails = ({route}) => {
 
   return (
     <View style={styles.homeStyle}>
-      {
-        <FlatList
-          contentContainerStyle={{paddingBottom: 100}}
-          showsVerticalScrollIndicator={false}
+      <AppText style={{fontSize: 20}}>FoodiMartDetails 1</AppText>
+      <View style={{height: '100%', width: '100%'}}>
+        <FlashList
           data={
             data === 1
               ? burger
@@ -96,12 +95,12 @@ const FoodiMartDetails = ({route}) => {
               ? sandwitch
               : data === 5 && iceCream
           }
-          // numColumns={2}
-          keyExtractor={item => item?.id}
           renderItem={renderCakes}
-          // columnWrapperStyle={{justifyContent: 'space-between'}}
+          keyExtractor={item => item?.id}
+          estimatedItemSize={200}
+          
         />
-      }
+      </View>
     </View>
   );
 };
@@ -139,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodiMartDetails;
+export default FoodiMartDetails1;

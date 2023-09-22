@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {
   View,
   StyleSheet,
@@ -27,6 +27,12 @@ import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
 
 const Home = ({navigation}) => {
   // const loginEmail = useSelector(state => state.auth.loginEmail);
+  useEffect(() => {
+    console.log('first');
+    return () => {};
+  }, []);
+
+  // const GET = useCallback(() => {}, []);
 
   const goResaurant = () => {
     navigation.navigate(stackscreens.restaurant);

@@ -55,39 +55,38 @@ const CartItems = ({userFoodCart}) => {
               <AppText style={styles.idtextStyle}>${item.subtotal}</AppText>
             </View>
             {/* button style */}
-           
-              {/* carts */}
-              <View style={{...styles.ratingContainer}}>
-                <TouchableOpacity
-                  activeOpacity={0.9}
-                  onPress={removeToCart.bind(this, item.id)}>
-                  <View style={styles.iconContainer}>
-                    <AppText style={{fontSize: 25, color: mycolors.white}}>
-                      -
-                    </AppText>
-                  </View>
-                </TouchableOpacity>
-                <View
-                  style={{
-                    backgroundColor: mycolors.jaman,
-                    paddingHorizontal: moderateScale(14),
-                    paddingVertical: moderateScale(4.6),
-                  }}>
-                  <AppText style={{fontSize: 18, color: mycolors.white}}>
-                    {myCart?.quant ? myCart.quant : 0}
+
+            {/* carts */}
+            <View style={{...styles.ratingContainer}}>
+              <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={removeToCart.bind(this, item.id)}>
+                <View style={styles.iconContainer}>
+                  <AppText style={{fontSize: 25, color: mycolors.white}}>
+                    -
                   </AppText>
                 </View>
-                <TouchableOpacity
-                  activeOpacity={0.9}
-                  onPress={addToCart.bind(this, item.id)}>
-                  <View style={styles.iconContainer2}>
-                    <AppText style={{fontSize: 25, color: mycolors.white}}>
-                      +
-                    </AppText>
-                  </View>
-                </TouchableOpacity>
+              </TouchableOpacity>
+              <View
+                style={{
+                  backgroundColor: mycolors.jaman,
+                  paddingHorizontal: moderateScale(14),
+                  paddingVertical: moderateScale(4.6),
+                }}>
+                <AppText style={{fontSize: 18, color: mycolors.white}}>
+                  {myCart?.quant ? myCart.quant : 0}
+                </AppText>
               </View>
-
+              <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={addToCart.bind(this, item.id)}>
+                <View style={styles.iconContainer2}>
+                  <AppText style={{fontSize: 25, color: mycolors.white}}>
+                    +
+                  </AppText>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Smcard>
