@@ -13,6 +13,10 @@ import {
 } from '../../../components/responsiveness/RespHeight';
 import imagesPath from '../../../constants/imagesPath';
 import {moderateScale} from 'react-native-size-matters';
+import {
+  height,
+  width,
+} from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
 
 const CartItems = ({userFoodCart}) => {
   const dispatch = useDispatch();
@@ -37,62 +41,76 @@ const CartItems = ({userFoodCart}) => {
           {/* 1st  */}
           <Smcard
             style={{
-              width: respWidth(45),
+              width: respWidth(32),
               backgroundColor: mycolors.green100,
               borderRadius: 10,
-              margin: 10,
+              paddingVertical: 10,
+              marginHorizontal: 10,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
             <Image source={{uri: item.url}} style={styles.img} />
           </Smcard>
           {/*  2nd  */}
-          <View style={{width: '48%'}}>
-            <View>
+          <View
+            style={{
+              width: '60%',
+            }}>
+            <View
+              style={{
+                paddingRight: 10,
+                width: '60%',
+              }}>
               <AppText lines={2} style={styles.titleText}>
                 {item.title}
               </AppText>
             </View>
+            <AppText style={styles.idtextStyle}>Price: ${item.price}</AppText>
             <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingRight: '30%',
+                marginBottom: 6,
               }}>
-              <AppText style={styles.idtextStyle}>${item.price}</AppText>
               <AppText style={styles.idtextStyle}>${item.subtotal}</AppText>
-            </View>
-            {/* button style */}
-
-            {/* carts */}
-            <View style={{...styles.ratingContainer}}>
-              <TouchableOpacity
-                activeOpacity={0.9}
-                onPress={removeToCart.bind(this, item.id)}>
-                <View style={styles.iconContainer}>
-                  <AppText style={{fontSize: 25, color: mycolors.white}}>
-                    -
+              {/* p1 */}
+              <View style={{...styles.cartContainer}}>
+                <TouchableOpacity
+                  activeOpacity={0.9}
+                  onPress={removeToCart.bind(this, item.id)}>
+                  <View style={styles.iconContainer}>
+                    <AppText style={{fontSize: 25, color: mycolors.black}}>
+                      -
+                    </AppText>
+                  </View>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    backgroundColor: mycolors.green100,
+                    paddingHorizontal: moderateScale(14),
+                    paddingVertical: respHeight(0.5),
+                  }}>
+                  <AppText
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                      color: mycolors.black,
+                    }}>
+                    {myCart?.quant ? myCart.quant : 0}
                   </AppText>
                 </View>
-              </TouchableOpacity>
-              <View
-                style={{
-                  backgroundColor: mycolors.jaman,
-                  paddingHorizontal: moderateScale(14),
-                  paddingVertical: moderateScale(4.6),
-                }}>
-                <AppText style={{fontSize: 18, color: mycolors.white}}>
-                  {myCart?.quant ? myCart.quant : 0}
-                </AppText>
+                <TouchableOpacity
+                  activeOpacity={0.9}
+                  onPress={addToCart.bind(this, item.id)}>
+                  <View style={styles.iconContainer2}>
+                    <AppText style={{fontSize: 25, color: mycolors.white}}>
+                      +
+                    </AppText>
+                  </View>
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity
-                activeOpacity={0.9}
-                onPress={addToCart.bind(this, item.id)}>
-                <View style={styles.iconContainer2}>
-                  <AppText style={{fontSize: 25, color: mycolors.white}}>
-                    +
-                  </AppText>
-                </View>
-              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -106,15 +124,21 @@ const CartItems = ({userFoodCart}) => {
         <Smcard
           style={{
             backgroundColor: mycolors.red,
-            height: respHeight(19),
-            borderTopRightRadius: 2,
-            borderBottomRightRadius: 2,
-            paddingHorizontal: 30,
-            paddingVertical: 50,
+            height: respHeight(13.5),
+            marginHorizontal: respHeight(2.5),
+            borderTopRightRadius: 10,
+            borderBottomRightRadius: 10,
+            paddingHorizontal: respWidth(10),
           }}>
-          <TouchableOpacity onPress={deleteProduct.bind(this, item.id)}>
+          <TouchableOpacity
+            style={{position: 'relative', right: -25, top: 40}}
+            onPress={deleteProduct.bind(this, item.id)}>
             <Image
-              style={{width: 45, height: 45, tintColor: mycolors.white}}
+              style={{
+                width: 45,
+                height: 45,
+                tintColor: mycolors.white,
+              }}
               source={imagesPath.delete}
             />
           </TouchableOpacity>
@@ -125,13 +149,13 @@ const CartItems = ({userFoodCart}) => {
   return (
     <View style={styles.container}>
       <SwipeListView
-        contentContainerStyle={{paddingBottom: 50}}
+        contentContainerStyle={{paddingBottom: 150}}
         data={userFoodCart}
         renderHiddenItem={renderHiddenItems}
         keyExtractor={item => item.id}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
-        rightOpenValue={-80}
+        rightOpenValue={-100}
       />
     </View>
   );
@@ -141,16 +165,19 @@ const styles = StyleSheet.create({
   deletbtn: {
     alignItems: 'center',
     backgroundColor: mycolors.white,
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    paddingVertical: 20,
+    paddingVertical: 10,
+    // marginHorizontal: 10,
   },
   mainContainer: {
     width: respWidth(95),
-    // width: '100%',
-    backgroundColor: 'white',
-    aspectRatio: 2.5,
+    marginHorizontal: respWidth(2),
+    height: respHeight(14),
+    paddingHorizontal: moderateScale(4),
+    backgroundColor: mycolors.whitelight,
+    paddingVertical: '2%',
     marginVertical: '2%',
     borderRadius: 10,
   },
@@ -164,7 +191,6 @@ const styles = StyleSheet.create({
     backgroundColor: mycolors.mxprimary,
   },
   titleText: {
-    // width: '100%',
     color: mycolors.black,
     fontSize: 16,
     fontWeight: 'bold',
@@ -172,50 +198,50 @@ const styles = StyleSheet.create({
   idtextStyle: {
     color: mycolors.blue,
     fontSize: 19,
-    marginBottom: 10,
     fontWeight: 'bold',
   },
 
   img: {
-    height: '70%',
+    height: '80%',
     width: '60%',
-    borderRadius: 5,
-    resizeMode: 'cover',
-    marginLeft: 10,
-    marginRight: 13,
+    borderRadius: 10,
+    resizeMode: 'center',
   },
 
   boxCard: {
-    flex: 1,
+    // flex: 1,
     display: 'flex',
-    justifyContent: 'flex-start',
     flexDirection: 'row',
-    // alignItems: "center",
-    marginTop: 20,
+    alignItems: 'center',
+    gap: 10,
+    // marginTop: 20,
   },
 
   //
 
-  ratingContainer: {
-    // paddingHorizontal: moderateScale(4),
+  cartContainer: {
+    // paddingHorizoratingContainerntal: moderateScale(4),
+    backgroundColor: mycolors.green100,
+    width: '40%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    borderRadius: 10,
+    paddingHorizontal: 2,
+    justifyContent: 'space-between',
   },
-
+  cartStyle: {
+    backgroundColor: mycolors.green100,
+  },
   iconContainer: {
-    backgroundColor: mycolors.jaman,
-    // paddingVertical: moderateScale(1.4),
-    paddingHorizontal: moderateScale(15),
-    borderTopLeftRadius: moderateScale(5),
-    borderBottomLeftRadius: moderateScale(5),
+    backgroundColor: mycolors.white,
+    paddingHorizontal: moderateScale(12),
+    borderRadius: 10,
   },
   iconContainer2: {
     backgroundColor: mycolors.jaman,
-    paddingHorizontal: moderateScale(15),
-    // paddingVertical: moderateScale(1.4),
-    borderTopRightRadius: moderateScale(5),
-    borderBottomRightRadius: moderateScale(5),
+    paddingHorizontal: moderateScale(10),
+    borderRadius: 10,
   },
 });
 

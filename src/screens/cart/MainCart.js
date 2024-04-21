@@ -39,6 +39,7 @@ const MainCart = ({navigation}) => {
               flexDirection: 'row',
               gap: respWidth(28),
               marginBottom: 15,
+              paddingHorizontal: moderateScale(10),
             }}>
             <Pressable
               style={{
@@ -48,7 +49,7 @@ const MainCart = ({navigation}) => {
               }}>
               <Entypo size={35} color={mycolors.jaman} name="chevron-left" />
             </Pressable>
-            <AppText style={styles.mainTextstyle}>My Cart</AppText>
+            <AppText style={styles.mainTextstyle}>My Cart </AppText>
           </View>
           <CartItems userFoodCart={userFoodCart} />
         </View>
@@ -61,7 +62,6 @@ const MainCart = ({navigation}) => {
 
 const styles = StyleSheet.create({
   MainCartcontainer: {
-    paddingHorizontal: moderateScale(10),
     flex: 1,
     backgroundColor: mycolors.white,
     flexDirection: 'column',
