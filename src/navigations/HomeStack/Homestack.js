@@ -31,6 +31,7 @@ import FormikLogin from '../../screens/login/FormikLogin';
 import LineChart from '../../screens/ChartKit/LineChart';
 import MyLineChart from '../../screens/ChartKit/LineChart';
 import FoodiMartDetails1 from '../../screens/Restaurants/FoodiMartDetails1';
+import NewFoodDetails from '../../screens/localMall/foodDetails.js/newFoodDetails';
 
 const Homestack = () => {
   const Stack = createNativeStackNavigator();
@@ -108,7 +109,7 @@ const Homestack = () => {
           headerStyle: {backgroundColor: mycolors.pink},
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name={stackscreens.foodiMartDetails1}
         component={FoodiMartDetails1}
         options={{
@@ -146,6 +147,11 @@ const Homestack = () => {
       <Stack.Screen
         name={stackscreens.foodDetail}
         component={FoodDetails}
+        options={{headerStyle: {backgroundColor: mycolors.red}}}
+      />
+      <Stack.Screen
+        name={stackscreens.newfoodDetail}
+        component={NewFoodDetails}
         options={{headerStyle: {backgroundColor: mycolors.red}}}
       />
       <Stack.Screen

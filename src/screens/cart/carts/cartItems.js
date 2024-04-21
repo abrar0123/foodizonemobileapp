@@ -20,7 +20,6 @@ const CartItems = ({userFoodCart}) => {
   const addToCart = id => {
     dispatch(cartActions.addToCart({id: id}));
   };
-  console.log('userFoodCart__', userFoodCart);
   const removeToCart = id => {
     dispatch(cartActions.removeToCart({id: id}));
   };
@@ -33,12 +32,20 @@ const CartItems = ({userFoodCart}) => {
     const myCart = userFoodCart.find(cart => cart.id === item.id);
 
     return (
-      <Smcard style={styles.mainContainer} key={item.id}>
+      <View style={styles.mainContainer} key={item.id}>
         <View style={styles.boxCard}>
           {/* 1st  */}
-          <View style={{width: respWidth(45)}}>
+          <Smcard
+            style={{
+              width: respWidth(45),
+              backgroundColor: mycolors.green100,
+              borderRadius: 20,
+              margin: 10,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
             <Image source={{uri: item.url}} style={styles.img} />
-          </View>
+          </Smcard>
           {/*  2nd  */}
           <View style={{width: '48%'}}>
             <View>
@@ -89,7 +96,7 @@ const CartItems = ({userFoodCart}) => {
             </View>
           </View>
         </View>
-      </Smcard>
+      </View>
     );
   };
 
@@ -142,6 +149,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     width: respWidth(95),
     // width: '100%',
+    backgroundColor: 'white',
     aspectRatio: 2.5,
     marginVertical: '2%',
     borderRadius: 10,
@@ -169,9 +177,10 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    height: '88%',
+    height: '70%',
+    width: '60%',
     borderRadius: 5,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     marginLeft: 10,
     marginRight: 13,
   },

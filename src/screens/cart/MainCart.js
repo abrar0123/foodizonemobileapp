@@ -1,17 +1,19 @@
 import React from 'react';
-import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Pressable} from 'react-native';
 import {useSelector} from 'react-redux';
 import AppText from '../../components/UI/AppText';
 import CartItems from './carts/cartItems';
-import Button from '../../components/UI/Button/Button';
-// import {callFirebaseFn} from '../../ReduxSlice/myActions';
 import mycolors from '../../styles/mycolors';
 import {moderateScale} from 'react-native-size-matters';
 import imagesPath from '../../constants/imagesPath';
 import SafeArea from '../../components/Safearea/SafeArea';
-import {respHeight} from '../../components/responsiveness/RespHeight';
+import {
+  respHeight,
+  respWidth,
+} from '../../components/responsiveness/RespHeight';
 import stackscreens from '../../constants/stackscreens';
 import CartButton from '../../components/Buttons/AppButtons/CartButton';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const MainCart = ({navigation}) => {
   //   const cartIndex = useSelector(state => state.foodcart.cartIndex);
@@ -26,16 +28,27 @@ const MainCart = ({navigation}) => {
     total += userFoodCart[items].quant * userFoodCart[items].price;
   }
 
-  const orderPlaceHandler = () => {
-    console.log('orderPlaceHandler__successfully');
-    // callFirebaseFn();
-  };
-
   return (
     <SafeArea>
       <View style={styles.MainCartcontainer}>
         <View style={styles.main2cart}>
-          <AppText style={styles.mainTextstyle}>Your Food Cart</AppText>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              gap: respWidth(28),
+              marginBottom: 15,
+            }}>
+            <Pressable
+              style={{
+                padding: 6,
+                borderRadius: 50,
+                backgroundColor: mycolors.green100,
+              }}>
+              <Entypo size={35} color={mycolors.jaman} name="chevron-left" />
+            </Pressable>
+            <AppText style={styles.mainTextstyle}>My Cart</AppText>
+          </View>
           <CartItems userFoodCart={userFoodCart} />
         </View>
         <CartButton onPress={goCheckoutHandler}>
@@ -66,6 +79,8 @@ const styles = StyleSheet.create({
   mainTextstyle: {
     fontSize: moderateScale(25),
     fontWeight: 'bold',
+    color: mycolors.jaman,
+    alignSelf: 'center',
   },
   cartbtn: {
     backgroundColor: mycolors.jaman,

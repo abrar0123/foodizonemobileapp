@@ -1,4 +1,4 @@
-export const Burger1 = [
+export const Burger = [
   {
     id: 'the-gramercy-tavern-burger-4-pack',
     img: 'https://goldbelly.imgix.net/uploads/showcase_media_asset/image/137148/Gramercy-Tavern-Burger-and-Kielbasa-Kit-6.4.21-72ppi-1x1-15.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1',

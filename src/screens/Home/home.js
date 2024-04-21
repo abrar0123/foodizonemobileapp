@@ -8,7 +8,6 @@ import {
   Alert,
 } from 'react-native';
 import AppText from '../../components/UI/AppText/AppText';
-import {useSelector} from 'react-redux';
 import {
   scale,
   moderateScale,

@@ -11,6 +11,8 @@ export default {
   mall: 'mall',
   localmaall: 'LocalMall',
   foodDetail: 'Food Details',
+  newfoodDetail: 'Best Food Details',
+
   Checkout: 'checkout',
   myorder: 'My Orders',
   account: 'Account',
@@ -27,6 +29,6 @@ export default {
   foodiMartDetails: 'FoodiMartDetails',
   formikLogin: 'Formik Login',
   lineChart: 'Line Chart',
-  trackOrder:'Track Order',
-  foodiMartDetails1:'FoodiMartDetails1'
+  trackOrder: 'Track Order',
+  foodiMartDetails1: 'FoodiMartDetails1',
 };

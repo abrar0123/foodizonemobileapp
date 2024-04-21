@@ -5,7 +5,6 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  Platform,
 } from 'react-native';
 import AppText from '../../components/UI/AppText';
 import mycolors from '../../styles/mycolors';
@@ -20,13 +19,13 @@ import {brownie, cakes, chocolate, custom, gulabjamun, storedata} from './data';
 
 import {useState} from 'react';
 import {StatusBar} from 'react-native';
-import axios from 'axios';
 import {BestFoods} from '../../assets/MainData/bestFoods';
-import {src} from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
 import {Burger} from '../../assets/MainData/Burger';
 import {Pizza} from '../../assets/MainData/Pizza';
 import {Sandwitch} from '../../assets/MainData/Sandwitch';
 import {IceCream} from '../../assets/MainData/IceCream';
+import {useNavigation} from '@react-navigation/native';
+import stackscreens from '../../constants/stackscreens';
 
 const allstoredata = cakes.concat(custom, brownie, chocolate);
 
@@ -37,18 +36,14 @@ const Restaurants = () => {
   let pizza = Pizza;
   let sandwitch = Sandwitch;
   let iceCream = IceCream;
-  bestFoods.length = 16;
-  burger.length = 16;
-  pizza.length = 16;
-  iceCream.length = 16;
+
+  const navigation = useNavigation();
 
   const selectHandler = (ind, bgc) => {
     setselectIndex({id: ind, bgc: bgc});
   };
 
-  // console.log('select', selectIndex);
-
-  // **************** Horizontal line render Item  ****************
+  //  **************** Horizontal line render Item  ****************
   const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity
@@ -58,7 +53,7 @@ const Restaurants = () => {
           style={{
             ...styles.storeCardStyle,
             backgroundColor:
-              item.id === selectIndex.id ? mycolors.pink : mycolors.lightgrey,
+              item.id === selectIndex.id ? mycolors.pink : mycolors.grey,
           }}>
           <Image source={item.image} style={styles.img} />
           <AppText
@@ -75,13 +70,16 @@ const Restaurants = () => {
   };
 
   // **************** Cakes data render Item  ****************
-
   const renderCakes = ({item, index}) => {
     // console.log('img__', item?.img);
     // const imageUrl = `${item.img}.jpg`;
-
+    // p1
     return (
-      <TouchableOpacity activeOpacity={0.9}>
+      <TouchableOpacity
+        activeOpacity={0.9}
+        onPress={() =>
+          navigation.navigate(stackscreens.newfoodDetail, {oneFood: item})
+        }>
         <Smcard style={styles.storeCakeStyle}>
           {/* sometime image not be displays because of error */}
 
@@ -121,14 +119,14 @@ const Restaurants = () => {
         }}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        ItemSeparatorComponent={() => <View style={{width: 15}} />}
+        ItemSeparatorComponent={() => <View style={{width: 10}} />}
       />
-
+      <AppText style={styles.mainTitle}>Recommendation</AppText>
       {selectIndex.id === 0 ? (
         <FlatList
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{paddingBottom: respHeight(38)}}
-          data={bestFoods}
+          data={bestFoods?.splice(0, 17)}
           numColumns={2}
           keyExtractor={item => item.id}
           renderItem={renderCakes}
@@ -140,14 +138,14 @@ const Restaurants = () => {
           showsVerticalScrollIndicator={false}
           data={
             selectIndex.id === 1
-              ? burger
+              ? burger.splice(0, 16)
               : selectIndex.id === 2
-              ? pizza
+              ? pizza.splice(0, 16)
               : selectIndex.id === 3
-              ? sandwitch
+              ? sandwitch.splice(0, 16)
               : selectIndex.id === 4
-              ? sandwitch
-              : selectIndex.id === 5 && iceCream
+              ? sandwitch.splice(0, 16)
+              : selectIndex.id === 5 && iceCream.splice(0, 16)
           }
           numColumns={2}
           keyExtractor={item => item.id}
@@ -179,11 +177,16 @@ const styles = StyleSheet.create({
     marginBottom: respHeight(2.5),
     borderRadius: 10,
   },
-
+  mainTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 15,
+  },
   // ------ horixontal renderItem
   storeCardStyle: {
     // width: respWidth(35),
-    height: respHeight(8),
+    height: respHeight(5),
     borderRadius: 10,
     overflow: 'hidden',
     display: 'flex',
@@ -192,16 +195,16 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    width: respWidth(16),
-    height: respHeight(6.5),
+    width: respWidth(10),
+    height: respHeight(5),
+    marginLeft: 5,
     resizeMode: 'center',
-    padding: 10,
+    // padding: 10,
   },
   title: {
-    fontSize: scale(18),
-    paddingHorizontal: respWidth(3),
-    paddingVertical: respHeight(1.1),
-    fontWeight: 'bold',
+    fontSize: scale(14),
+    paddingHorizontal: respWidth(1.5),
+    // paddingVertical: respHeight(1.1),
     color: mycolors.white,
   },
 

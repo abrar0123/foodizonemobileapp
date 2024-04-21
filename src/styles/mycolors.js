@@ -6,6 +6,7 @@ export default {
   white: '#fff',
   blue: 'darkblue',
   grey: '#bcbcbc',
+  grey100: '#dcd9d9',
   dgrey: '#666666',
   tomato: 'tomato',
   lblack: '#333131',
@@ -20,5 +21,6 @@ export default {
   silk: '#05c4bc',
   brown: '#351401',
   cyan: '#00ced1',
-  transparent:'rgba(0,0,0,0.6)'
+  green100: '#e5efe2',
+  transparent: 'rgba(0,0,0,0.6)',
 };
