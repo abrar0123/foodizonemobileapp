@@ -127,6 +127,7 @@ const FormikLogin = ({navigation}) => {
         onSubmit={onSubmitHandler}>
         {({
           handleChange,
+          handleReset,
           handleSubmit,
           handleBlur,
           values,

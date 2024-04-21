@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import AppText from '../../components/UI/AppText/AppText';
 import {useSelector} from 'react-redux';
@@ -24,13 +25,10 @@ import SmCard from '../../components/UI/SmallCard/smcard';
 import Search from '../../components/Search/SearchBar';
 import stackscreens from '../../constants/stackscreens';
 import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
+import messaging from '@react-native-firebase/messaging';
 
 const Home = ({navigation}) => {
   // const loginEmail = useSelector(state => state.auth.loginEmail);
-  useEffect(() => {
-    console.log('first');
-    return () => {};
-  }, []);
 
   // const GET = useCallback(() => {}, []);
 
@@ -44,6 +42,64 @@ const Home = ({navigation}) => {
   const goLineChart = () => {
     navigation.navigate(stackscreens.lineChart);
   };
+
+  useEffect(() => {
+    // console.log('FCM Run ====> ');
+    const notificationSend = async () => {
+      try {
+        const notif = await messaging().getToken();
+        console.log('getFcm -->\n\t : ', notif);
+      } catch (error) {
+        console.log('getFcm error -->'.error);
+      }
+    };
+
+    // notificationSend();
+  }, []);
+
+  useEffect(() => {
+    // const notificationListen = async () => {
+    const unsub = messaging().onMessage(async msg => {
+      Alert.alert(msg.notification.title, msg.notification.body);
+      console.log('received_msg --> \n\t: ', msg);
+    });
+    // };
+    return unsub;
+    // notificationListen();
+  }, []);
+
+  useEffect(() => {
+    const notificationListen = async () => {
+      messaging().setBackgroundMessageHandler(async msg => {
+        console.log('notificatin__: 1\n\t : ', msg.notification);
+        Alert.alert(msg.notification.title, msg.notification.body);
+      });
+
+      // 2
+      messaging().onNotificationOpenedApp(async msg => {
+        console.log('opened--- msg > \n \t :', msg);
+
+        Alert.alert(msg.notification.title, msg.notification.body, [
+          {
+            text: 'cancel',
+            onPress: () => {
+              console.log('cancel pressed ');
+            },
+          },
+          {
+            text: 'Yes',
+            onPress: () => {
+              console.log('yes pressed ');
+              navigation.navigate(stackscreens.camera);
+            },
+          },
+        ]);
+      });
+    
+  };
+    notificationListen();
+  }, []);
+
   return (
     <ScrollView>
       <View style={styles.homeStyle}>
@@ -56,7 +112,7 @@ const Home = ({navigation}) => {
             </AppText>
           </View>
           <View>
-            <Image style={styles.imagestyle} source={imagesPath.burger} />
+            <Image style={styles.imagestyle} source={imagesPath?.burger} />
           </View>
         </SmCard>
         <View style={{marginVertical: moderateScale(20)}}>
