@@ -13,6 +13,7 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {ApiProvider} from '@reduxjs/toolkit/dist/query/react';
 import {foodProductsApi} from './src/Redux/rtxQuery/apiSliceProducts';
+import Codepush from 'react-native-code-push';
 
 const App = () => {
   return (
@@ -34,4 +35,4 @@ const styles = StyleSheet.create({
 
 AppRegistry.registerComponent('foodizone', () => App);
 
-export default App;
+export default Codepush(App);

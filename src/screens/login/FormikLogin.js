@@ -100,7 +100,6 @@ const FormikLogin = ({navigation}) => {
         .where('password', '==', values.password)
         .get()
         .then(res => {
-          console.log('login__here23:\n', res);
           Dispatch(authActions.login({loggedIn: res.docs[0].data()}));
           setisLoading(false);
         })

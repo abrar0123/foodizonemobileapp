@@ -11,7 +11,7 @@ export const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       const {loggedIn} = action.payload;
-      console.log('loggedIn__mycode123\n:', loggedIn);
+      // console.log('loggedIn__mycode123\n:', loggedIn);
       state.loginEmail = loggedIn?.email;
       state.loggedInCredential = loggedIn;
     },
@@ -20,7 +20,6 @@ export const authSlice = createSlice({
       state.password = null;
       state.username = null;
     },
-  
   },
 });
 const persistConfigue = {
