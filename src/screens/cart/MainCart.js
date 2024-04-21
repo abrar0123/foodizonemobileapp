@@ -14,6 +14,7 @@ import {
 import stackscreens from '../../constants/stackscreens';
 import CartButton from '../../components/Buttons/AppButtons/CartButton';
 import Entypo from 'react-native-vector-icons/Entypo';
+import BottomSheet from '../../components/BottomSheet/BottomSheet';
 
 const MainCart = ({navigation}) => {
   //   const cartIndex = useSelector(state => state.foodcart.cartIndex);
@@ -51,9 +52,8 @@ const MainCart = ({navigation}) => {
           </View>
           <CartItems userFoodCart={userFoodCart} />
         </View>
-        <CartButton onPress={goCheckoutHandler}>
-          Check out {`( Total : $${total} )`}
-        </CartButton>
+        <BottomSheet total={total} goCheckoutHandler={goCheckoutHandler} />
+        {/* p1 */}
       </View>
     </SafeArea>
   );

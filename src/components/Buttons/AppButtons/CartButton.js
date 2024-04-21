@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   cartbtn: {
     backgroundColor: mycolors.jaman,
     // paddingHorizontal: moderateScale(35),
-    paddingVertical: moderateScale(15),
+    paddingVertical: moderateScale(11),
     borderRadius: moderateScale(5),
   },
   text: {

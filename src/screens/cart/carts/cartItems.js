@@ -39,7 +39,7 @@ const CartItems = ({userFoodCart}) => {
             style={{
               width: respWidth(45),
               backgroundColor: mycolors.green100,
-              borderRadius: 20,
+              borderRadius: 10,
               margin: 10,
               alignItems: 'center',
               justifyContent: 'center',
