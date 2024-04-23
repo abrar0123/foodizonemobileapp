@@ -50,11 +50,11 @@ const FormikLogin = ({navigation}) => {
   };
 
   // *****************  Form Data Submitted  *****************
-  const onSubmitHandler = async values => {
-    // console.log('formik data submitted__:', values);
+  const onSubmitHandler = values => {
+    console.log('formik data submitted__:', values);
 
-    await logInAuthentication(values);
-    await firestreLoginCheck(values);
+    logInAuthentication(values);
+    firestreLoginCheck(values);
     // firestreLoginCheck(values);
   };
 
@@ -74,7 +74,6 @@ const FormikLogin = ({navigation}) => {
       );
       const data = await response.json();
 
-      console.log('dataa__', data);
       if (data.error) {
         const error = `Authentication Error ${data.error.message.toLowerCase()}`;
         if (data.error.message.includes('EMAIL_')) {
@@ -94,17 +93,21 @@ const FormikLogin = ({navigation}) => {
   const firestreLoginCheck = async values => {
     setisLoading(true);
     try {
+      const data = await firestore().collection('RegisterUsers');
+      const ss = {email: 'test@gmail.com', password: 'test12'};
+      Dispatch(authActions.login({loggedIn: ss}));
       await firestore()
         .collection('RegisterUsers')
         .where('email', '==', values.email)
         .where('password', '==', values.password)
         .get()
         .then(res => {
-          Dispatch(authActions.login({loggedIn: res.docs[0].data()}));
+          console.log('object', res.docs[0].data());
+          Dispatch(authActions.login({loggedIn: res?.docs[0]?.data()}));
           setisLoading(false);
         })
         .catch(e => {
-          console.log('error31__:\n', e);
+          console.log('error32__:\n', e);
         });
     } catch (error) {
       console.log('error333', error);

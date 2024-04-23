@@ -20,6 +20,9 @@ import imagesPath from '../../constants/imagesPath';
 import stackscreens from '../../constants/stackscreens';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Feather from 'react-native-vector-icons/Feather';
 
 const Profile = ({navigation}) => {
   const goProfileHandler = () => {
@@ -131,11 +134,7 @@ const Profile = ({navigation}) => {
 
             <View style={{...styles.itemsDetailContainer}}>
               <TouchableOpacity activeOpacity={0.5} onPress={goDevceInfo}>
-                <Icon
-                  name="cc-mastercard"
-                  size={28}
-                  color={mycolors.cyan}
-                />
+                <Icon name="cc-mastercard" size={28} color={mycolors.cyan} />
               </TouchableOpacity>
 
               <TouchableOpacity activeOpacity={0.5} onPress={goQrCode}>
@@ -143,11 +142,7 @@ const Profile = ({navigation}) => {
               </TouchableOpacity>
 
               <TouchableOpacity activeOpacity={0.5} onPress={goCamera}>
-                <Icon
-                  name="camera-retro"
-                  size={30}
-                  color={mycolors.cyan}
-                />
+                <Icon name="camera-retro" size={30} color={mycolors.cyan} />
               </TouchableOpacity>
 
               <TouchableOpacity activeOpacity={0.5} onPress={goNotification}>
@@ -163,6 +158,39 @@ const Profile = ({navigation}) => {
                   size={35}
                   color={mycolors.cyan}
                 />
+              </TouchableOpacity>
+            </View>
+            {/* p2 */}
+            <View style={{...styles.itemsDetailContainer}}>
+              <TouchableOpacity activeOpacity={0.5} onPress={goDevceInfo}>
+                <MaterialIcons
+                  name="video-call"
+                  size={35}
+                  color={mycolors.cyan}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity activeOpacity={0.5} onPress={goQrCode}>
+                <MaterialCommunityIcons
+                  name="text-to-speech"
+                  size={35}
+                  color={mycolors.cyan}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity activeOpacity={0.5} onPress={goCamera}>
+                <MaterialCommunityIcons
+                  name="cellphone-nfc"
+                  size={30}
+                  color={mycolors.cyan}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity activeOpacity={0.5} onPress={goNotification}>
+                <AppText style={{color: mycolors.cyan}}>Testing</AppText>
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.5} onPress={goChatBot}>
+                <Feather name="bluetooth" size={30} color={mycolors.cyan} />
               </TouchableOpacity>
             </View>
           </Smcard>

@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -25,11 +25,59 @@ import Search from '../../components/Search/SearchBar';
 import stackscreens from '../../constants/stackscreens';
 import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
 import messaging from '@react-native-firebase/messaging';
+import Voice from '@react-native-voice/voice';
+import Button from '../../components/UI/Button';
 
 const Home = ({navigation}) => {
   // const loginEmail = useSelector(state => state.auth.loginEmail);
+  const [voiceStarted, setVoiceStarted] = useState('');
+  const [voiceEnd, setVoiceEnd] = useState('');
+  const [voiceresult, setVoiceResult] = useState('');
 
-  // const GET = useCallback(() => {}, []);
+  useEffect(() => {
+    Voice.onSpeechStart = onSpeechStart;
+    Voice.onSpeechEnd = onSpeechEnd;
+    Voice.onSpeechResults = onSpeechResults;
+
+    return () => {
+      Voice.destroy().then(Voice.removeAllListeners);
+    };
+  }, []);
+
+  async function onStartButtonPress(e) {
+    try {
+      await Voice.start('en-US');
+      setVoiceStarted('');
+      setVoiceEnd('');
+      setVoiceResult([]);
+    } catch (error) {
+      console.log('error ', error);
+    }
+  }
+  async function onStopButtonPress(e) {
+    await Voice.stop('en-US');
+    await Voice.destroy('en-US');
+  }
+
+  function onSpeechStart(e) {
+    try {
+      console.log('e s', e);
+    } catch (error) {
+      console.log('e s err', error);
+    }
+  }
+
+  function onSpeechEnd(e) {
+    try {
+      console.log('e e', e);
+    } catch (error) {
+      console.log('e e err', error);
+    }
+  }
+
+  function onSpeechResults(e) {
+    console.log('e res', e);
+  }
 
   const goResaurant = () => {
     navigation.navigate(stackscreens.restaurant);
@@ -94,8 +142,7 @@ const Home = ({navigation}) => {
           },
         ]);
       });
-    
-  };
+    };
     notificationListen();
   }, []);
 
@@ -228,6 +275,19 @@ const Home = ({navigation}) => {
               </View>
               <View>
                 <Image style={styles.box2imgstyle} source={imagesPath.food2} />
+              </View>
+            </SmCard>
+          </View>
+          {/* 3 p1 */}
+          <View style={{marginVertical: moderateScale(10)}}>
+            <SmCard style={styles.primaryBox2}>
+              <View style={{...styles.flexcolum, gap: 10}}>
+                <AppText style={styles.box2Text}>Food Foods </AppText>
+                <AppText
+                  style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
+                  Order Food
+                </AppText>
+                <Button onPress={onStartButtonPress}>Voice started </Button>
               </View>
             </SmCard>
           </View>

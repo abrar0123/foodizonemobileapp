@@ -35,6 +35,7 @@ import NewFoodDetails from '../../screens/localMall/foodDetails.js/newFoodDetail
 
 const Homestack = () => {
   const Stack = createNativeStackNavigator();
+
   return (
     <Stack.Navigator
       screenOptions={{
