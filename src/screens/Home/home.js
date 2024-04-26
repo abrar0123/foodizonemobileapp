@@ -151,7 +151,7 @@ const Home = ({navigation}) => {
   return (
     <>
       <MyAds />
-      {/* <RewardAds /> */}
+      <RewardAds />
 
       <View style={styles.homeStyle}>
         {/* box 2 */}

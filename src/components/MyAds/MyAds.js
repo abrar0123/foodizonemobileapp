@@ -33,6 +33,7 @@ const MyAds = () => {
 
   const [loaded, setLoaded] = React.useState(false);
 
+  // ****************** u control + save OR navigate to show interesstitial ads ******************
   // React.useEffect(() => {
   //   // load();
   //   if (isClosed) {

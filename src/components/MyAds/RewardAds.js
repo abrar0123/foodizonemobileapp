@@ -13,6 +13,8 @@ const RewardAds = () => {
     keywords: ['art', 'science'],
   });
 
+  // ****************** u control + save OR navigate to show rewarded ads ******************
+
   React.useEffect(() => {
     const unsubLoaded = rewardAd.addAdEventListener(
       RewardedAdEventType.LOADED,
@@ -23,7 +25,6 @@ const RewardAds = () => {
     const unsubscribe = rewardAd.addAdEventListener(
       RewardedAdEventType.LOADED,
       rew => {
-        setLoaded(true);
         console.log('my daily earnings ---> ', rew);
       },
     );
