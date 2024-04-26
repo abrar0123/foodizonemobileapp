@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -14,8 +14,13 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {ApiProvider} from '@reduxjs/toolkit/dist/query/react';
 import {foodProductsApi} from './src/Redux/rtxQuery/apiSliceProducts';
 import Codepush from 'react-native-code-push';
+import Crashlytics from '@react-native-firebase/crashlytics';
 
 const App = () => {
+  useEffect(() => {
+    Crashlytics().log('app mounted');
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persiststore}>

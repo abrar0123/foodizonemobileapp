@@ -27,6 +27,8 @@ import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
 import messaging from '@react-native-firebase/messaging';
 import Voice from '@react-native-voice/voice';
 import Button from '../../components/UI/Button';
+import MyAds from '../../components/MyAds/MyAds';
+import RewardAds from '../../components/MyAds/RewardAds';
 
 const Home = ({navigation}) => {
   // const loginEmail = useSelector(state => state.auth.loginEmail);
@@ -147,10 +149,13 @@ const Home = ({navigation}) => {
   }, []);
 
   return (
-    <ScrollView>
+    <>
+      <MyAds />
+      {/* <RewardAds /> */}
+
       <View style={styles.homeStyle}>
         {/* box 2 */}
-        <SmCard style={styles.flexstyle}>
+        {/* <SmCard style={styles.flexstyle}>
           <View style={styles.flexcolum0}>
             <AppText style={styles.welcomeText}>Welcome Back, Abrar </AppText>
             <AppText style={styles.desText}>
@@ -160,13 +165,13 @@ const Home = ({navigation}) => {
           <View>
             <Image style={styles.imagestyle} source={imagesPath?.burger} />
           </View>
-        </SmCard>
+        </SmCard> */}
         <View style={{marginVertical: moderateScale(20)}}>
           {/* <Search /> */}
         </View>
 
         {/* box 2  food delivery */}
-        <TouchableOpacity onPress={goResaurant} activeOpacity={0.95}>
+        {/* <TouchableOpacity onPress={goResaurant} activeOpacity={0.95}>
           <SmCard style={styles.primaryBox2}>
             <View style={styles.flexcolum}>
               <AppText style={styles.box2Text}>Food Delivery </AppText>
@@ -179,10 +184,10 @@ const Home = ({navigation}) => {
               <Image style={styles.box2imgstyle} source={imagesPath.plate} />
             </View>
           </SmCard>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* box 3 added */}
-        <Card style={{marginVertical: 15}}>
+        {/* <Card style={{marginVertical: 15}}>
           <View style={styles.primaryBox3}>
             <TouchableOpacity activeOpacity={0.9} onPress={goFoodiMart}>
               <SmCard style={styles.Box3container1}>
@@ -242,8 +247,8 @@ const Home = ({navigation}) => {
               </SmCard>
             </View>
           </View>
-        </Card>
-        <View>
+        </Card> */}
+        {/* <View>
           <AppText
             style={{
               fontSize: 20,
@@ -278,7 +283,7 @@ const Home = ({navigation}) => {
               </View>
             </SmCard>
           </View>
-          {/* 3 p1 */}
+
           <View style={{marginVertical: moderateScale(10)}}>
             <SmCard style={styles.primaryBox2}>
               <View style={{...styles.flexcolum, gap: 10}}>
@@ -291,9 +296,9 @@ const Home = ({navigation}) => {
               </View>
             </SmCard>
           </View>
-        </View>
+        </View> */}
       </View>
-    </ScrollView>
+    </>
   );
 };
 
@@ -302,8 +307,8 @@ const styles = StyleSheet.create({
     // paddingHorizontal: moderateScale(10),
     paddingHorizontal: respWidth(3),
 
-    backgroundColor: mycolors.white,
-    flex: 1,
+    backgroundColor: mycolors.jaman,
+    // flex: 1,
   },
   flexstyle: {
     display: 'flex',

@@ -16,7 +16,7 @@ const Button = props => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    padding: scale(15),
+    padding: scale(10),
     borderRadius: moderateScale(2),
     backgroundColor: mycolors.blue,
     color: mycolors.white,
