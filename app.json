@@ -2,7 +2,6 @@
   "name": "foodizone",
   "displayName": "foodizone",
   "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-2387560791010168~8112655004",
-    "ios_app_id": "ca-app-pub-xxxxxxxx~xxxxxxxx"
+    "android_app_id": "ca-app-pub-2387560791010168~8112655004"
   }
 }

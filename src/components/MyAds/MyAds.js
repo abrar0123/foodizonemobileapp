@@ -41,20 +41,18 @@ const MyAds = () => {
   //   }
   // }, [isClosed, load]);
 
-  React.useEffect(() => {
-    const unsubscribe = interstitial.addAdEventListener(
-      AdEventType.LOADED,
-      () => {
-        interstitial.show();
-        setLoaded(true);
-        console.log('ads here loadded ========');
-      },
-    );
-    interstitial.load();
-    return unsubscribe;
-  });
-
-  console.log('loaded ========= :', loaded);
+  // React.useEffect(() => {
+  //   const unsubscribe = interstitial.addAdEventListener(
+  //     AdEventType.LOADED,
+  //     () => {
+  //       interstitial.show();
+  //       setLoaded(true);
+  //       console.log('ads here loadded ========');
+  //     },
+  //   );
+  //   interstitial.load();
+  //   return unsubscribe;
+  // });
 
   return (
     <View style={styles.mainC}>
@@ -66,29 +64,41 @@ const MyAds = () => {
         }}>
         Show Interstitial
       </Button>
+
+      {/* <View style={{height:200,width:200, backgroundColor:'red'}}> */}
       <BannerAd
         // unitId={adUnitId}
-        unitId={TestIds.BANNER}
-        size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+        // unitId={TestIds.BANNER}
+        unitId="ca-app-pub-2387560791010168/4151382781"
+        // style={{width:'100%'}}
+        // onSizeChange={()=>console.log('This is on Size Change')}
+        // size={BannerAdSize.LARGE_BANNER}
+        size={BannerAdSize.BANNER}
         requestOptions={{requestNonPersonalizedAdsOnly: true}}
+        onAdClosed={e => console.log('ad closed ', e)}
+        onAdFailedToLoad={e => console.log('ad onAdFailedToLoad ', e)}
+        onAdLoaded={e => console.log('ad onAdLoaded ', e)}
+        onAdOpened={e => console.log('ad onAdOpened ', e)}
+
         // requestOptions={{
-        //   networkExtras: {
-        //     collapsible: 'bottom',
-        //   },
-        // }}
+        //     networkExtras: {
+        //         collapsible: 'bottom',
+        //       },
+        //     }}
       />
     </View>
+    // </View>
   );
 };
 export default MyAds;
 
 const styles = StyleSheet.create({
   mainC: {
-    flex: 1,
-    backgroundColor: mycolors.whitelight,
+    // flex: 1,
+    // backgroundColor: mycolors.whitelight,
     // backgroundColor: mycolors.jamanlight,
     marginVertical: 15,
-    paddingVertical: 10,
+    paddingVertical: 20,
     borderRadius: 5,
   },
 });

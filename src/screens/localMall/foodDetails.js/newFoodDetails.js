@@ -58,8 +58,11 @@ const NewFoodDetails = ({route}) => {
             {oneFood.title}
           </AppText>
           <AppText style={styles.descriptionText}>
-            Best pizza forever , please go order and enjoy best pizza
+            Best pizza forever , this pizza is just for you , very delicious and
+            even have too much tasty , just try once pizza, please go order and
+            enjoy best pizza
           </AppText>
+
           <View
             style={{
               ...styles.ratingContainer,
@@ -240,9 +243,11 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     textAlign: 'justify',
-    paddingHorizontal: moderateScale(4),
+    // paddingHorizontal: moderateScale(4),
     position: 'relative',
-    bottom: respHeight(12),
+    width: '85%',
+    alignSelf: 'center',
+    bottom: respHeight(15),
   },
   gobtn: {
     paddingTop: moderateScale(20),

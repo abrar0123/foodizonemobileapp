@@ -189,7 +189,9 @@ const Profile = ({navigation}) => {
               <TouchableOpacity activeOpacity={0.5} onPress={goNotification}>
                 <AppText style={{color: mycolors.cyan}}>Testing</AppText>
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.5} onPress={goChatBot}>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Bluetooth')}>
                 <Feather name="bluetooth" size={30} color={mycolors.cyan} />
               </TouchableOpacity>
             </View>

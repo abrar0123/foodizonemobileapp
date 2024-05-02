@@ -32,6 +32,7 @@ import LineChart from '../../screens/ChartKit/LineChart';
 import MyLineChart from '../../screens/ChartKit/LineChart';
 import FoodiMartDetails1 from '../../screens/Restaurants/FoodiMartDetails1';
 import NewFoodDetails from '../../screens/localMall/foodDetails.js/newFoodDetails';
+import Bluetooth from '../../screens/SectionScreens/Bluetooth/Bluetooth';
 
 const Homestack = () => {
   const Stack = createNativeStackNavigator();
@@ -72,17 +73,23 @@ const Homestack = () => {
         }}
       />
       <Stack.Screen
+        name={'Bluetooth'}
+        component={Bluetooth}
+        options={{
+          headerStyle: {backgroundColor: mycolors.orange},
+        }}
+      />
+
+      <Stack.Screen
         name={stackscreens.qrcode}
         component={QrCode}
         options={{headerShown: false}}
       />
-
       <Stack.Screen
         name={stackscreens.deviceinfo}
         component={DeviceInfo}
         options={{headerShown: false}}
       />
-
       <Stack.Screen
         name={stackscreens.camera}
         component={VisionCamera}
@@ -93,7 +100,6 @@ const Homestack = () => {
         component={MyTabsView}
         options={{headerShown: false}}
       />
-
       <Stack.Screen
         name={stackscreens.restaurant}
         component={Restaurants}

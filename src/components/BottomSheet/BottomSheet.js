@@ -53,7 +53,8 @@ const BottomSheet = ({total, goCheckoutHandler}) => {
         style={{
           backgroundColor: mycolors.white,
           paddingHorizontal: '30%',
-          marginTop: '4%',
+          marginTop: '3%',
+          marginBottom: '2%',
           // width: '100%',
         }}
         styleT={{color: mycolors.black}}
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: '28%',
+    height: '30%',
     backgroundColor: mycolors.jaman,
     display: 'flex',
     justifyContent: 'center',
