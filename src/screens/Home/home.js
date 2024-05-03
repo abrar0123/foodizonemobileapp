@@ -154,7 +154,7 @@ const Home = ({navigation}) => {
 
       <View style={styles.homeStyle}>
         {/* box 2 */}
-        <SmCard style={styles.flexstyle}>
+        {/* <SmCard style={styles.flexstyle}>
           <View style={styles.flexcolum0}>
             <AppText style={styles.welcomeText}>Welcome Back, Abrar </AppText>
             <AppText style={styles.desText}>
@@ -164,15 +164,24 @@ const Home = ({navigation}) => {
           <View>
             <Image style={styles.imagestyle} source={imagesPath?.burger} />
           </View>
-        </SmCard>
+        </SmCard> */}
 
-        <View style={{marginVertical: moderateScale(20)}}>
+        <View
+          style={{
+            marginVertical: moderateScale(20),
+            height: 200,
+            backgroundColor: mycolors.lightgrey,
+          }}>
           {/* <Search /> */}
         </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(stackscreens.bluetooth)}>
+          <AppText>Ble Manager</AppText>
+        </TouchableOpacity>
         {/* <MyAds /> */}
 
         {/* box 2  food delivery */}
-        <TouchableOpacity onPress={goResaurant} activeOpacity={0.95}>
+        {/* <TouchableOpacity onPress={goResaurant} activeOpacity={0.95}>
           <SmCard style={styles.primaryBox2}>
             <View style={styles.flexcolum}>
               <AppText style={styles.box2Text}>Food Delivery </AppText>
@@ -185,10 +194,10 @@ const Home = ({navigation}) => {
               <Image style={styles.box2imgstyle} source={imagesPath.plate} />
             </View>
           </SmCard>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* box 3 added */}
-        <Card style={{marginVertical: 15}}>
+        {/* <Card style={{marginVertical: 15}}>
           <View style={styles.primaryBox3}>
             <TouchableOpacity activeOpacity={0.9} onPress={goFoodiMart}>
               <SmCard style={styles.Box3container1}>
@@ -248,8 +257,8 @@ const Home = ({navigation}) => {
               </SmCard>
             </View>
           </View>
-        </Card>
-        <View style={{}}>
+        </Card> */}
+        {/* <View style={{}}>
           <AppText
             style={{
               fontSize: 20,
@@ -302,7 +311,7 @@ const Home = ({navigation}) => {
               </View>
             </SmCard>
           </View>
-        </View>
+        </View> */}
       </View>
     </ScrollView>
   );

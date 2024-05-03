@@ -12,7 +12,7 @@ export default {
   localmaall: 'LocalMall',
   foodDetail: 'Food Details',
   newfoodDetail: 'Best Food Details',
-
+  bluetooth: 'Bluetooth',
   Checkout: 'checkout',
   myorder: 'My Orders',
   account: 'Account',

@@ -73,7 +73,7 @@ const Homestack = () => {
         }}
       />
       <Stack.Screen
-        name={'Bluetooth'}
+        name={stackscreens.bluetooth}
         component={Bluetooth}
         options={{
           headerStyle: {backgroundColor: mycolors.orange},
