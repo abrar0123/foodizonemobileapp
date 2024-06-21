@@ -32,22 +32,16 @@ const Bluetooth = () => {
   useEffect(() => {
     const bluetoothPermit = async () => {
       try {
-        // const checkP = PermissionsAndroid.check(
-        //   PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        // ).then((e)=>console.log("location accessed : ",e)).
-        // catch((a)=>console.log("not loc",a));
-        // console.log('permission accessed ======= ',checkP);
-        // if (checkP) {
         const ss = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         );
         const p1 = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
         );
-        const check = await PermissionsAndroid.check(
-          PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+        const check = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
         );
-        console.log('check Bluetooth permits ', check);
+        // console.log('check Bluetooth permits ', check);
         if (ss) {
           // console.log('user is accepted >>> ', ss);
         } else {
@@ -59,9 +53,32 @@ const Bluetooth = () => {
     };
 
     bluetoothPermit();
+    startCompanionScan();
   }, []);
 
-  console.log('blutooth scanning >>> ', isScanning);
+  const startCompanionScan = () => {
+    setPeripherals(['id']);
+    try {
+      console.debug('[startCompanionScan] starting companion scan...');
+      BleManager.companionScan(SERVICE_UUIDS, {single: false})
+        .then(peripheral => {
+          console.debug(
+            '[startCompanionScan] scan promise returned successfully.',
+            peripheral,
+          );
+          if (peripheral != null) {
+            setPeripherals(map => {
+              return new Map(map.set(peripheral.id, peripheral));
+            });
+          }
+        })
+        .catch(err => {
+          console.debug('[startCompanionScan] ble scan cancel', err);
+        });
+    } catch (error) {
+      console.error('[startCompanionScan] ble scan error thrown', error);
+    }
+  };
 
   const scanning = () => {
     try {

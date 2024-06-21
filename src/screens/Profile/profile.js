@@ -191,7 +191,7 @@ const Profile = ({navigation}) => {
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('Bluetooth')}>
+                onPress={() => navigation.navigate('BluetoothPlx')}>
                 <Feather name="bluetooth" size={30} color={mycolors.cyan} />
               </TouchableOpacity>
             </View>
