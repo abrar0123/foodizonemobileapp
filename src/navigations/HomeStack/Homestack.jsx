@@ -33,6 +33,12 @@ import MyLineChart from '../../screens/ChartKit/LineChart';
 import FoodiMartDetails1 from '../../screens/Restaurants/FoodiMartDetails1';
 import NewFoodDetails from '../../screens/localMall/foodDetails.js/newFoodDetails';
 import Bluetooth from '../../screens/SectionScreens/Bluetooth/Bluetooth';
+import {ClickDemoWidgetPreviewScreen} from '../widget-preview/ClickDemoWidgetPreviewScreen';
+import {DebugEventsWidgetPreviewScreen} from '../widget-preview/DebugEventsWidgetPreviewScreen';
+import {ResizableMusicWidgetPreviewScreen} from '../widget-preview/ResizableMusicWidgetPreviewScreen';
+import {ListDemoWidgetPreviewDeepLinkScreen} from '../widget-preview/ListDemoWidgetPreviewDeepLinkScreen';
+import {FitnessWidgetPreviewScreen} from '../widget-preview/FitnessWidgetPreviewScreen';
+import {ListScreen} from './ListScreen';
 
 const Homestack = () => {
   const Stack = createNativeStackNavigator();
@@ -43,11 +49,42 @@ const Homestack = () => {
         headerStyle: {backgroundColor: mycolors.jaman},
         headerTintColor: mycolors.white,
         contentStyle: {backgroundColor: mycolors.gray},
-      }}>
+      }}
+      initialRouteName="ListScreen">
       <Stack.Screen
         name={stackscreens.tabRoutes}
         component={Tabroutes}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ListScreen"
+        component={ListScreen}
+        options={{title: 'React Native Android Widget Example'}}
+      />
+      <Stack.Screen
+        name="ClickDemoWidgetPreviewScreen"
+        component={ClickDemoWidgetPreviewScreen}
+        options={{title: 'Click Demo Widget Preview'}}
+      />
+      <Stack.Screen
+        name="ResizableMusicWidgetPreviewScreen"
+        component={ResizableMusicWidgetPreviewScreen}
+        options={{title: 'Resizable Music Widget Preview'}}
+      />
+      <Stack.Screen
+        name="DebugEventsWidgetPreviewScreen"
+        component={DebugEventsWidgetPreviewScreen}
+        options={{title: 'Debug Widget Events'}}
+      />
+      <Stack.Screen
+        name="ListDemoWidgetPreviewDeepLinkScreen"
+        component={ListDemoWidgetPreviewDeepLinkScreen}
+        options={{title: 'List Widget Deep Link'}}
+      />
+      <Stack.Screen
+        name="FitnessWidgetPreviewScreen"
+        component={FitnessWidgetPreviewScreen}
+        options={{title: 'Fitness Widget Preview'}}
       />
       <Stack.Screen name={stackscreens.Checkout} component={Checkout} />
       <Stack.Screen

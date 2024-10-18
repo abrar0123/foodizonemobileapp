@@ -6,7 +6,10 @@ import {
   StatusBar,
   AppRegistry,
 } from 'react-native';
-
+import {
+  registerWidgetConfigurationScreen,
+  registerWidgetTaskHandler,
+} from 'react-native-android-widget';
 import Route from './src/navigations/Routes/route';
 import {persiststore, store} from './src/Redux/store/store';
 import {Provider} from 'react-redux';
@@ -15,6 +18,8 @@ import {ApiProvider} from '@reduxjs/toolkit/dist/query/react';
 import {foodProductsApi} from './src/Redux/rtxQuery/apiSliceProducts';
 import Codepush from 'react-native-code-push';
 import Crashlytics from '@react-native-firebase/crashlytics';
+import {WidgetConfigurationScreen} from './WidgetConfigurationScreen';
+import {widgetTaskHandler} from './widgetTaskHandler';
 
 const App = () => {
   useEffect(() => {
@@ -39,5 +44,6 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('foodizone', () => App);
-
+registerWidgetTaskHandler(widgetTaskHandler);
+registerWidgetConfigurationScreen(WidgetConfigurationScreen);
 export default Codepush(App);

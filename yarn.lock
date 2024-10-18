@@ -7710,6 +7710,11 @@ react-native-admob-native-ads@^0.6.6:
   resolved "https://registry.npmjs.org/react-native-admob-native-ads/-/react-native-admob-native-ads-0.6.6.tgz"
   integrity sha512-aENUw0KY3dbzZqlERVTr7EeuQGAJIDLDeMNMGzpWIL+VP62Wjj/mcMUCFK/GBTwKmAEHJJBtLqglrtXw9btC4Q==
 
+react-native-android-widget@^0.14.1:
+  version "0.14.1"
+  resolved "https://registry.npmjs.org/react-native-android-widget/-/react-native-android-widget-0.14.1.tgz"
+  integrity sha512-GF2IXwxKfvTtFwSlqU/NTMHrK8P7FvThJ8X5LZa5F7V+XsHLLakhml0l08+dUta5h9gw/g1TQTqQeycVFaLJjg==
+
 react-native-animatable@^1.2.4, react-native-animatable@1.3.3:
   version "1.3.3"
   resolved "https://registry.npmjs.org/react-native-animatable/-/react-native-animatable-1.3.3.tgz"
