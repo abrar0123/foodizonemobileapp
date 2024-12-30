@@ -56,11 +56,11 @@ const Homestack = () => {
         component={Tabroutes}
         options={{headerShown: false}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="ListScreen"
         component={ListScreen}
         options={{title: 'React Native Android Widget Example'}}
-      />
+      /> */}
       <Stack.Screen
         name="ClickDemoWidgetPreviewScreen"
         component={ClickDemoWidgetPreviewScreen}

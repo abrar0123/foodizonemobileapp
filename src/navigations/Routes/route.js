@@ -10,7 +10,7 @@ const Route = () => {
   const loginEmail = useSelector(state => state.auth.loginEmail);
 
   return (
-    <NavigationContainer linking={linkingOptions}>
+    <NavigationContainer >
       {loginEmail ? <Homestack /> : <Authnavigation />}
       {/* <Homestack /> */}
     </NavigationContainer>
