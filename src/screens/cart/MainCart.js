@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Pressable} from 'react-native';
-import {useSelector} from 'react-redux';
+import { View, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { useSelector } from 'react-redux';
 import AppText from '../../components/UI/AppText';
 import CartItems from './carts/cartItems';
 import mycolors from '../../styles/mycolors';
-import {moderateScale} from 'react-native-size-matters';
+import { moderateScale } from 'react-native-size-matters';
 import imagesPath from '../../constants/imagesPath';
 import SafeArea from '../../components/Safearea/SafeArea';
 import {
@@ -16,7 +16,7 @@ import CartButton from '../../components/Buttons/AppButtons/CartButton';
 import Entypo from 'react-native-vector-icons/Entypo';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 
-const MainCart = ({navigation}) => {
+const MainCart = ({ navigation }) => {
   //   const cartIndex = useSelector(state => state.foodcart.cartIndex);
   const userFoodCart = useSelector(state => state.cart.foodCart);
 

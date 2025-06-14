@@ -12,6 +12,9 @@ export default {
   localmaall: 'LocalMall',
   foodDetail: 'Food Details',
   newfoodDetail: 'Best Food Details',
+  ticketDetails: 'TicketDetails',
+  ticketCheckout: 'TicketCheckout',
+  testSc: 'TestSc',
 
   Checkout: 'checkout',
   myorder: 'My Orders',

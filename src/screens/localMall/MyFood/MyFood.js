@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,103 +7,88 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import AppText from '../../../components/UI/AppText';
 import ListFood from './listfood';
 import Card from '../../../components/UI/Card/Card';
 import mycolors from '../../../styles/mycolors';
-import {scale} from 'react-native-size-matters';
+import { scale } from 'react-native-size-matters';
 import {
   respHeight,
   respWidth,
 } from '../../../components/responsiveness/RespHeight';
-import Spinner from 'react-native-loading-spinner-overlay';
-import {useSelector} from 'react-redux';
-import CustomLoader from '../../../components/CustomLoader/CustomLoader';
+import { useDispatch, useSelector } from 'react-redux';
 import SkLoader from '../../../components/CustomLoader/SkLoader';
 import PlacesModal from '../../../components/CustomModal/PlacesModal';
+import { setSearchedMovies } from '../../../Redux/foodapiSlice';
 
-const screens = [
-  {
-    id: 1,
-    name: 'List Food',
-    status: true,
-  },
-  {
-    id: 2,
-    name: 'Grid Food',
-    status: true,
-  },
-];
 
-const MyFood = ({foodapidata, searchedFood, openModal1, navigation}) => {
-  // const [MyFood, setMyFood] = useState([]);
+
+const MyFood = ({ foodapidata, home, userSearch, searchedFood, openModal1, navigation }) => {
   const [ind, setind] = useState(1);
+
   const [Loader, setLoader] = useState(false);
-  const [number, setNumber] = useState(9);
+  const [movies, setMovies] = useState([]);
+
   const isLoading = useSelector(state => state.foodapi.loading);
   // const isLoading = true;
+  const dispatch = useDispatch();
 
-  const myFoodApi = async () => {
+  const api_key = 'c8ff365567fa75e6c1ca3f5ebb1190de';
+
+  const fetchPopularMovies = async () => {
     try {
       setLoader(true);
-      console.log('data fetch started');
-      const data = await fetch(
-        'https://www.themealdb.com/api/json/v2/1/categories.php',
+      console.log('Fetching popular movies...');
+
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=1`
       );
-      const response = await data.json();
-      // console.log("MyFood_API__:\n\n\n", response.categories);
-      // setMyFood(response.categories);
+
+      const json = await response.json();
+
+      if (json?.results) {
+
+        setMovies(json?.results);
+
+        dispatch(setSearchedMovies(json?.results));
+        setLoader(false);
+      }
+
+      // console.log('Popular Movies:', json.results?.length);
+      // You can now store this in state if needed
+      // setMovies(json.results);
+
     } catch (error) {
-      console.log('MyFood_API___Error___:', error);
+      console.log('TMDB_API_Error:', error);
+    } finally {
+      setLoader(false);
     }
-    setLoader(false);
   };
 
   const pressHandler = id => {
     setind(id);
   };
+  useEffect(() => {
+    fetchPopularMovies()
+  }, [])
 
-  const renderItem = ({item}) => {
-    return (
-      <View style={{flex: 1}}>
-        <TouchableOpacity
-          style={[
-            styles.btn,
-            {
-              backgroundColor: ind === item.id ? mycolors.jaman : mycolors.grey,
-            },
-          ]}
-          onPress={pressHandler.bind(this, item.id)}>
-          <AppText
-            style={{
-              color: ind === item.id ? mycolors.white : mycolors.jaman,
-              fontSize: 18,
-            }}>
-            {item.name}
-          </AppText>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  console.log('openModal1__', openModal1);
+  console.log('userSearch100 :', userSearch);
+
+
   return (
     <React.Fragment>
-      {/* <FlatList
-          data={screens}
-          numColumns={2}
-          key={item => item.id}
-          renderItem={renderItem}
-          columnWrapperStyle={{justifyContent: 'space-evenly'}}
-        /> */}
-      {/* <AppText style={styles.welcomeText}>FastFood Deals</AppText> */}
-      {isLoading ? (
+      {(Loader) ? (
         <SkLoader />
       ) : (
         <ListFood
-          MyFood={searchedFood.length > 0 ? searchedFood : foodapidata}
+          // MyFood={movies}
+          MyFood={userSearch ? searchedFood : movies}
+          searched={(userSearch) ? true : false}
           Loader={Loader}
           navigation={navigation}
+          userSearch={searchedFood}
+          home={home}
         />
       )}
       {openModal1 && <PlacesModal isVisible={openModal1} />}
@@ -120,6 +105,7 @@ const styles = StyleSheet.create({
     borderBottomColor: mycolors.primaryorange,
     borderBottomWidth: 3,
     color: mycolors.primaryorange,
+    backgroundColor: '#F2F2F6',
   },
 });
 

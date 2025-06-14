@@ -1,5 +1,5 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {API_KEY, Api_EndPoints} from './Handleapi/handleapi';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { API_KEY, Api_EndPoints } from './Handleapi/handleapi';
 
 export const getFoodData = createAsyncThunk('fooddata', async () => {
   try {
@@ -18,11 +18,20 @@ export const foodapiSlice = createSlice({
   name: 'foodapi',
   initialState: {
     foodapidata: [],
+    sMovies: [],
     loading: false,
     error: null,
   },
   reducers: {
-    apidata: () => {},
+    apidata: () => {
+
+    },
+    setSearchedMovies: (state, action) => {
+      const movies = action.payload;
+
+      state.sMovies = movies;
+
+    }
   },
   extraReducers: buildler => {
     buildler
@@ -42,3 +51,5 @@ export const foodapiSlice = createSlice({
 });
 
 export const foodApiReducer = foodapiSlice.reducer;
+export const { setSearchedMovies } = foodapiSlice.actions;
+

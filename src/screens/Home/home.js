@@ -1,13 +1,13 @@
-import React, {useEffect, useCallback, useState} from 'react';
+import { useState } from 'react';
 import {
   View,
   StyleSheet,
   Image,
   ScrollView,
-  TouchableOpacity,
-  Alert,
+  StatusBar,
+  Text,
+  Pressable,
 } from 'react-native';
-import AppText from '../../components/UI/AppText/AppText';
 import {
   scale,
   moderateScale,
@@ -19,296 +19,59 @@ import {
   respHeight,
   respWidth,
 } from '../../components/responsiveness/RespHeight';
-import Card from '../../components/UI/Card/Card';
-import SmCard from '../../components/UI/SmallCard/smcard';
-import Search from '../../components/Search/SearchBar';
+
+import MyFood from '../localMall/MyFood/MyFood';
+import { useSelector } from 'react-redux';
 import stackscreens from '../../constants/stackscreens';
-import {useGetAllProductsQuery} from '../../Redux/rtxQuery/apiSliceProducts';
-import messaging from '@react-native-firebase/messaging';
-import Voice from '@react-native-voice/voice';
-import Button from '../../components/UI/Button';
-import MyAds from '../../components/MyAds/MyAds';
-import RewardAds from '../../components/MyAds/RewardAds';
 
-const Home = ({navigation}) => {
-  // const loginEmail = useSelector(state => state.auth.loginEmail);
-  const [voiceStarted, setVoiceStarted] = useState('');
-  const [voiceEnd, setVoiceEnd] = useState('');
-  const [voiceresult, setVoiceResult] = useState('');
+const Home = ({ navigation }) => {
+  const foodapidata = useSelector(state => state.foodapi.foodapidata);
 
-  useEffect(() => {
-    Voice.onSpeechStart = onSpeechStart;
-    Voice.onSpeechEnd = onSpeechEnd;
-    Voice.onSpeechResults = onSpeechResults;
-
-    return () => {
-      Voice.destroy().then(Voice.removeAllListeners);
-    };
-  }, []);
-
-  async function onStartButtonPress(e) {
-    try {
-      await Voice.start('en-US');
-      setVoiceStarted('');
-      setVoiceEnd('');
-      setVoiceResult([]);
-    } catch (error) {
-      console.log('error ', error);
-    }
-  }
-  async function onStopButtonPress(e) {
-    await Voice.stop('en-US');
-    await Voice.destroy('en-US');
-  }
-
-  function onSpeechStart(e) {
-    try {
-      console.log('e s', e);
-    } catch (error) {
-      console.log('e s err', error);
-    }
-  }
-
-  function onSpeechEnd(e) {
-    try {
-      console.log('e e', e);
-    } catch (error) {
-      console.log('e e err', error);
-    }
-  }
-
-  function onSpeechResults(e) {
-    console.log('e res', e);
-  }
-
-  const goResaurant = () => {
-    navigation.navigate(stackscreens.restaurant);
-  };
-  const goFoodiMart = () => {
-    navigation.navigate(stackscreens.foodiMart);
-  };
-
-  const goLineChart = () => {
-    navigation.navigate(stackscreens.lineChart);
-  };
-
-  useEffect(() => {
-    // console.log('FCM Run ====> ');
-    const notificationSend = async () => {
-      try {
-        const notif = await messaging().getToken();
-        console.log('getFcm -->\n\t : ', notif);
-      } catch (error) {
-        console.log('getFcm error -->'.error);
-      }
-    };
-
-    // notificationSend();
-  }, []);
-
-  useEffect(() => {
-    // const notificationListen = async () => {
-    const unsub = messaging().onMessage(async msg => {
-      Alert.alert(msg.notification.title, msg.notification.body);
-      console.log('received_msg --> \n\t: ', msg);
-    });
-    // };
-    return unsub;
-    // notificationListen();
-  }, []);
-
-  useEffect(() => {
-    const notificationListen = async () => {
-      messaging().setBackgroundMessageHandler(async msg => {
-        console.log('notificatin__: 1\n\t : ', msg.notification);
-        Alert.alert(msg.notification.title, msg.notification.body);
-      });
-
-      // 2
-      messaging().onNotificationOpenedApp(async msg => {
-        console.log('opened--- msg > \n \t :', msg);
-
-        Alert.alert(msg.notification.title, msg.notification.body, [
-          {
-            text: 'cancel',
-            onPress: () => {
-              console.log('cancel pressed ');
-            },
-          },
-          {
-            text: 'Yes',
-            onPress: () => {
-              console.log('yes pressed ');
-              navigation.navigate(stackscreens.camera);
-            },
-          },
-        ]);
-      });
-    };
-    notificationListen();
-  }, []);
+  const [searchedFood, setsearchedFood] = useState([]);
+  const [userSearch, setuserSearch] = useState('');
 
   return (
-    <ScrollView>
-      {/* <RewardAds /> */}
+    <View style={styles.mystyle}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <View style={styles.topContainer}>
+        <Text style={{ ...styles.title, color: 'black', width: respWidth(30) }} numberOfLines={1}>
+          Watch
+        </Text>
+        <Pressable onPress={() => navigation.navigate(stackscreens.mall)}>
 
-      <View style={styles.homeStyle}>
-        {/* box 2 */}
-        <SmCard style={styles.flexstyle}>
-          <View style={styles.flexcolum0}>
-            <AppText style={styles.welcomeText}>Welcome Back, Abrar </AppText>
-            <AppText style={styles.desText}>
-              Almost 50 + Restaurants opens in Area, Enjoy Your Best Food
-            </AppText>
-          </View>
-          <View>
-            <Image style={styles.imagestyle} source={imagesPath?.burger} />
-          </View>
-        </SmCard>
+          <Image source={imagesPath.Search} style={styles.imagstyle1} />
+        </Pressable>
 
-        <View style={{marginVertical: moderateScale(20)}}>
-          {/* <Search /> */}
-        </View>
-        {/* <MyAds /> */}
-
-        {/* box 2  food delivery */}
-        <TouchableOpacity onPress={goResaurant} activeOpacity={0.95}>
-          <SmCard style={styles.primaryBox2}>
-            <View style={styles.flexcolum}>
-              <AppText style={styles.box2Text}>Food Delivery </AppText>
-              <AppText
-                style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-                Order Food You Love
-              </AppText>
-            </View>
-            <View>
-              <Image style={styles.box2imgstyle} source={imagesPath.plate} />
-            </View>
-          </SmCard>
-        </TouchableOpacity>
-
-        {/* box 3 added */}
-        <Card style={{marginVertical: 15}}>
-          <View style={styles.primaryBox3}>
-            <TouchableOpacity activeOpacity={0.9} onPress={goFoodiMart}>
-              <SmCard style={styles.Box3container1}>
-                <AppText style={styles.box3Text}>Foodie Mart </AppText>
-                <AppText
-                  style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-                  Best Mart Shops
-                </AppText>
-                <Image style={styles.box3imgstyle} source={imagesPath.kake} />
-                <AppText
-                  style={{
-                    ...styles.box2Text,
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                  }}>
-                  Everyday upto 20% OFF
-                </AppText>
-                <AppText
-                  style={{...styles.box2Text, fontSize: 14, fontWeight: '400'}}>
-                  Go your Favourite Shop and place Order
-                </AppText>
-              </SmCard>
-            </TouchableOpacity>
-
-            <View style={{display: 'flex', flexDirection: 'column', gap: 10}}>
-              <TouchableOpacity activeOpacity={0.85} onPress={goLineChart}>
-                <SmCard style={styles.Box3container2}>
-                  <AppText style={styles.box3Text}>Foodie Pickup </AppText>
-                  <AppText
-                    style={{
-                      ...styles.box2Text,
-                      fontSize: 14,
-                      fontWeight: '200',
-                    }}>
-                    Order Food You Love
-                  </AppText>
-                  <Image
-                    style={styles.box2imgstyle}
-                    source={imagesPath.plate}
-                  />
-                </SmCard>
-              </TouchableOpacity>
-
-              <SmCard style={styles.Box3container3}>
-                <View style={{width: '45%', paddingStart: 7}}>
-                  <AppText style={styles.box3Text}>Shops </AppText>
-                  <AppText
-                    style={{
-                      ...styles.box2Text,
-                      fontSize: 12,
-                      fontWeight: '200',
-                    }}>
-                    Grocessery etc
-                  </AppText>
-                </View>
-                <Image style={styles.box3imgstyle2} source={imagesPath.plate} />
-              </SmCard>
-            </View>
-          </View>
-        </Card>
-        <View style={{}}>
-          <AppText
-            style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              color: mycolors.cyan,
-              marginBottom: moderateScale(10),
-              borderBottomColor: mycolors.silk,
-              borderBottomWidth: 3,
-              paddingBottom: 5,
-              width: 160,
-            }}>
-            Your Restuarants
-          </AppText>
-          <SmCard style={styles.primaryBox2}>
-            <View style={styles.flexcolum}>
-              <AppText style={styles.box2Text}>Food Foods </AppText>
-              <AppText
-                style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-                Order Food You Love
-              </AppText>
-            </View>
-            <View>
-              <Image style={styles.box2imgstyle} source={imagesPath.food1} />
-            </View>
-          </SmCard>
-          <View style={{marginVertical: moderateScale(10)}}>
-            <SmCard style={[styles.primaryBox2, {backgroundColor: 'pink'}]}>
-              <View style={styles.flexcolum}>
-                <AppText style={styles.box2Text}>Food Foods </AppText>
-                <AppText
-                  style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-                  Order Food You Love
-                </AppText>
-              </View>
-              <View>
-                <Image style={styles.box2imgstyle} source={imagesPath.food2} />
-              </View>
-            </SmCard>
-          </View>
-
-          <View style={{marginVertical: moderateScale(10)}}>
-            <SmCard style={styles.primaryBox2}>
-              <View style={{...styles.flexcolum, gap: 10}}>
-                <AppText style={styles.box2Text}>Food Foods </AppText>
-                <AppText
-                  style={{...styles.box2Text, fontSize: 14, fontWeight: '200'}}>
-                  Order Food
-                </AppText>
-                <Button onPress={onStartButtonPress}>Voice started </Button>
-              </View>
-            </SmCard>
-          </View>
-        </View>
       </View>
-    </ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
+
+        <View style={{
+          backgroundColor: '#F2F2F6', paddingTop: moderateScale(20),
+          paddingHorizontal: moderateScale(10)
+        }}>
+          <MyFood
+            foodapidata={foodapidata}
+            navigation={navigation}
+            searchedFood={searchedFood}
+            userSearch={userSearch}
+            home
+          />
+        </View>
+      </ScrollView>
+    </View>
+
   );
 };
 
 const styles = StyleSheet.create({
+  mystyle: {
+    flex: 1,
+    marginHorizontal: 0,
+    marginVertical: 0,
+    paddingHorizontal: 0,
+    paddingTop: 0,
+    backgroundColor: mycolors.white,
+  },
   homeStyle: {
     // paddingHorizontal: moderateScale(10),
     paddingHorizontal: respWidth(3),
@@ -323,6 +86,13 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(3),
     padding: moderateScale(5),
     justifyContent: 'space-between',
+  },
+  topContainer: {
+    flexDirection: 'row', paddingHorizontal: 20, backgroundColor: '#ffffff', paddingVertical: 5, alignItems: 'center', justifyContent: 'space-between', marginVertical: moderateScale(10)
+  },
+  imagstyle1: {
+    width: respWidth(10),
+    height: 25,
   },
   flexcolum0: {
     display: 'flex',

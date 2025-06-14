@@ -1,6 +1,6 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useEffect } from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import stackscreens from '../../constants/stackscreens';
 import Home1 from '../../screens/Home/Home1';
 import Tabroutes from '../Tabroutes/tabroutes';
@@ -33,34 +33,39 @@ import MyLineChart from '../../screens/ChartKit/LineChart';
 import FoodiMartDetails1 from '../../screens/Restaurants/FoodiMartDetails1';
 import NewFoodDetails from '../../screens/localMall/foodDetails.js/newFoodDetails';
 import Bluetooth from '../../screens/SectionScreens/Bluetooth/Bluetooth';
+import { TicketDetails } from '../../screens/localMall/TicketDetails/TicketDetails';
+import { TicketCheckout } from '../../screens/localMall/TicketDetails/TicketCheckout';
+import { TestSc } from '../../screens/localMall/TicketDetails/Test';
 
 const Homestack = () => {
   const Stack = createNativeStackNavigator();
 
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerStyle: {backgroundColor: mycolors.jaman},
-        headerTintColor: mycolors.white,
-        contentStyle: {backgroundColor: mycolors.gray},
-      }}>
+      // screenOptions={{
+      //   headerStyle: { backgroundColor: mycolors.jaman },
+      //   headerTintColor: mycolors.white,
+      //   contentStyle: { backgroundColor: mycolors.gray },
+      // }}
+      initialRouteName={stackscreens.tabRoutes}
+    >
       <Stack.Screen
         name={stackscreens.tabRoutes}
         component={Tabroutes}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name={stackscreens.Checkout} component={Checkout} />
       <Stack.Screen
         name={stackscreens.myorder}
         component={Myorder}
-        options={({navigation}) => ({
-          headerStyle: {backgroundColor: mycolors.red},
+        options={({ navigation }) => ({
+          headerStyle: { backgroundColor: mycolors.red },
           headerTintColor: mycolors.white,
           title: 'Favourite Places',
           headerRight: () => (
             <TouchableOpacity
               onPress={() => navigation.navigate(stackscreens.Checkout)}>
-              <AppText styles={{fontSize: 40, fontWeight: 'bold'}}>+</AppText>
+              <AppText styles={{ fontSize: 40, fontWeight: 'bold' }}>+</AppText>
             </TouchableOpacity>
           ),
         })}
@@ -69,43 +74,43 @@ const Homestack = () => {
         name={stackscreens.account}
         component={Account}
         options={{
-          headerStyle: {backgroundColor: mycolors.orange},
+          headerStyle: { backgroundColor: mycolors.orange },
         }}
       />
       <Stack.Screen
         name={'Bluetooth'}
         component={Bluetooth}
         options={{
-          headerStyle: {backgroundColor: mycolors.orange},
+          headerStyle: { backgroundColor: mycolors.orange },
         }}
       />
 
       <Stack.Screen
         name={stackscreens.qrcode}
         component={QrCode}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={stackscreens.deviceinfo}
         component={DeviceInfo}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={stackscreens.camera}
         component={VisionCamera}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={stackscreens.myTabsView}
         component={MyTabsView}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={stackscreens.restaurant}
         component={Restaurants}
         options={{
           title: 'Best Restuarants',
-          headerStyle: {backgroundColor: mycolors.pink},
+          headerStyle: { backgroundColor: mycolors.pink },
         }}
       />
       <Stack.Screen
@@ -113,7 +118,7 @@ const Homestack = () => {
         component={FoodiMartDetails}
         options={{
           title: 'Best FoodiMart Details',
-          headerStyle: {backgroundColor: mycolors.pink},
+          headerStyle: { backgroundColor: mycolors.pink },
         }}
       />
       <Stack.Screen
@@ -121,7 +126,7 @@ const Homestack = () => {
         component={FoodiMartDetails1}
         options={{
           title: 'Best FoodiMart Details',
-          headerStyle: {backgroundColor: mycolors.pink},
+          headerStyle: { backgroundColor: mycolors.pink },
         }}
       />
       <Stack.Screen
@@ -129,47 +134,74 @@ const Homestack = () => {
         component={FoodiMart}
         options={{
           title: 'Best Foodi Mart',
-          headerStyle: {backgroundColor: mycolors.pink},
+          headerStyle: { backgroundColor: mycolors.pink },
         }}
       />
+
       <Stack.Screen
         name={stackscreens.notification}
         component={Notification}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={stackscreens.chatBot}
         component={ChatBot}
         options={{
-          headerStyle: {backgroundColor: mycolors.silk},
+          headerStyle: { backgroundColor: mycolors.silk },
         }}
       />
+      <Stack.Screen
+        name={stackscreens.testSc}
+        component={TestSc}
+        options={{
+          headerShown: false
+        }}
+      />
+
+
       <Stack.Screen
         name={stackscreens.userChat}
         component={UserChat}
         options={{
-          headerStyle: {backgroundColor: mycolors.silk},
+          headerStyle: { backgroundColor: mycolors.silk },
         }}
       />
       <Stack.Screen
         name={stackscreens.foodDetail}
         component={FoodDetails}
-        options={{headerStyle: {backgroundColor: mycolors.red}}}
+        options={{ headerStyle: { backgroundColor: mycolors.red } }}
       />
       <Stack.Screen
         name={stackscreens.newfoodDetail}
         component={NewFoodDetails}
-        options={{headerStyle: {backgroundColor: mycolors.red}}}
+        options={{ headerShown: false }}
+
+      // options={{headerStyle: {backgroundColor: mycolors.red}}}
       />
+      <Stack.Screen
+        name={stackscreens.ticketDetails}
+        component={TicketDetails}
+        options={{ headerShown: false }}
+
+      // options={{headerStyle: {backgroundColor: mycolors.red}}}
+      />
+      <Stack.Screen
+        name={stackscreens.ticketCheckout}
+        component={TicketCheckout}
+        options={{ headerShown: false }}
+
+      // options={{headerStyle: {backgroundColor: mycolors.red}}}
+      />
+
       <Stack.Screen
         name={stackscreens.userOneChat}
         component={UserOneChat}
-        options={{headerStyle: {backgroundColor: mycolors.silk}}}
+        options={{ headerStyle: { backgroundColor: mycolors.silk } }}
       />
       <Stack.Screen
         name={stackscreens.lineChart}
         component={MyLineChart}
-        options={{headerStyle: {backgroundColor: mycolors.silk}}}
+        options={{ headerStyle: { backgroundColor: mycolors.silk } }}
       />
     </Stack.Navigator>
   );

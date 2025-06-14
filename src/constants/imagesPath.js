@@ -7,10 +7,24 @@ export default {
 
   // icons style
   allrest: require('../assets/image/allfood.png'),
+  Close: require('../assets/image/Close.png'),
+  Search: require('../assets/image/s1.png'),
+
+
   burger: require('../assets/image/burger.png'),
   search: require('../assets/image/search.png'),
   filter: require('../assets/image/filter.png'),
   plate: require('../assets/image/plate1.png'),
+  dots: require('../assets/image/dots.png'),
+
+  a: require('../assets/image/a.png'),
+  b: require('../assets/image/b.png'),
+  c: require('../assets/image/c.png'),
+  d: require('../assets/image/d.png'),
+  seat: require('../assets/image/seat.png'),
+
+
+
   kake: require('../assets/image/kake.png'),
   food1: require('../assets/image/food1.png'),
   food2: require('../assets/image/food2.png'),

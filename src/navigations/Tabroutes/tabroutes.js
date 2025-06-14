@@ -1,6 +1,6 @@
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { Image, StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import stackscreens from '../../constants/stackscreens';
 import Home from '../../screens/Home/home';
 import MainCart from '../../screens/cart/MainCart';
@@ -8,8 +8,8 @@ import Profile from '../../screens/Profile/profile';
 import mycolors from '../../styles/mycolors';
 import imagesPath from '../../constants/imagesPath';
 import Localmall from '../../screens/localMall/localmall';
-import MyFood from '../../screens/localMall/MyFood/MyFood';
 import TrackOrder from '../../screens/track';
+import TabViews from './TabViews';
 
 const Tabroutes = () => {
   const Tab = createBottomTabNavigator();
@@ -17,25 +17,33 @@ const Tabroutes = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: mycolors.jaman,
+        tabBarActiveTintColor: mycolors.white,
         tabBarInactiveTintColor: mycolors.grey,
         tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: mycolors.white,
-        },
-      }}>
+
+        // tabBarStyle: {
+        //   backgroundColor: 'white',
+        //   borderColor: '#2E2739',
+        //   borderTopRightRadius: 20,
+        //   borderTopLeftRadius: 20,
+        //   borderRadius: 30,
+        //   // borderWidth: 10
+        // },
+      }}
+      tabBar={({ state }) => <TabViews state={state} />}
+    >
       <Tab.Screen
         name={stackscreens.home}
         component={Home}
         options={{
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({ focused }) => {
             return (
               <Image
                 style={{
                   ...styles.imagestyle,
-                  tintColor: focused ? mycolors.jaman : mycolors.black,
+                  tintColor: focused ? mycolors.white : mycolors.grey,
                 }}
-                source={imagesPath.home}
+                source={imagesPath.c}
               />
             );
           },
@@ -45,13 +53,13 @@ const Tabroutes = () => {
         name={stackscreens.mall}
         component={Localmall}
         options={{
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={imagesPath.mall}
+                source={imagesPath.b}
                 style={{
                   ...styles.imagestyle,
-                  tintColor: focused ? mycolors.jaman : mycolors.black,
+                  tintColor: focused ? mycolors.white : mycolors.grey
                 }}
               />
             );
@@ -62,13 +70,13 @@ const Tabroutes = () => {
         name={stackscreens.maincart}
         component={MainCart}
         options={{
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={imagesPath.cart}
+                source={imagesPath.a}
                 style={{
                   ...styles.imagestyle,
-                  tintColor: focused ? mycolors.jaman : mycolors.black,
+                  tintColor: focused ? mycolors.white : mycolors.grey
                 }}
               />
             );
@@ -79,13 +87,13 @@ const Tabroutes = () => {
         name={stackscreens.trackOrder}
         component={TrackOrder}
         options={{
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={imagesPath.filter}
+                source={imagesPath.d}
                 style={{
                   ...styles.imagestyle,
-                  tintColor: focused ? mycolors.jaman : mycolors.black,
+                  tintColor: focused ? mycolors.white : mycolors.grey
                 }}
               />
             );
@@ -93,31 +101,15 @@ const Tabroutes = () => {
         }}
       />
 
-      <Tab.Screen
-        name={stackscreens.profile}
-        component={Profile}
-        options={{
-          tabBarIcon: ({focused}) => {
-            return (
-              <Image
-                source={imagesPath.profile}
-                style={{
-                  ...styles.imagestyle,
-                  tintColor: focused ? mycolors.jaman : mycolors.black,
-                }}
-              />
-            );
-          },
-        }}
-      />
+
     </Tab.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
   imagestyle: {
-    width: 35,
-    height: 35,
+    width: 25,
+    height: 25,
   },
 });
 
