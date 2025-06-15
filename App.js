@@ -11,15 +11,9 @@ import Route from './src/navigations/Routes/route';
 import {persiststore, store} from './src/Redux/store/store';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import {ApiProvider} from '@reduxjs/toolkit/dist/query/react';
-import {foodProductsApi} from './src/Redux/rtxQuery/apiSliceProducts';
-import Codepush from 'react-native-code-push';
-import Crashlytics from '@react-native-firebase/crashlytics';
 
 const App = () => {
-  useEffect(() => {
-    Crashlytics().log('app mounted');
-  }, []);
+
 
   return (
     <Provider store={store}>
@@ -38,6 +32,6 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('foodizone', () => App);
+AppRegistry.registerComponent('moviezone', () => App);
 
-export default Codepush(App);
+export default App;

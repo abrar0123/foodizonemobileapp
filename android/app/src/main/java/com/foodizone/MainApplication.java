@@ -8,7 +8,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
-import com.microsoft.codepush.react.CodePush;
 import java.util.List;
 // import com.wenkesj.voice.VoicePackage;
 
@@ -20,12 +19,7 @@ public class MainApplication extends Application implements ReactApplication {
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
         }
-       
 
-         @Override
-        protected String getJSBundleFile() {
-            return CodePush.getJSBundleFile();
-        }
 
         @Override
         protected List<ReactPackage> getPackages() {
