@@ -36,6 +36,7 @@ import Bluetooth from '../../screens/SectionScreens/Bluetooth/Bluetooth';
 import { TicketDetails } from '../../screens/localMall/TicketDetails/TicketDetails';
 import { TicketCheckout } from '../../screens/localMall/TicketDetails/TicketCheckout';
 import { TestSc } from '../../screens/localMall/TicketDetails/Test';
+import UserListScreen from '../../screens/Chatting/UsersListScreen';
 
 const Homestack = () => {
   const Stack = createNativeStackNavigator();
@@ -150,6 +151,8 @@ const Homestack = () => {
           headerStyle: { backgroundColor: mycolors.silk },
         }}
       />
+      <Stack.Screen name="Users" component={UserListScreen} />
+
       <Stack.Screen
         name={stackscreens.testSc}
         component={TestSc}

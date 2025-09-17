@@ -10,6 +10,8 @@ import imagesPath from '../../constants/imagesPath';
 import Localmall from '../../screens/localMall/localmall';
 import TrackOrder from '../../screens/track';
 import TabViews from './TabViews';
+import UserChat from '../../screens/chatBot/userChat';
+import UserListScreen from '../../screens/Chatting/UsersListScreen';
 
 const Tabroutes = () => {
   const Tab = createBottomTabNavigator();
@@ -34,7 +36,7 @@ const Tabroutes = () => {
     >
       <Tab.Screen
         name={stackscreens.home}
-        component={Home}
+        component={UserListScreen}
         options={{
           tabBarIcon: ({ focused }) => {
             return (

@@ -5,8 +5,6 @@ import persistStore from 'redux-persist/es/persistStore';
 import {FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from 'redux-persist';
 import {foodApiReducer} from '../foodapiSlice';
 import {cartReducer} from '../cartSlice';
-import {foodProductsApi} from '../rtxQuery/apiSliceProducts';
-import {setupListeners} from '@reduxjs/toolkit/dist/query';
 
 const rootReducer = combineReducers({
   auth: authreducer,

@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   StyleSheet,
-  SafeAreaView,
   Platform,
   StatusBar,
   AppRegistry,
@@ -18,9 +17,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persiststore}>
-        {/* <ApiProvider api={foodProductsApi}> */}
         <Route />
-        {/* </ApiProvider> */}
       </PersistGate>
     </Provider>
   );

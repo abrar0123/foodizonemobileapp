@@ -69,11 +69,11 @@ const MyFood = ({ foodapidata, home, userSearch, searchedFood, openModal1, navig
   const pressHandler = id => {
     setind(id);
   };
+
   useEffect(() => {
     fetchPopularMovies()
   }, [])
 
-  console.log('userSearch100 :', userSearch);
 
 
   return (

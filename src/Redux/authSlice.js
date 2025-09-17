@@ -3,22 +3,18 @@ import {persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const authSlice = createSlice({
-  name: 'auth',
   initialState: {
-    loginEmail: '',
-    loggedInCredential: {},
+    name: 'gorgo',
+    login: {},
+    data: 123,
   },
+  name: 'auth',
   reducers: {
-    login: (state, action) => {
-      const {loggedIn} = action.payload;
-      // console.log('loggedIn__mycode123\n:', loggedIn);
-      state.loginEmail = loggedIn?.email;
-      state.loggedInCredential = loggedIn;
+    authLogin: (state, action) => {
+      state.login = action.payload;
     },
-    logout: state => {
-      state.loginEmail = null;
-      state.password = null;
-      state.username = null;
+    authLogout: (state, action) => {
+      state.login = {};
     },
   },
 });
@@ -29,3 +25,4 @@ const persistConfigue = {
 
 export const authreducer = persistReducer(persistConfigue, authSlice.reducer);
 export const authActions = authSlice.actions;
+export const {authLogin,authLogout} = authSlice.actions;
